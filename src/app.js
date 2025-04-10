@@ -1,16 +1,15 @@
-const express = require('express');
-const app = express();
-require('dotenv').config();
-const PORT = process.env.PORT || 3000;
+import express from 'express';
+import cors from 'cors';
 
+const corsOptions = {
+    origin: '*',
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+};
+
+const app = express();
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
-app.get('/', (req, res) => {
-    res.send('¡API con Express funcionando!');
-});
-
-app.listen(PORT, () => {
-    console.log(`Servidor corriendo en http://localhost:${PORT}`);
-});
-
-
+export default app;
