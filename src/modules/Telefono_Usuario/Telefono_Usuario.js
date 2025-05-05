@@ -9,14 +9,22 @@ export const Telefono_Usuario = sequelize.define(
       primaryKey: true,
       autoIncrement: true,
     },
-    id_usuario: { 
+    usuario_id: { 
         type: DataTypes.INTEGER, 
         allowNull: false 
     },
-    telefono: {
+    tipo_telefono_id: {
         type: DataTypes.STRING,
         allowNull: false
     },
+    numero:{
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    es_principal:{
+      type: DataTypes.BOOLEAN,
+      defaultValue: 1,
+    }
   },
   {
     tableName: "telefonos_usuario",
