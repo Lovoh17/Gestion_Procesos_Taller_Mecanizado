@@ -1,7 +1,7 @@
 import { sequelize } from '../../shared/database/database.js';
 import { DataTypes } from 'sequelize';
 
-import { TipoPedido } from '../Tipo_Pedido/Tipo_Pedido.js';
+import { Tipo_Pedido } from '../Tipo_Pedido/Tipo_Pedido.js';
 import { Usuario } from '../Usuario/Usuario.js';
 
 export const Plano = sequelize.define('planos', {
@@ -27,7 +27,7 @@ export const Plano = sequelize.define('planos', {
         type: DataTypes.BIGINT,
         allowNull: false,
         references: {
-            model: TipoPedido,
+            model: Tipo_Pedido,
             key: 'id'
         }
     },

@@ -3,10 +3,10 @@ import { DataTypes } from 'sequelize';
 
 // Importe de los modelos necesarios
 import { MateriaPrima } from '../Materia_Prima/Materia_Prima.js';
-import { UnidadMedida } from '../Unidad_Medida/Unidad_Medida.js';
-import { TipoStock } from '../Tipo_Stock/Tipo_Stock.js';
-import { Pedido } from '../Pedido/Pedido.js'; // No implementado o no definido
-import { PedidoMaterial } from '../Pedido_Material/Pedido_Material.js'; // No implementado o no definido
+import { Unidad_Medida } from '../Unidad_Medida/Unidad_Medida.js';
+import { Tipo_Stock } from '../Tipo_Stock/Tipo_Stock.js';
+//import { Pedido } from '../Pedido/Pedido.js'; // No implementado o no definido
+//import { PedidoMaterial } from '../Pedido_Material/Pedido_Material.js'; // No implementado o no definido
 import { Usuario } from '../Usuario/Usuario.js';
 
 
@@ -32,7 +32,7 @@ export const HistorialMovimientoStock = sequelize.define('historial_movimientos_
         type: DataTypes.BIGINT,
         allowNull: false,
         refereces: {
-            model: UnidadMedida,
+            model: Unidad_Medida,
             key: 'id'
         }
     },
@@ -40,7 +40,7 @@ export const HistorialMovimientoStock = sequelize.define('historial_movimientos_
         type: DataTypes.SMALLINT,
         allowNull: true,
         refereces: {
-            model: TipoStock,
+            model: Tipo_Stock,
             key: 'id'
         }
     },
@@ -48,11 +48,11 @@ export const HistorialMovimientoStock = sequelize.define('historial_movimientos_
         type: DataTypes.SMALLINT,
         allowNull: false,
         refereces: {
-            model: TipoStock,
+            model: Tipo_Stock,
             key: 'id'
         }
     },
-    pedido_id: {
+    /*pedido_id: {
         type: DataTypes.BIGINT,
         allowNull: true,
         refereces: {
@@ -67,7 +67,7 @@ export const HistorialMovimientoStock = sequelize.define('historial_movimientos_
             model: PedidoMaterial,
             key: 'id'
         }
-    },
+    },*/
     usuario_id: {
         type: DataTypes.BIGINT,
         allowNull: false,

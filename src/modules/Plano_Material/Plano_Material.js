@@ -1,10 +1,10 @@
 import { sequelize } from '../../shared/database/database.js';
 import { DataTypes } from 'sequelize';
 
-import { Plano } from '../Plano/Planos.js';
+import { Plano } from '../Plano/Plano.js';
 import { MateriaPrima } from '../Materia_Prima/Materia_Prima.js';
-import { Pedido } from '../Pedido/Pedido.js';
-import { UnidadMedida } from '../Unidad_Medida/Unidad_Medida.js';
+//import { Pedido } from '../Pedido/Pedido.js';
+import { Unidad_Medida } from '../Unidad_Medida/Unidad_Medida.js';
 
 export const PlanoMaterial = sequelize.define('plano_materiales', {
     id: { 
@@ -16,7 +16,7 @@ export const PlanoMaterial = sequelize.define('plano_materiales', {
         type: DataTypes.BIGINT,
         allowNull: false,
         references: { 
-            model: Plano, 
+            model: Plano,
             key: 'id' }
     },
     material_id: {
@@ -24,14 +24,14 @@ export const PlanoMaterial = sequelize.define('plano_materiales', {
         allowNull: false,
         references: { model: MateriaPrima, key: 'id_mp' }
     },
-    pedido_id: {
+    /*pedido_id: {
         type: DataTypes.BIGINT,
         allowNull: false,
         references: { 
             model: Pedido,
             key: 'id' },
             comment: 'A que pedido pertenece este plano'
-    },
+    },*/
     cantidad: { 
         type: DataTypes.DECIMAL, 
         allowNull: false 
@@ -45,7 +45,7 @@ export const PlanoMaterial = sequelize.define('plano_materiales', {
       type: DataTypes.BIGINT,
       allowNull: false,
       references: { 
-        model: UnidadMedida, 
+        model: Unidad_Medida, 
         key: 'id' }
     },
     notas: { 
