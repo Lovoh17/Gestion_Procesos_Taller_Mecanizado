@@ -1,5 +1,5 @@
 import { DataTypes } from "sequelize";
-import { sequelize } from "../../shared/database/database";
+import { sequelize } from "../../shared/database/database.js";
 
 export const Usuario = sequelize.define(
   "usuarios",
@@ -29,10 +29,10 @@ export const Usuario = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    id_zona: {
+    /*id_zona: {
       type: DataTypes.INTEGER,
       allowNull: false,
-    },
+    },*/
   },
   {
     tableName: "usuarios",
