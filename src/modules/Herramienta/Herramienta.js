@@ -64,11 +64,11 @@ export const Herramienta = sequelize.define(
     },
     zonas_trabajo_id: {
       type: DataTypes.SMALLINT,
-      allowNull: true,/* Descomente cuando haya modelo Zona_Trabajo
+      allowNull: true,
       reference:{
         model:Zona_Trabajo,
         key:'id'
-      }*/
+      }
     },
     fecha_adquisicion: {
       type: DataTypes.DATEONLY,

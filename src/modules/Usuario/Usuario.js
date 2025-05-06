@@ -78,11 +78,11 @@ export const Usuario = sequelize.define(
     },
     zona_trabajo_id: {
       type: DataTypes.BIGINT,
-      allowNull: false,/* Descomente cuando tengan zonas_trabajos
+      allowNull: false,
       reference:{
         model: Zona_Trabajo,
         key: 'id'
-      }*/
+      }
     },
     ultimo_acceso: {
       type: DataTypes.DATE,

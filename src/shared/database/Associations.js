@@ -16,10 +16,17 @@ import { Unidad_Medida } from '../../modules/Unidad_Medida/Unidad_Medida.js';
 
 import { Pedido } from '../../modules/Pedido/Pedido.js';
 import { Tipo_Herramienta } from '../../modules/Tipo_Herramienta/Tipo_Herramienta.js';
+import { Estado_Herramienta } from '../../modules/Estado_Herramienta/Estado_Herramienta.js';
+import { Zona_Trabajo } from '../../modules/Zona_Trabajo/Zona_Trabajo.js';
+import { Puesto } from '../../modules/Puesto/Puesto.js';
+import { Estado_Usuario } from '../../modules/Estado_Usuario/Estado_Usuario.js';
+import { Turno } from '../../modules/Turno/Turno.js';
+import { Tipo_Telefono } from '../../modules/Tipo_Telefono/Tipo_Telefono.js';
+import { Tipo_Materia_Prima } from '../../modules/Tipo_Materia_Prima/Tipo_Materia_Prima.js';
 //import { Pedido_Material } from '../../modules/Pedido_Material/Pedido_Material.js';
 //import { Pedido_Herramienta } from '../../modules/Pedido_Herramienta/Pedido_Herramienta.js';
 
-
+/*
 Usuario.hasMany(Telefono_Usuario, {
   foreignKey: 'id_usuario',
   as: 'telefonos'
@@ -29,7 +36,7 @@ Telefono_Usuario.belongsTo(Usuario, {
   foreignKey: 'id_usuario',
   as: 'usuario'
 });
-
+*/
 /*Usuario.belongsTo(Zona, {
   foreignKey: 'id_zona',
   as: 'zona'
@@ -69,4 +76,24 @@ Pedido.belongsTo(Tipo_Pedido, { foreignKey: 'tipo_pedido_id' });
 Pedido.belongsTo(Estado_Pedido, { foreignKey: 'estado_id' });
 Pedido.belongsTo(Razon_Pausa_Pedido, { foreignKey: 'razon_pausa_actual_id' });
 
-Herramienta.belongsTo(Tipo_Herramienta,{foreignKey: 'id'});
+Herramienta.belongsTo(Tipo_Herramienta,{foreignKey: 'tipo_herramienta_id'});
+Herramienta.belongsTo(Estado_Herramienta, {foreignKey: 'estado_herramienta_id'});
+Herramienta.belongsTo(Zona_Trabajo, { foreignKey: 'zonas_trabajo_id'});
+
+Zona_Trabajo.belongsTo(Usuario, {foreignKey: 'responsable_id'});
+
+Usuario.belongsTo(Puesto, {foreignKey: 'puesto_id'});
+Usuario.belongsTo(Estado_Usuario , {foreignKey: 'estado_id'});
+Usuario.belongsTo(Turno,{ foreignKey: 'turno_id'});
+Usuario.belongsTo(Zona_Trabajo, {foreignKey: 'zona_trabajo_id'});
+
+Telefono_Usuario.belongsTo(Usuario, {foreignKey: 'usuario_id'});
+Telefono_Usuario.belongsTo(Tipo_Telefono, { foreignKey: 'tipo_telefono_id'});
+
+Materia_Prima.belongsTo(Tipo_Materia_Prima, {foreignKey: 'tipo_materia_prima_id'});
+Materia_Prima.belongsTo(Unidad_Medida, { foreignKey: 'unidad_base_id'});
+Materia_Prima.belongsTo(Unidad_Medida, { foreignKey: 'fraccion_unidad_id'});
+Materia_Prima.belongsTo(Tipo_Stock, { foreignKey: 'pertenece_a_stock_id'});
+
+
+
