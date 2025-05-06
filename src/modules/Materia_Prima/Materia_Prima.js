@@ -1,5 +1,9 @@
 import { sequelize } from "../../shared/database/database.js";
 import { DataTypes } from "sequelize";
+import { Tipo_Materia_Prima } from "../Tipo_Materia_Prima/Tipo_Materia_Prima.js"; 
+import { Unidad_Medida } from "../Unidad_Medida/Unidad_Medida.js";
+import { Tipo_Stock } from "../Tipo_Stock/Tipo_Stock.js";
+
 
 export const Materia_Prima = sequelize.define("materias_prima", {
     id_mp: {
@@ -24,10 +28,18 @@ export const Materia_Prima = sequelize.define("materias_prima", {
     tipo_materia_prima_id: {
       type: DataTypes.BIGINT,
       allowNull: false,
+      reference:{
+        model: Tipo_Materia_Prima,
+        key: 'id'
+      }
     },
     unidad_base_id: {
       type: DataTypes.BIGINT,
       allowNull: false,
+      reference:{
+        model: Unidad_Medida,
+        key:'id'
+      }
     },
     stock_minimo: {
       type: DataTypes.DECIMAL,
@@ -56,6 +68,10 @@ export const Materia_Prima = sequelize.define("materias_prima", {
     fraccion_unidad_id: {
       type: DataTypes.BIGINT,
       allowNull: false,
+      reference:{
+        model: Unidad_Medida,
+        key: 'id'
+      }
     },
     permite_fraccion: {
       type: DataTypes.BOOLEAN,
@@ -66,6 +82,10 @@ export const Materia_Prima = sequelize.define("materias_prima", {
       type: DataTypes.SMALLINT,
       allowNull: false,
       comment: "1=pedido internos, 2=pedido externos, 3=prácticas",
+      reference:{
+        model:Tipo_Stock,
+        key: 'id'
+      }
     },
     costo_unitario: {
       type: DataTypes.DECIMAL,
@@ -95,4 +115,4 @@ export const Materia_Prima = sequelize.define("materias_prima", {
     tableName: "materias_prima",
     timestamps: false,
   }
-);
+)

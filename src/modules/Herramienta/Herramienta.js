@@ -1,5 +1,7 @@
 import { sequelize } from "../../shared/database/database.js";
 import { DataTypes } from "sequelize";
+import { Tipo_Herramienta } from "../Tipo_Herramienta/Tipo_Herramienta.js";
+import { Estado_Herramienta } from "../Estado_Herramienta/Estado_Herramienta.js" ;
 
 export const Herramienta = sequelize.define(
   "herramientas",
@@ -16,6 +18,10 @@ export const Herramienta = sequelize.define(
     tipo_herramienta_id: {
       type: DataTypes.BIGINT,
       allowNull: false,
+      reference:{
+        model: Tipo_Herramienta,
+        key: 'id'
+      }
     },
     modelo: {
       type: DataTypes.STRING,
@@ -40,6 +46,11 @@ export const Herramienta = sequelize.define(
       type: DataTypes.SMALLINT,
       allowNull: false,
       defaultValue: 1,
+      reference:{
+        model: Estado_Herramienta,
+        key: 'id'
+      }
+      
     },
     vida_util_horas: {
       type: DataTypes.DECIMAL,
@@ -53,7 +64,11 @@ export const Herramienta = sequelize.define(
     },
     zonas_trabajo_id: {
       type: DataTypes.SMALLINT,
-      allowNull: true,
+      allowNull: true,/* Descomente cuando haya modelo Zona_Trabajo
+      reference:{
+        model:Zona_Trabajo,
+        key:'id'
+      }*/
     },
     fecha_adquisicion: {
       type: DataTypes.DATEONLY,

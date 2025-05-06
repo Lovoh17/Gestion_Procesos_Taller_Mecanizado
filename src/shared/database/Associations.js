@@ -15,6 +15,7 @@ import { Tipo_Stock } from '../../modules/Tipo_Stock/Tipo_Stock.js';
 import { Unidad_Medida } from '../../modules/Unidad_Medida/Unidad_Medida.js';
 
 import { Pedido } from '../../modules/Pedido/Pedido.js';
+import { Tipo_Herramienta } from '../../modules/Tipo_Herramienta/Tipo_Herramienta.js';
 //import { Pedido_Material } from '../../modules/Pedido_Material/Pedido_Material.js';
 //import { Pedido_Herramienta } from '../../modules/Pedido_Herramienta/Pedido_Herramienta.js';
 
@@ -67,3 +68,5 @@ Pedido.belongsTo(Plano, { foreignKey: 'plano_id' });
 Pedido.belongsTo(Tipo_Pedido, { foreignKey: 'tipo_pedido_id' });
 Pedido.belongsTo(Estado_Pedido, { foreignKey: 'estado_id' });
 Pedido.belongsTo(Razon_Pausa_Pedido, { foreignKey: 'razon_pausa_actual_id' });
+
+Herramienta.belongsTo(Tipo_Herramienta,{foreignKey: 'id'});

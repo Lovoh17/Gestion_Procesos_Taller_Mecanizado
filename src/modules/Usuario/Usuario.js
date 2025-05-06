@@ -1,5 +1,8 @@
 import { sequelize } from "../../shared/database/database.js";
 import { DataTypes } from "sequelize";
+import { Puesto } from "../Puesto/Puesto.js";
+import { Estado_Usuario } from "../Estado_Usuario/Estado_Usuario.js";
+import { Turno } from "../Turno/Turno.js";
 
 export const Usuario = sequelize.define(
   "Usuario",
@@ -29,11 +32,19 @@ export const Usuario = sequelize.define(
     puesto_id: {
       type: DataTypes.BIGINT,
       allowNull: false,
+      reference:{
+        model: Puesto,
+        key: 'id'
+      }
     },
     estado_id: {
       type: DataTypes.SMALLINT,
       allowNull: false,
       defaultValue: 1,
+      reference:{
+        model: Estado_Usuario,
+        key: 'id'
+      }
     },
     foto_ruta: {
       type: DataTypes.STRING,
@@ -60,10 +71,18 @@ export const Usuario = sequelize.define(
     turno_id: {
       type: DataTypes.SMALLINT,
       allowNull: false,
+      reference:{
+        model: Turno,
+        key:  'id'
+      }
     },
     zona_trabajo_id: {
       type: DataTypes.BIGINT,
-      allowNull: false,
+      allowNull: false,/* Descomente cuando tengan zonas_trabajos
+      reference:{
+        model: Zona_Trabajo,
+        key: 'id'
+      }*/
     },
     ultimo_acceso: {
       type: DataTypes.DATE,

@@ -1,5 +1,7 @@
 import { sequelize } from "../../shared/database/database.js";
 import { DataTypes } from "sequelize";
+import { Usuario } from "../Usuario/Usuario.js";
+import { Tipo_Telefono } from "../Tipo_Telefono/Tipo_Telefono.js";
 
 export const Telefono_Usuario = sequelize.define(
   "telefonos_usuario",
@@ -11,11 +13,19 @@ export const Telefono_Usuario = sequelize.define(
     },
     usuario_id: { 
         type: DataTypes.INTEGER, 
-        allowNull: false 
+        allowNull: false,
+        reference:{
+          model: Usuario,
+          key: 'id'
+        }
     },
     tipo_telefono_id: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        reference:{
+          model: Tipo_Telefono,
+          key: 'id'
+        }
     },
     numero:{
       type: DataTypes.STRING,
