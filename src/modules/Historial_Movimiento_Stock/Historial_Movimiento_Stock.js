@@ -1,12 +1,11 @@
 import { sequelize } from '../../shared/database/database.js';
 import { DataTypes } from 'sequelize';
 
-// Importe de los modelos necesarios
-import { MateriaPrima } from '../Materia_Prima/Materia_Prima.js';
+import { Materia_Prima } from '../Materia_Prima/Materia_Prima.js';
 import { Unidad_Medida } from '../Unidad_Medida/Unidad_Medida.js';
 import { Tipo_Stock } from '../Tipo_Stock/Tipo_Stock.js';
 //import { Pedido } from '../Pedido/Pedido.js'; // No implementado o no definido
-//import { PedidoMaterial } from '../Pedido_Material/Pedido_Material.js'; // No implementado o no definido
+//import { Pedido_Material } from '../Pedido_Material/Pedido_Material.js'; // No implementado o no definido
 import { Usuario } from '../Usuario/Usuario.js';
 
 
@@ -20,7 +19,7 @@ export const HistorialMovimientoStock = sequelize.define('historial_movimientos_
         type: DataTypes.BIGINT,
         allowNull: false,
         refereces: {
-            model: MateriaPrima,
+            model: Materia_Prima,
             key: 'id_mp'
         }
     },

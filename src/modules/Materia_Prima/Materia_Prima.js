@@ -1,9 +1,7 @@
 import { sequelize } from "../../shared/database/database.js";
 import { DataTypes } from "sequelize";
 
-export const MateriaPrima = sequelize.define(
-  "MateriaPrima",
-  {
+export const Materia_Prima = sequelize.define("materias_prima", {
     id_mp: {
       type: DataTypes.INTEGER,
       primaryKey: true,
