@@ -6,6 +6,8 @@ if (process.env.NODE_ENV !== 'production') {
   dotenv.config();
 }
 
+import './shared/database/Associations.js'
+
 const PORT = process.env.PORT || 3000;
 
 async function main(){

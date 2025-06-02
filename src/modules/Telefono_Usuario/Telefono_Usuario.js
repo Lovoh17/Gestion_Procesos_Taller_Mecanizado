@@ -1,5 +1,7 @@
-import { sequelize } from "../../shared/database/database";
+import { sequelize } from "../../shared/database/database.js";
 import { DataTypes } from "sequelize";
+import { Usuario } from "../Usuario/Usuario.js";
+import { Tipo_Telefono } from "../Tipo_Telefono/Tipo_Telefono.js";
 
 export const Telefono_Usuario = sequelize.define(
   "telefonos_usuario",
@@ -9,14 +11,30 @@ export const Telefono_Usuario = sequelize.define(
       primaryKey: true,
       autoIncrement: true,
     },
-    id_usuario: { 
+    usuario_id: { 
         type: DataTypes.INTEGER, 
-        allowNull: false 
+        allowNull: false,
+        reference:{
+          model: Usuario,
+          key: 'id'
+        }
     },
-    telefono: {
+    tipo_telefono_id: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        reference:{
+          model: Tipo_Telefono,
+          key: 'id'
+        }
     },
+    numero:{
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    es_principal:{
+      type: DataTypes.BOOLEAN,
+      defaultValue: 1,
+    }
   },
   {
     tableName: "telefonos_usuario",
