@@ -5,15 +5,27 @@ import { Telefono_Usuario } from '../../modules/Telefono_Usuario/Telefono_Usuari
 import { Materia_Prima } from '../../modules/Materia_Prima/Materia_Prima.js';
 import { Herramienta } from '../../modules/Herramienta/Herramienta.js';
 
+// AYALA
 import { HistorialMovimientoStock } from '../../modules/Historial_Movimiento_Stock/Historial_Movimiento_Stock.js';
 import { Plano } from '../../modules/Plano/Plano.js';
 import { PlanoMaterial } from '../../modules/Plano_Material/Plano_Material.js';
 import { PlanoHerramienta } from '../../modules/Plano_Herramienta/Plano_Herramienta.js';
 
+import { Mantenimiento } from '../../modules/Mantenimiento/Mantenimiento.js';
+import { Estado_Mantenimiento } from '../../modules/Estado_Mantenimiento/Estado_Mantenimiento.js';
+import { Prioridad_Mantenimiento } from '../../modules/Prioridad_Mantenimiento/Prioridad_Mantenimiento.js';
+import { Tipo_Mantenimiento } from '../../modules/Tipo_Mantenimiento/Tipo_Mantenimiento.js';
+import { Alerta_Reparacion } from '../../modules/Alerta_Reparacion/Alerta_Reparacion.js';
+import { Estado_Reparacion } from '../../modules/Estado_Reparacion/Estado_Reparacion.js';
+import { Tipo_Alerta } from '../../modules/Tipo_Alerta/Tipo_Alerta.js';
+import { Historial_Uso_Herramientas } from '../../modules/Historial_Uso_Herramienta/Historial_Uso_herramientas.js';
+import { Pedido_Material } from '../../modules/Pedido_Material/Pedido_Material.js';
+import { Pedido_Herramienta } from '../../modules/Pedido_Herramienta/Pedido_Herramienta.js';
+
+
 import { Tipo_Pedido } from '../../modules/Tipo_Pedido/Tipo_Pedido.js';
 import { Tipo_Stock } from '../../modules/Tipo_Stock/Tipo_Stock.js';
 import { Unidad_Medida } from '../../modules/Unidad_Medida/Unidad_Medida.js';
-
 import { Pedido } from '../../modules/Pedido/Pedido.js';
 import { Tipo_Herramienta } from '../../modules/Tipo_Herramienta/Tipo_Herramienta.js';
 import { Estado_Herramienta } from '../../modules/Estado_Herramienta/Estado_Herramienta.js';
@@ -55,6 +67,36 @@ HistorialMovimientoStock.belongsTo(Pedido, { foreignKey: 'pedido_id' });
 //HistorialMovimientoStock.belongsTo(Pedido_Material, { foreignKey: 'pedido_material_id' });
 //HistorialMovimientoStock.belongsTo(Pedido_Herramienta, { foreignKey: 'pedido_herramienta_id' });
 HistorialMovimientoStock.belongsTo(Usuario, { foreignKey: 'usuario_id' });
+
+Mantenimiento.belongsTo(Herramienta, { foreignKey: 'herramienta_id' });
+Mantenimiento.belongsTo(Tipo_Mantenimiento, { foreignKey: 'tipo_mantenimiento_id' });
+Mantenimiento.belongsTo(Estado_Mantenimiento, { foreignKey: 'estado_id' });
+Mantenimiento.belongsTo(Prioridad_Mantenimiento, { foreignKey: 'prioridad_id' });
+Mantenimiento.belongsTo(Usuario, { foreignKey: 'tecnico_asignado_id', as: 'tecnicoAsignado' });
+Mantenimiento.belongsTo(Usuario, { foreignKey: 'mantenimiento_hecho_por', as: 'hechoPor' });
+Mantenimiento.belongsTo(Usuario, { foreignKey: 'actualizado_por', as: 'actualizadoPor' });
+
+Alerta_Reparacion.belongsTo(Herramienta, { foreignKey: 'herramienta_id' });
+Alerta_Reparacion.belongsTo(Tipo_Alerta, { foreignKey: 'tipo_alerta_id' });
+Alerta_Reparacion.belongsTo(Prioridad_Mantenimiento, { foreignKey: 'prioridad_id' });
+Alerta_Reparacion.belongsTo(Estado_Reparacion, { foreignKey: 'estado_reparacion' });
+Alerta_Reparacion.belongsTo(Usuario, { foreignKey: 'resuelta_por', as: 'usuarioResuelve' });
+
+Historial_Uso_Herramientas.belongsTo(Herramienta, { foreignKey: 'herramienta_id' });
+Historial_Uso_Herramientas.belongsTo(Usuario, { foreignKey: 'usuario_id' });
+Historial_Uso_Herramientas.belongsTo(Pedido, { foreignKey: 'proyecto_id' });
+Historial_Uso_Herramientas.belongsTo(Estado_Herramienta, { foreignKey: 'estado_devolucion_id' });
+Historial_Uso_Herramientas.belongsTo(Usuario, { foreignKey: 'aprobado_por', as: 'usuarioAprueba' });
+
+Pedido_Material.belongsTo(Pedido, { foreignKey: 'pedido_id' });
+Pedido_Material.belongsTo(Materia_Prima, { foreignKey: 'material_id' });
+Pedido_Material.belongsTo(Unidad_Medida, { foreignKey: 'unidad_medida_id' });
+Pedido_Material.belongsTo(Tipo_Stock, { foreignKey: 'tipo_stock_destino' });
+Pedido_Material.belongsTo(Estado_Entrega, { foreignKey: 'estado_entrega_id' });
+
+Pedido_Herramienta.belongsTo(Pedido, { foreignKey: 'pedido_id' });
+Pedido_Herramienta.belongsTo(Herramienta, { foreignKey: 'herramienta_id' });
+Pedido_Herramienta.belongsTo(Estado_Herramienta, { foreignKey: 'estado_herramienta_id' });
 
 Plano.belongsTo(Usuario, { foreignKey: 'creado_por' });
 Plano.belongsTo(Tipo_Pedido, { foreignKey: 'tipo_pedidos_id' });
