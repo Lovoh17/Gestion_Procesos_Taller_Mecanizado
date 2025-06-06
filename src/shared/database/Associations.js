@@ -16,9 +16,11 @@ import { Estado_Mantenimiento } from '../../modules/Estado_Mantenimiento/Estado_
 import { Prioridad_Mantenimiento } from '../../modules/Prioridad_Mantenimiento/Prioridad_Mantenimiento.js';
 import { Tipo_Mantenimiento } from '../../modules/Tipo_Mantenimiento/Tipo_Mantenimiento.js';
 import { Alerta_Reparacion } from '../../modules/Alerta_Reparacion/Alerta_Reparacion.js';
+
 import { Estado_Reparacion } from '../../modules/Estado_Reparacion/Estado_Reparacion.js';
 import { Tipo_Alerta } from '../../modules/Tipo_Alerta/Tipo_Alerta.js';
-import { Historial_Uso_Herramientas } from '../../modules/Historial_Uso_Herramienta/Historial_Uso_herramientas.js';
+
+import { Historial_Uso_Herramienta } from '../../modules/Historial_Uso_Herramienta/Historial_Uso_Herramienta.js';
 import { Pedido_Material } from '../../modules/Pedido_Material/Pedido_Material.js';
 import { Pedido_Herramienta } from '../../modules/Pedido_Herramienta/Pedido_Herramienta.js';
 import { Entrega_Pedido } from '../../modules/Entrega_Pedidio/Entrega_Pedido.js';
@@ -86,11 +88,11 @@ Alerta_Reparacion.belongsTo(Prioridad_Mantenimiento, { foreignKey: 'prioridad_id
 Alerta_Reparacion.belongsTo(Estado_Reparacion, { foreignKey: 'estado_reparacion' });
 Alerta_Reparacion.belongsTo(Usuario, { foreignKey: 'resuelta_por', as: 'usuarioResuelve' });
 
-Historial_Uso_Herramientas.belongsTo(Herramienta, { foreignKey: 'herramienta_id' });
-Historial_Uso_Herramientas.belongsTo(Usuario, { foreignKey: 'usuario_id' });
-Historial_Uso_Herramientas.belongsTo(Pedido, { foreignKey: 'proyecto_id' });
-Historial_Uso_Herramientas.belongsTo(Estado_Herramienta, { foreignKey: 'estado_devolucion_id' });
-Historial_Uso_Herramientas.belongsTo(Usuario, { foreignKey: 'aprobado_por', as: 'usuarioAprueba' });
+Historial_Uso_Herramienta.belongsTo(Herramienta, { foreignKey: 'herramienta_id' });
+Historial_Uso_Herramienta.belongsTo(Usuario, { foreignKey: 'usuario_id' });
+Historial_Uso_Herramienta.belongsTo(Pedido, { foreignKey: 'proyecto_id' });
+Historial_Uso_Herramienta.belongsTo(Estado_Herramienta, { foreignKey: 'estado_devolucion_id' });
+Historial_Uso_Herramienta.belongsTo(Usuario, { foreignKey: 'aprobado_por', as: 'usuarioAprueba' });
 
 Pedido_Material.belongsTo(Pedido, { foreignKey: 'pedido_id' });
 Pedido_Material.belongsTo(Materia_Prima, { foreignKey: 'material_id' });
