@@ -31,6 +31,6 @@ export const Zona_Trabajo = sequelize.define("zonas_trabajo",{
     }
 },
 {
-    tableName: "materias_prima",
+    tableName: "zonas_trabajo",
     timestamps: false,
 })
