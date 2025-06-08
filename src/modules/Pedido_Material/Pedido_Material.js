@@ -1,4 +1,4 @@
-import { sequelize } from "../../shared/database/database";
+import { sequelize } from "../../shared/database/database.js";
 import { DataTypes } from "sequelize";
 
 export const Pedido_Material = sequelize.define("pedido_materiales", {
