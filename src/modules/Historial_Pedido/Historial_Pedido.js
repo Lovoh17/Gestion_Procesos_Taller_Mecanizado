@@ -1,4 +1,4 @@
-import { sequelize } from "../../shared/database/database";
+import { sequelize } from "../../shared/database/database.js";
 import { DataTypes } from "sequelize";
 
 export const Historial_Pedido = sequelize.define("historial_pedidos", {
