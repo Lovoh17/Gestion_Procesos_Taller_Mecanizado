@@ -1,5 +1,4 @@
-import { zonaTrabajoService } from "../Zona_Trabajo/Zona_Trabajo.service";
-import { EstadoReparacionService } from "./Estado_Reparacion.service"
+import { EstadoReparacionService } from "./Estado_Reparacion.service.js";
 
 export const crearEstadoReparacion = async (req, res)=>{
     try {
@@ -35,8 +34,8 @@ export const obtenerEstadoReparacionPorNombre = async (req, res) => {
 
 export const obtenerEstadosReparacion = async (req, res)=>{
     try {
-        const EstadosTrabajos = await zonaTrabajoService.getAll();
-        res.status(200).json(EstadosTrabajos);
+        const estadoReparacion = await EstadoReparacionService.getAll();
+        res.status(200).json(estadoReparacion);
     } catch (error) {
         res.status(500).json({error: error.message});
     }

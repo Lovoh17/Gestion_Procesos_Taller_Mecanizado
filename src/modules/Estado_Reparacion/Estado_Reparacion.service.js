@@ -1,4 +1,4 @@
-import { Estado_Reparacion } from "./Estado_Reparacion";
+import { Estado_Reparacion } from "./Estado_Reparacion.js";
 
 class EstadoReparacionService{
     async getAll(){

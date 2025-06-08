@@ -1,4 +1,4 @@
-import { TiposAlertasService } from "./Tipos_Alertas.service";
+import { TiposAlertasService } from "./Tipos_Alertas.service.js";
 
 export const crearTiposAlerta = async (req, res) =>{
     try {
