@@ -41,6 +41,11 @@ import { Estado_Usuario } from '../../modules/Estado_Usuario/Estado_Usuario.js';
 import { Turno } from '../../modules/Turno/Turno.js';
 import { Tipo_Telefono } from '../../modules/Tipo_Telefono/Tipo_Telefono.js';
 import { Tipo_Materia_Prima } from '../../modules/Tipo_Materia_Prima/Tipo_Materia_Prima.js';
+
+import { Usuarios_Roles } from '../../modules/Usuarios_Roles/Usuarios_Roles.js';
+import { Permisos } from '../../modules/Permisos/Permisos.js';
+import { Rol } from '../../modules/Rol/Rol.js';
+
 //import { Pedido_Material } from '../../modules/Pedido_Material/Pedido_Material.js';
 //import { Pedido_Herramienta } from '../../modules/Pedido_Herramienta/Pedido_Herramienta.js';
 
@@ -169,5 +174,8 @@ Materia_Prima.belongsTo(Unidad_Medida, { foreignKey: 'unidad_base_id'});
 Materia_Prima.belongsTo(Unidad_Medida, { foreignKey: 'fraccion_unidad_id'});
 Materia_Prima.belongsTo(Tipo_Stock, { foreignKey: 'pertenece_a_stock_id'});
 
+Usuarios_Roles.belongsTo(Usuario,{ foreignKey: 'usuario_id'});
+Usuarios_Roles.belongsTo(Rol, {foreignKey: 'role_id'});
 
+Permisos.belongsTo(Rol, {foreignKey: 'role_id'});
 
