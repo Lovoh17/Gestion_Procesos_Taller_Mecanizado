@@ -15,4 +15,4 @@ export const Estados_Devolucion = sequelize.define("estados_devolucion",{
 {
     tableName: "estados_devolucion",
     timestamps: false
-})
+});

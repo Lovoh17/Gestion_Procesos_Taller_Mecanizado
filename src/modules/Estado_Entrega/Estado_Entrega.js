@@ -19,4 +19,4 @@ export const Estado_Entrega = sequelize.define("estado_entrega",{
 {
     tableName: "estado_entrega",
     timestamps: false,
-})
+});

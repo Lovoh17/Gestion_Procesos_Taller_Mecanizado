@@ -45,6 +45,18 @@ import { Tipo_Materia_Prima } from '../../modules/Tipo_Materia_Prima/Tipo_Materi
 import { Usuarios_Roles } from '../../modules/Usuarios_Roles/Usuarios_Roles.js';
 import { Permisos } from '../../modules/Permisos/Permisos.js';
 import { Rol } from '../../modules/Rol/Rol.js';
+import { Estado_Reparacion } from '../../modules/Estado_Reparacion/Estado_Reparacion.js';
+import { Tipos_Alertas } from '../../modules/Tipos_Alertas/Tipos_Alertas.js';
+import { Estados_Devolucion } from '../../modules/Estados_Devolucion/Estado_Devolucion.js';
+import { Estado_Pedido } from '../../modules/Estados_Pedido/Estados_Pedido.js';
+import { Estado_Entrega } from '../../modules/Estado_Entrega/Estado_Entrega.js';
+import { Razones_Pausa_Pedido } from '../../modules/Razones_Pausa_Pedido/Razones_Pausa_Pedido.js';
+import { Departamento_Universidad } from '../../modules/Departamentos_Universidad /Departamentos_Universidad.js';
+import { Estado_Transaccion } from '../../modules/Estado_Transaccion/Estado_Transaccion.js';
+import { Metodo_Pago } from '../../modules/Metodo_Pago/Metodo_Pago.js';
+import { Tipos_Transaccion } from '../../modules/Tipos_Transaccion/Tipos_Transaccion.js';
+
+
 
 //import { Pedido_Material } from '../../modules/Pedido_Material/Pedido_Material.js';
 //import { Pedido_Herramienta } from '../../modules/Pedido_Herramienta/Pedido_Herramienta.js';

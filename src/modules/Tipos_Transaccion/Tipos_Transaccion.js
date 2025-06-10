@@ -30,4 +30,4 @@ export const Tipos_Transaccion = sequelize.define("tipos_transaccion",{
 },{
     tableName: "tipos_transaccion",
     timestamps: false
-})
+});

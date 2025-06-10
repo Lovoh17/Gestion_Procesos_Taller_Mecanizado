@@ -22,4 +22,4 @@ export const Usuarios_Roles = sequelize.define("usuarios_roles",{
 {
     tableName: "usuario",
     timestamps: false
-})
+});

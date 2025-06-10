@@ -23,4 +23,4 @@ export const Permisos = sequelize.define("permisos",{
 {
     tableName: "permisos",
     timestamps: false
-})
+});

@@ -19,4 +19,4 @@ export const Razones_Pausa_Pedido = sequelize.define("razones_pausa_pedido",{
 {
     tableName: "razones_pausa_pedido",
     timestamps: false,
-})
+});

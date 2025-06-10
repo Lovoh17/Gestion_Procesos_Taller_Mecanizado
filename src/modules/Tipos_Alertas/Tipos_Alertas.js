@@ -14,4 +14,4 @@ export const Tipos_Alertas = sequelize.define("tipos_alertas",{
 {
     tableName: "tipos_alertas",
     timestamps: false,
-})
+});

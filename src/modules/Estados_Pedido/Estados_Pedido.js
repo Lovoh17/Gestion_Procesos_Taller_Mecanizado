@@ -31,4 +31,4 @@ export const Estado_Pedido = sequelize.define("estados_pedido",{
 {
     tableName: "estados_pedido",
     timestamps: false,
-})
+});

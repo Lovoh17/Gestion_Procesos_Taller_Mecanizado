@@ -23,4 +23,4 @@ export const Metodo_Pago = sequelize.define("metodo_pago",{
 {
     tableName: "metodo_pago",
     timestamps: false
-})
+});

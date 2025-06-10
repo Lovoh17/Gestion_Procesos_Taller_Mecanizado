@@ -15,4 +15,4 @@ export const Departamento_Universidad = sequelize.define("departamento_universid
 {
     tableName: "departamentos_universidad",
     timestamps: false
-})
+});
