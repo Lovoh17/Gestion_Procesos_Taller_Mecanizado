@@ -51,7 +51,7 @@ import { Estados_Devolucion } from '../../modules/Estados_Devolucion/Estado_Devo
 import { Estado_Pedido } from '../../modules/Estados_Pedido/Estados_Pedido.js';
 import { Estado_Entrega } from '../../modules/Estado_Entrega/Estado_Entrega.js';
 import { Razones_Pausa_Pedido } from '../../modules/Razones_Pausa_Pedido/Razones_Pausa_Pedido.js';
-import { Departamento_Universidad } from '../../modules/Departamentos_Universidad /Departamentos_Universidad.js';
+import { Departamento_Universidad } from '../../modules/Departamentos_Universidad/Departamentos_Universidad.js';
 import { Estado_Transaccion } from '../../modules/Estado_Transaccion/Estado_Transaccion.js';
 import { Metodo_Pago } from '../../modules/Metodo_Pago/Metodo_Pago.js';
 import { Tipos_Transaccion } from '../../modules/Tipos_Transaccion/Tipos_Transaccion.js';
