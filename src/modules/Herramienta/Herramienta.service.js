@@ -58,4 +58,4 @@ class HerramientaService{
     }
 }
 
-export const HerramientaService = new HerramientaService();
+export const herramientaService = new HerramientaService();

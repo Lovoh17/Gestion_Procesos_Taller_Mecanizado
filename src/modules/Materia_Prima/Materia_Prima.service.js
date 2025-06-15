@@ -1,9 +1,9 @@
-import {Materia_Prima} from "./Materia_Prima.js"
+import {MateriaPrima} from "./Materia_Prima.js"
 
 class MateriaPrimaService {
     async getAll() {
         try {
-            const materiasPrima = await Materia_Prima.findAll();
+            const materiasPrima = await MateriaPrima.findAll();
             return materiasPrima;
         } catch (error) {
             throw new Error("Error al obtener las materias primas: " + error.message);
@@ -12,7 +12,7 @@ class MateriaPrimaService {
 
     async getById(id) {
         try {
-            const materiaPrima = await Materia_Prima.findByPk(id);
+            const materiaPrima = await MateriaPrima.findByPk(id);
             if (!materiaPrima) {
                 throw new Error("Materia Prima no encontrada");
             }
@@ -24,7 +24,7 @@ class MateriaPrimaService {
 
     async create(data) {
         try {
-            const nuevaMateriaPrima = await Materia_Prima.create(data);
+            const nuevaMateriaPrima = await MateriaPrima.create(data);
             return nuevaMateriaPrima;
         } catch (error) {
             throw new Error("Error al crear la materia prima: " + error.message);
@@ -33,7 +33,7 @@ class MateriaPrimaService {
 
     async update(id, data) {
         try {
-            const materiaPrima = await Materia_Prima.findByPk(id);
+            const materiaPrima = await MateriaPrima.findByPk(id);
             if (!materiaPrima) {
                 throw new Error("Materia Prima no encontrada");
             }
@@ -46,7 +46,7 @@ class MateriaPrimaService {
 
     async delete(id) {
         try {
-            const materiaPrima = await Materia_Prima.findByPk(id);
+            const materiaPrima = await MateriaPrima.findByPk(id);
             if (!materiaPrima) {
                 throw new Error("Materia Prima no encontrada");
             }
@@ -58,4 +58,4 @@ class MateriaPrimaService {
     }
 }
 
-export const MateriaPrimaService = new MateriaPrimaService();
+export const materiaPrimaService = new MateriaPrimaService();

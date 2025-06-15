@@ -1,9 +1,9 @@
-import { Estado_Reparacion } from "./Estado_Reparacion.js";
+import { EstadoReparacion } from "./Estado_Reparacion.js";
 
 class EstadoReparacionService{
     async getAll(){
         try {
-            const EstadoReparacion = await Estado_Reparacion.findAll();
+            const EstadoReparacion = await EstadoReparacion.findAll();
             return EstadoReparacion;
         } catch (error) {
             throw new Error("Error al obtener todos los Estado Reparacion: " + error.message);
@@ -12,7 +12,7 @@ class EstadoReparacionService{
     }
     async getById(id){
         try {
-            const EstadoReparacion = await Estado_Reparacion.findByPk(id);
+            const EstadoReparacion = await EstadoReparacion.findByPk(id);
             if(!EstadoReparacion){
                 throw new Error("Estado reparacion no encontrado (el id no es correcto)")
             }
@@ -23,7 +23,7 @@ class EstadoReparacionService{
     }
     async create(data){
         try {
-            const nuevoEstadoReparacion = await Estado_Reparacion.create(data);
+            const nuevoEstadoReparacion = await EstadoReparacion.create(data);
             return nuevoEstadoReparacion;
         } catch (error) {
             throw new Error("Error al crear el estado reparacion "+ error.message);
@@ -32,7 +32,7 @@ class EstadoReparacionService{
     }
     async update(id, data){
         try {
-            const EstadoReparacion = await Estado_Reparacion.findByPk(id);
+            const EstadoReparacion = await EstadoReparacion.findByPk(id);
             if (!EstadoReparacion) {
                 throw new Error("Estado de reparacion no encontrado");
             }
@@ -44,7 +44,7 @@ class EstadoReparacionService{
     }
     async delete(id){
         try {
-            const EstadoReparacion = await Estado_Reparacion.findByPk(id);
+            const EstadoReparacion = await EstadoReparacion.findByPk(id);
             if (!EstadoReparacion) {
                 throw new Error("Estado reparacion no encontrado");               
             }
@@ -57,7 +57,7 @@ class EstadoReparacionService{
     }
     async getByName(nombre){
         try {
-            const EstadoReparacion = await Estado_Reparacion.findOne({where: {nombre}});
+            const EstadoReparacion = await EstadoReparacion.findOne({where: {nombre}});
             if (!EstadoReparacion) {
                 throw new Error("Estado Reparacion no encontrado");
             }

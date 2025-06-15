@@ -1,9 +1,9 @@
-import { Metodo_Pago } from "./Metodo_Pago.js";
+import { MetodoPago } from "./Metodo_Pago.js";
 
 class MetodoPagoService{
     async getAll() {
             try {
-                const metodoPago = await Metodo_Pago.findAll();
+                const metodoPago = await MetodoPago.findAll();
                 return metodoPago;
             } catch (error) {
                 throw new Error("Error al obtener los metodos de pago: " + error.message);
@@ -12,7 +12,7 @@ class MetodoPagoService{
     
         async getById(id) {
             try {
-                const metodoPago = await Metodo_Pago.findByPk(id);
+                const metodoPago = await MetodoPago.findByPk(id);
                 if (!metodoPago) {
                     throw new Error("Metodo de pago no encontrada");
                 }
@@ -24,7 +24,7 @@ class MetodoPagoService{
     
         async create(data) {
             try {
-                const nuevametodoPago = await Metodo_Pago.create(data);
+                const nuevametodoPago = await MetodoPago.create(data);
                 return nuevametodoPago;
             } catch (error) {
                 throw new Error("Error al crear el metodo de pago: " + error.message);
@@ -33,7 +33,7 @@ class MetodoPagoService{
     
         async update(id, data) {
             try {
-                const metodoPago = await Metodo_Pago.findByPk(id);
+                const metodoPago = await MetodoPago.findByPk(id);
                 if (!metodoPago) {
                     throw new Error("metodo de pago no encontrada");
                 }
@@ -46,7 +46,7 @@ class MetodoPagoService{
     
         async delete(id) {
             try {
-                const metodoPago = await Metodo_Pago.findByPk(id);
+                const metodoPago = await MetodoPago.findByPk(id);
                 if (!metodoPago) {
                     throw new Error("Metodo de Pago no encontrada");
                 }
@@ -59,4 +59,4 @@ class MetodoPagoService{
     
 }
 
-export const MetodoPagoService = new MetodoPagoService();
+export const metodoPagoService = new MetodoPagoService();

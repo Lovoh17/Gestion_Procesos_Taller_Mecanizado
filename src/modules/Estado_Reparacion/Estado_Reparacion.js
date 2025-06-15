@@ -1,7 +1,7 @@
 import { sequelize } from "../../shared/database/database.js";
 import { DataTypes } from "sequelize";
 
-export const Estado_Reparacion = sequelize.define(
+export const EstadoReparacion = sequelize.define(
     "Estado_Reparacion",
     {
         id:{

@@ -1,9 +1,9 @@
-import {Telefono_Usuario } from "./Telefono_Usuario.js";
+import {TelefonoUsuario } from "./Telefono_Usuario.js";
 
 class TelefonoUsuarioService{
     async getAll() {
         try {
-            const telefonosUsuario = await Zona_Trabajo.findAll();
+            const telefonosUsuario = await TelefonoUsuario.findAll();
             return telefonosUsuario;
         } catch (error) {
             throw new Error("Error al obtener los telefonos de usuario: " + error.message);
@@ -12,7 +12,7 @@ class TelefonoUsuarioService{
 
     async getById(id) {
         try {
-            const telefonoUsuario = await Zona_Trabajo.findByPk(id);
+            const telefonoUsuario = await TelefonoUsuario.findByPk(id);
             if (!telefonoUsuario) {
                 throw new Error("Telefono de Usuario no encontrada");
             }
@@ -24,7 +24,7 @@ class TelefonoUsuarioService{
 
     async create(data) {
         try {
-            const nuevaZonaTrabajo = await Zona_Trabajo.create(data);
+            const nuevaZonaTrabajo = await TelefonoUsuario.create(data);
             return nuevaZonaTrabajo;
         } catch (error) {
             throw new Error("Error al crear el telefono de usuario: " + error.message);
@@ -33,7 +33,7 @@ class TelefonoUsuarioService{
 
     async update(id, data) {
         try {
-            const telefonoUsuario = await Zona_Trabajo.findByPk(id);
+            const telefonoUsuario = await TelefonoUsuario.findByPk(id);
             if (!telefonoUsuario) {
                 throw new Error("Telefono de Usuario no encontrada");
             }
@@ -46,7 +46,7 @@ class TelefonoUsuarioService{
 
     async delete(id) {
         try {
-            const telefonoUsuario = await Zona_Trabajo.findByPk(id);
+            const telefonoUsuario = await TelefonoUsuario.findByPk(id);
             if (!telefonoUsuario) {
                 throw new Error("Telefono de Usuario no encontrada");
             }
@@ -58,4 +58,4 @@ class TelefonoUsuarioService{
     }
 }
 
-export const TelefonoUsuarioService = new TelefonoUsuarioService();
+export const telefonoUsuarioService = new TelefonoUsuarioService();

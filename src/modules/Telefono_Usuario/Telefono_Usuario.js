@@ -3,7 +3,7 @@ import { DataTypes } from "sequelize";
 import { Usuario } from "../Usuario/Usuario.js";
 import { Tipo_Telefono } from "../Tipo_Telefono/Tipo_Telefono.js";
 
-export const Telefono_Usuario = sequelize.define(
+export const TelefonoUsuario = sequelize.define(
   "telefonos_usuario",
   {
     id_telefono: {

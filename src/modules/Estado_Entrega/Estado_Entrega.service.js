@@ -1,10 +1,10 @@
-import { Estado_Entrega } from "./Estado_Entrega.js";
+import { EstadoEntrega } from "./Estado_Entrega.js";
 
 class EstadoEntregaService{
     async getAll() {
             try {
-                const Estado_Entrega = await Estado_Entrega.findAll();
-                return Estado_Entrega;
+                const estado_Entrega = await EstadoEntrega.findAll();
+                return estado_Entrega;
             } catch (error) {
                 throw new Error("Error al obtener los estado entrega: " + error.message);
             }
@@ -12,7 +12,7 @@ class EstadoEntregaService{
     
         async getById(id) {
             try {
-                const estado_entrega = await Estado_Entrega.findByPk(id);
+                const estado_entrega = await EstadoEntrega.findByPk(id);
                 if (!estado_entrega) {
                     throw new Error("Estado entrega no encontrado");
                 }
@@ -24,7 +24,7 @@ class EstadoEntregaService{
     
         async create(data) {
             try {
-                const estado_entrega = await Estado_Entrega.create(data);
+                const estado_entrega = await EstadoEntrega.create(data);
                 return estado_entrega;
             } catch (error) {
                 throw new Error("Error al crear el estado entrega: " + error.message);
@@ -33,7 +33,7 @@ class EstadoEntregaService{
     
         async update(id, data) {
             try {
-                const estado_entrega = await Estado_Entrega.findByPk(id);
+                const estado_entrega = await EstadoEntrega.findByPk(id);
                 if (!estado_entrega) {
                     throw new Error("Estado entrega no encontrada");
                 }
@@ -46,7 +46,7 @@ class EstadoEntregaService{
     
         async delete(id) {
             try {
-                const estado_entrega = await Estado_Entrega.findByPk(id);
+                const estado_entrega = await EstadoEntrega.findByPk(id);
                 if (!estado_entrega) {
                     throw new Error("Estado entrega no encontrada");
                 }
@@ -60,4 +60,4 @@ class EstadoEntregaService{
     
 }
 
-export const EstadoEntregaService = new EstadoEntregaService();
+export const estadoEntregaService = new EstadoEntregaService();

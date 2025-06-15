@@ -59,4 +59,4 @@ class PermisosService{
     
 }
 
-export const PermisoService = new PermisosService()
+export const permisoService = new PermisosService()

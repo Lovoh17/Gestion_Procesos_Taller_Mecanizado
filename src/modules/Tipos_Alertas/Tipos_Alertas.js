@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize"
 import { sequelize } from "../../shared/database/database.js"
 
-export const Tipos_Alertas = sequelize.define("tipos_alertas",{
+export const TiposAlertas = sequelize.define("tipos_alertas",{
     id:{
         type: DataTypes.BIGINT,
         allowNull: false

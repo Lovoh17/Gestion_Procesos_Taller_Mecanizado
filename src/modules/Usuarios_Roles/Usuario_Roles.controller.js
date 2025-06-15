@@ -1,9 +1,9 @@
-import { UsuarioRolService } from "./Usuario_Roles.service.js";
+import { usuarioRolService } from "./Usuario_Roles.service.js";
 
 export const crearUsuarioRol = async (req, res) => {
     try {
         const { usuario_id, role_id } = req.body;
-        const nuevaUsuarioRol = await UsuarioRolService.create({
+        const nuevaUsuarioRol = await usuarioRolService.create({
             usuario_id,
             role_id
         });
@@ -16,7 +16,7 @@ export const crearUsuarioRol = async (req, res) => {
 export const obtenerUsuarioRolPorId = async (req, res) => {
     try {
         const { id } = req.params;
-        const zonaTrabajo = await UsuarioRolService.getById(id);
+        const zonaTrabajo = await usuarioRolService.getById(id);
         res.status(200).json(zonaTrabajo);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -26,7 +26,7 @@ export const obtenerUsuarioRolPorId = async (req, res) => {
 export const obtenerUsuarioRolPorNombre = async (req, res) => {
     try {
         const { nombre } = req.params;
-        const zonaTrabajo = await UsuarioRolService.getByName(nombre);
+        const zonaTrabajo = await usuarioRolService.getByName(nombre);
         res.status(200).json(zonaTrabajo);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -35,7 +35,7 @@ export const obtenerUsuarioRolPorNombre = async (req, res) => {
 
 export const obtenerUsuarioRoles = async (req, res) => {
     try {
-        const usuarioRoles = await UsuarioRolService.getAll();
+        const usuarioRoles = await usuarioRolService.getAll();
         res.status(200).json(usuarioRoles);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -46,7 +46,7 @@ export const actualizarUsuarioRol = async (req, res) => {
     try {
         const { id } = req.params;
         const { usuario_id, role_id } = req.body;
-        const zonaTrabajoActualizada = await UsuarioRolService.update(id, {
+        const zonaTrabajoActualizada = await usuarioRolService.update(id, {
             usuario_id,
             role_id
         });
@@ -59,7 +59,7 @@ export const actualizarUsuarioRol = async (req, res) => {
 export const eliminarUsuarioRol = async (req, res) => {
     try {
         const { id } = req.params;
-        await UsuarioRolService.delete(id);
+        await usuarioRolService.delete(id);
         res.status(200).json({ message: "Zona de trabajo eliminada" });
     } catch (error) {
         res.status(500).json({ error: error.message });

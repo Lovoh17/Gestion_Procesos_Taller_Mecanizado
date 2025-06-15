@@ -1,9 +1,9 @@
-import { Estado_Transaccion } from "./Estado_Transaccion.js";
+import { EstadoTransaccion } from "./Estado_Transaccion.js";
 
 class EstadoTransaccionService{
     async getAll() {
             try {
-                const estado_transaccion = await Estado_Transaccion.findAll();
+                const estado_transaccion = await EstadoTransaccion.findAll();
                 return estado_transaccion;
             } catch (error) {
                 throw new Error("Error al obtener los estado transacion: " + error.message);
@@ -12,7 +12,7 @@ class EstadoTransaccionService{
     
         async getById(id) {
             try {
-                const estado_transaccion = await Estado_Transaccion.findByPk(id);
+                const estado_transaccion = await EstadoTransaccion.findByPk(id);
                 if (!estado_transaccion) {
                     throw new Error("estado transaccion no encontrado");
                 }
@@ -24,7 +24,7 @@ class EstadoTransaccionService{
     
         async create(data) {
             try {
-                const nuevoEstadoT = await Estado_Transaccion.create(data);
+                const nuevoEstadoT = await EstadoTransaccion.create(data);
                 return nuevoEstadoT;
             } catch (error) {
                 throw new Error("Error al crear lo estado transaccion: " + error.message);
@@ -33,7 +33,7 @@ class EstadoTransaccionService{
     
         async update(id, data) {
             try {
-                const estado_transaccion = await Estado_Transaccion.findByPk(id);
+                const estado_transaccion = await EstadoTransaccion.findByPk(id);
                 if (!estado_transaccion) {
                     throw new Error("Estado transaccion no encontrado");
                 }
@@ -46,7 +46,7 @@ class EstadoTransaccionService{
     
         async delete(id) {
             try {
-                const estado_transaccion = await Estado_Transaccion.findByPk(id);
+                const estado_transaccion = await EstadoTransaccion.findByPk(id);
                 if (!estado_transaccion) {
                     throw new Error("estado transaccion no encontrado");
                 }

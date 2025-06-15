@@ -1,9 +1,9 @@
-import { Tipos_Transaccion } from "./Tipos_Transaccion.js";
+import { TiposTransaccion } from "./Tipos_Transaccion.js";
 
 class TipoTransaccionService{
     async getAll() {
             try {
-                const tiposTransaccion = await Tipos_Transaccion.findAll();
+                const tiposTransaccion = await TiposTransaccion.findAll();
                 return tiposTransaccion;
             } catch (error) {
                 throw new Error("Error al obtener los tipos transaccion: " + error.message);
@@ -12,7 +12,7 @@ class TipoTransaccionService{
     
         async getById(id) {
             try {
-                const TipoTransaccion = await Tipos_Transaccion.findByPk(id);
+                const TipoTransaccion = await TiposTransaccion.findByPk(id);
                 if (!TipoTransaccion) {
                     throw new Error("Tipos de transaccion no encontrado");
                 }
@@ -24,7 +24,7 @@ class TipoTransaccionService{
     
         async create(data) {
             try {
-                const nuevaTipoTransaccion = await Tipos_Transaccion.create(data);
+                const nuevaTipoTransaccion = await TiposTransaccion.create(data);
                 return nuevaTipoTransaccion;
             } catch (error) {
                 throw new Error("Error al crear lo tipo de transaccion: " + error.message);
@@ -33,7 +33,7 @@ class TipoTransaccionService{
     
         async update(id, data) {
             try {
-                const TipoTransaccion = await Tipos_Transaccion.findByPk(id);
+                const TipoTransaccion = await TiposTransaccion.findByPk(id);
                 if (!TipoTransaccion) {
                     throw new Error("Tipo de transaccion no encontrado");
                 }
@@ -46,7 +46,7 @@ class TipoTransaccionService{
     
         async delete(id) {
             try {
-                const TipoTransaccion = await Tipos_Transaccion.findByPk(id);
+                const TipoTransaccion = await TiposTransaccion.findByPk(id);
                 if (!TipoTransaccion) {
                     throw new Error("Tipo de transaccion no encontrado");
                 }
@@ -59,4 +59,4 @@ class TipoTransaccionService{
     
 }
 
-export const TipoTransaccionService = new TipoTransaccionService();
+export const tipoTransaccionService = new TipoTransaccionService();

@@ -1,7 +1,7 @@
 import { sequelize } from '../../shared/database/database.js';
 import { DataTypes } from 'sequelize';
 
-import { Materia_Prima } from '../Materia_Prima/Materia_Prima.js';
+import { MateriaPrima } from '../Materia_Prima/Materia_Prima.js';
 import { Unidad_Medida } from '../Unidad_Medida/Unidad_Medida.js';
 import { Tipo_Stock } from '../Tipo_Stock/Tipo_Stock.js';
 //import { Pedido } from '../Pedido/Pedido.js'; // No implementado o no definido

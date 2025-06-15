@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize"
 import { sequelize } from "../../shared/database/database.js"
 
-export const Razones_Pausa_Pedido = sequelize.define("razones_pausa_pedido",{
+export const RazonesPausaPedido = sequelize.define("razones_pausa_pedido",{
     id:{
         type: DataTypes.BIGINT,
         primaryKey: true,
