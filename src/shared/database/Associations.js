@@ -18,7 +18,7 @@ import { Tipo_Mantenimiento } from '../../modules/Tipo_Mantenimiento/Tipo_Manten
 import { Alerta_Reparacion } from '../../modules/Alerta_Reparacion/Alerta_Reparacion.js';
 
 import { Estado_Reparacion } from '../../modules/Estado_Reparacion/Estado_Reparacion.js';
-import { Tipo_Alerta } from '../../modules/Tipo_Alerta/Tipo_Alerta.js';
+import { Tipos_Alertas } from '../../modules/Tipos_Alertas/Tipos_Alertas.js';
 
 import { Historial_Uso_Herramienta } from '../../modules/Historial_Uso_Herramienta/Historial_Uso_Herramienta.js';
 import { Pedido_Material } from '../../modules/Pedido_Material/Pedido_Material.js';
@@ -45,8 +45,8 @@ import { Tipo_Materia_Prima } from '../../modules/Tipo_Materia_Prima/Tipo_Materi
 import { Usuarios_Roles } from '../../modules/Usuarios_Roles/Usuarios_Roles.js';
 import { Permisos } from '../../modules/Permisos/Permisos.js';
 import { Rol } from '../../modules/Rol/Rol.js';
-import { Estado_Reparacion } from '../../modules/Estado_Reparacion/Estado_Reparacion.js';
-import { Tipos_Alertas } from '../../modules/Tipos_Alertas/Tipos_Alertas.js';
+//import { Estado_Reparacion } from '../../modules/Estado_Reparacion/Estado_Reparacion.js';
+//import { Tipos_Alertas } from '../../modules/Tipos_Alertas/Tipos_Alertas.js';
 import { Estados_Devolucion } from '../../modules/Estados_Devolucion/Estado_Devolucion.js';
 import { Estado_Pedido } from '../../modules/Estados_Pedido/Estados_Pedido.js';
 import { Estado_Entrega } from '../../modules/Estado_Entrega/Estado_Entrega.js';
@@ -100,7 +100,7 @@ Mantenimiento.belongsTo(Usuario, { foreignKey: 'mantenimiento_hecho_por', as: 'h
 Mantenimiento.belongsTo(Usuario, { foreignKey: 'actualizado_por', as: 'actualizadoPor' });
 
 Alerta_Reparacion.belongsTo(Herramienta, { foreignKey: 'herramienta_id' });
-Alerta_Reparacion.belongsTo(Tipo_Alerta, { foreignKey: 'tipo_alerta_id' });
+Alerta_Reparacion.belongsTo(Tipos_Alertas, { foreignKey: 'tipo_alerta_id' });
 Alerta_Reparacion.belongsTo(Prioridad_Mantenimiento, { foreignKey: 'prioridad_id' });
 Alerta_Reparacion.belongsTo(Estado_Reparacion, { foreignKey: 'estado_reparacion' });
 Alerta_Reparacion.belongsTo(Usuario, { foreignKey: 'resuelta_por', as: 'usuarioResuelve' });

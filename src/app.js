@@ -5,7 +5,7 @@ import AlertaReparacionRoutes from './modules/Alerta_Reparacion/Alerta_Reparacio
 import DepartamentosUniversidadRoutes from './modules/Departamentos_Universidad/Departamentos_Universidad.routes.js';
 import DetalleEntregaRoutes from './modules/Detalle_Entrega/Detalle_Entrega.routes.js';
 import DetalleTransaccionRoutes from './modules/Detalle_Transaccion/Detalle_Transaccion.routes.js';
-import EntregaPedidoRoutes from './modules/Entrega_Pedido/Entrega_Pedido.routes.js';
+import EntregaPedidoRoutes from './modules/Entrega_Pedidio/Entrega_Pedido.routes.js'; //---------
 import EstadoEntregaRoutes from './modules/Estado_Entrega/Estado_Entrega.routes.js';
 import EstadoHerramientaRoutes from './modules/Estado_Herramienta/Estado_Herramienta.routes.js';
 import EstadoMantenimientoRoutes from './modules/Estado_Mantenimiento/Estado_Mantenimiento.routes.js';

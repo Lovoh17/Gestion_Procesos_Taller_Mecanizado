@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 3000;
 
 async function main(){
     try{
-        await sequelize.sync({force: false});
+        await sequelize.sync({force: true});
         console.log('Conectado a la BD');
         app.listen(PORT);
         console.log(`Servidor escuchando en el puerto ${PORT}`);

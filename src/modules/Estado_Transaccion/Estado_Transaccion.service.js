@@ -58,4 +58,4 @@ class EstadoTransaccionService{
         }
     
 }
-export const EstadoTransaccionService = new EstadoTransaccionService();
+export const estadoTransaccionService = new EstadoTransaccionService();

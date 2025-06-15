@@ -59,4 +59,4 @@ class EstadoPedidoService{
     
 }
 
-export const EstadoPedidoService = new EstadoPedidoService();
+export const estadoPedidoService = new EstadoPedidoService();
