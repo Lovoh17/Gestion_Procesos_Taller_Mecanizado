@@ -58,4 +58,4 @@ class DepartamentoUniversidadService{
         }
     
 }
-export const DepartamentoUniversidadService = new DepartamentoUniversidadService();
+export const departamentoUniversidadService = new DepartamentoUniversidadService();

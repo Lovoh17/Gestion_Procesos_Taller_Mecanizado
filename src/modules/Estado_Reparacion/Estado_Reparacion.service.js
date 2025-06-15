@@ -68,4 +68,4 @@ class EstadoReparacionService{
     }
 }
 
-export const EstadoReparacionService = new EstadoReparacionService();
+export const estadoReparacionService = new EstadoReparacionService();
