@@ -1,5 +1,5 @@
 import { Router } from "express";
-import {crearPermiso, obtenerPermisos, obtenerPermisoPorId, actualizarPermiso, eliminarPermiso} from "./Permisos.controller.js";
+import {crearPermiso, obtenerPermisos, obtenerPermisoPorId, actualizarPermiso, eliminarPermiso} from "./Permiso.controller.js";
 
 const router = Router();
 

@@ -1,4 +1,4 @@
-import { departamentoUniversidadService } from "./Departamentos_Universidad.service.js";
+import { departamentoUniversidadService } from "./Departamento_Universidad.service.js";
 
 export const crearDepartamentoU = async (req, res) => {
     try {

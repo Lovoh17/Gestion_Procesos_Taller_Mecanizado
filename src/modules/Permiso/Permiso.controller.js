@@ -1,4 +1,4 @@
-import { permisoService } from "./Permisos.service.js";
+import { permisoService } from "./Permiso.service.js";
 
 export const crearPermiso = async (req, res) => {
     try {

@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize"
 import { sequelize } from "../../shared/database/database.js"
 
-export const Permisos = sequelize.define("permisos",{
+export const Permiso = sequelize.define("permiso",{
     id:{
         type: DataTypes.BIGINT,
         primaryKey: true,

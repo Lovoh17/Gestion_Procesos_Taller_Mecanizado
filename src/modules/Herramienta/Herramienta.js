@@ -4,7 +4,7 @@ import { Tipo_Herramienta } from "../Tipo_Herramienta/Tipo_Herramienta.js";
 import { Estado_Herramienta } from "../Estado_Herramienta/Estado_Herramienta.js" ;
 
 export const Herramienta = sequelize.define(
-  "herramientas",
+  "herramienta",
   {
     id: {
       type: DataTypes.BIGINT,

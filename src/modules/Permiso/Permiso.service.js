@@ -1,9 +1,9 @@
-import { Permisos } from "./Permisos.js";
+import { Permiso } from "./Permiso.js";
 
-class PermisosService{
+class PermisoService{
     async getAll() {
         try {
-            const permisos = await Permisos.findAll();
+            const permisos = await Permiso.findAll();
             return permisos;
         } catch (error) {
             throw new Error("Error al obtener los permisos: " + error.message);
@@ -12,7 +12,7 @@ class PermisosService{
 
     async getById(id) {
         try {
-            const permiso = await Permisos.findByPk(id);
+            const permiso = await Permiso.findByPk(id);
             if (!permiso) {
                 throw new Error("Permiso no encontrado");
             }
@@ -24,7 +24,7 @@ class PermisosService{
 
     async create(data) {
         try {
-            const nuevaPermiso = await Permisos.create(data);
+            const nuevaPermiso = await Permiso.create(data);
             return nuevaPermiso;
         } catch (error) {
             throw new Error("Error al crear el permiso: " + error.message);
@@ -33,7 +33,7 @@ class PermisosService{
 
     async update(id, data) {
         try {
-            const permiso = await Permisos.findByPk(id);
+            const permiso = await Permiso.findByPk(id);
             if (!permiso) {
                 throw new Error("Permiso no encontrado");
             }
@@ -46,7 +46,7 @@ class PermisosService{
 
     async delete(id) {
         try {
-            const permiso = await Permisos.findByPk(id);
+            const permiso = await Permiso.findByPk(id);
             if (!permiso) {
                 throw new Error("Permiso no encontrado");
             }
@@ -59,4 +59,4 @@ class PermisosService{
     
 }
 
-export const permisoService = new PermisosService()
+export const permisoService = new PermisoService()

@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize"
 import { sequelize } from "../../shared/database/database.js"
 
-export const UsuariosRoles = sequelize.define("usuarios_roles",{
+export const UsuarioRol = sequelize.define("usuario_rol",{
     usuario_id:{
         type: DataTypes.BIGINT,
         allowNull: false,

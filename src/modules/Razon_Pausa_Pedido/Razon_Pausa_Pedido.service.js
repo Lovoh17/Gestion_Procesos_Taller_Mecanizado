@@ -1,9 +1,9 @@
-import { RazonesPausaPedido } from "./Razones_Pausa_Pedido.js";
+import { RazonPausaPedido } from "./Razon_Pausa_Pedido.js";
 
-class RazonesPausaPedidoService{
+class RazonPausaPedidoService{
     async getAll() {
             try {
-                const razones_pausa_pedido = await RazonesPausaPedido.findAll();
+                const razones_pausa_pedido = await RazonPausaPedido.findAll();
                 return razones_pausa_pedido;
             } catch (error) {
                 throw new Error("Error al obtener las razones para pausa el pedido: " + error.message);
@@ -12,7 +12,7 @@ class RazonesPausaPedidoService{
     
         async getById(id) {
             try {
-                const razones_pausa_pedido = await RazonesPausaPedido.findByPk(id);
+                const razones_pausa_pedido = await RazonPausaPedido.findByPk(id);
                 if (!razones_pausa_pedido) {
                     throw new Error("Razones pausa pedido no encontrada");
                 }
@@ -24,7 +24,7 @@ class RazonesPausaPedidoService{
     
         async create(data) {
             try {
-                const razones_pausa_pedido = await RazonesPausaPedido.create(data);
+                const razones_pausa_pedido = await RazonPausaPedido.create(data);
                 return razones_pausa_pedido;
             } catch (error) {
                 throw new Error("Error al crear la razones pausa pedido: " + error.message);
@@ -33,7 +33,7 @@ class RazonesPausaPedidoService{
     
         async update(id, data) {
             try {
-                const razones_pausa_pedido = await RazonesPausaPedido.findByPk(id);
+                const razones_pausa_pedido = await RazonPausaPedido.findByPk(id);
                 if (!razones_pausa_pedido) {
                     throw new Error("Razones pausa pedido no encontrada");
                 }
@@ -46,7 +46,7 @@ class RazonesPausaPedidoService{
     
         async delete(id) {
             try {
-                const razones_pausa_pedido = await RazonesPausaPedido.findByPk(id);
+                const razones_pausa_pedido = await RazonPausaPedido.findByPk(id);
                 if (!razones_pausa_pedido) {
                     throw new Error("Razones pausa pedido no encontrada");
                 }
@@ -58,4 +58,4 @@ class RazonesPausaPedidoService{
         }
     
 }
-export const razonesPausaPedidoService = new RazonesPausaPedidoService();
+export const razonPausaPedidoService = new RazonPausaPedidoService();

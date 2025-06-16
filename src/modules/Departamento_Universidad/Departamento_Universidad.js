@@ -1,17 +1,18 @@
 import { DataTypes } from "sequelize"
 import { sequelize } from "../../shared/database/database.js"
 
-export const TiposAlertas = sequelize.define("tipos_alertas",{
+export const DepartamentoUniversidad = sequelize.define("departamento_universidad",{
     id:{
         type: DataTypes.BIGINT,
-        allowNull: false
+        primaryKey: true,
+        autoIncrement: true
     },
-    nombre_alertas:{
+    nombre:{
         type: DataTypes.STRING,
         allowNull: false
     }
 },
 {
-    tableName: "tipos_alertas",
-    timestamps: false,
+    tableName: "departamentos_universidad",
+    timestamps: false
 });

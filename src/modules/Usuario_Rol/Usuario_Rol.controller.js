@@ -1,4 +1,4 @@
-import { usuarioRolService } from "./Usuario_Roles.service.js";
+import { usuarioRolService } from "./Usuario_Rol.service.js";
 
 export const crearUsuarioRol = async (req, res) => {
     try {

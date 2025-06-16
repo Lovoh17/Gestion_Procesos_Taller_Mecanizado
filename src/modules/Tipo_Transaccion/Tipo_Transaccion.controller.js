@@ -1,4 +1,4 @@
-import { tipoTransaccionService } from "./Tipos_Transaccion.service.js";
+import { tipoTransaccionService } from "./Tipo_Transaccion.service.js";
 
 export const crearTipoTransaccion = async (req, res) => {
     try {

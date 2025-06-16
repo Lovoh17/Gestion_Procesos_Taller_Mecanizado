@@ -1,5 +1,5 @@
 import { Router } from "express";
-import {crearDepartamentoU,obtenerDepartamentoUPorId, obtenerDepartamentoU,actualizarDepartamentoU,eliminarDepartamentoU} from "./Departamentos_Universidad.controller.js";
+import {crearDepartamentoU,obtenerDepartamentoUPorId, obtenerDepartamentoU,actualizarDepartamentoU,eliminarDepartamentoU} from "./Departamento_Universidad.controller.js";
 
 const router = new Router();
 

@@ -1,9 +1,9 @@
-import { TiposAlertas } from "./Tipos_Alertas.js";
+import { TipoAlerta } from "./Tipo_Alerta.js";
 
-class TiposAlertasService{
+class TipoAlertaService{
     async getAll(){
         try {
-            const tipoAlerta = await TiposAlertas.findAll();
+            const tipoAlerta = await TipoAlerta.findAll();
             return tipoAlerta;
         } catch (error) {
             throw new Error("Error al obtener todas los tipos de alertas: "+ error.message);
@@ -11,7 +11,7 @@ class TiposAlertasService{
     }
     async getById(id){
         try {
-            const tipoAlerta = await TiposAlertas.findByPk(id);
+            const tipoAlerta = await TipoAlerta.findByPk(id);
             if (!tipoAlerta) {
                 throw new Error("Tipo de alerta no encontrada");
             }
@@ -22,7 +22,7 @@ class TiposAlertasService{
     }
     async create(data){
         try {
-            const nuevoTipoAlerta = await TiposAlertas.create(data);
+            const nuevoTipoAlerta = await TipoAlerta.create(data);
             return nuevoTipoAlerta;
         } catch (error) {
             throw new Error("Error al crear un nuevo tipo de alerta: " + error.message);
@@ -30,7 +30,7 @@ class TiposAlertasService{
     }
     async update(id, data){
         try {
-            const TipoAlerta = await TiposAlertas.findByPk(id);
+            const TipoAlerta = await TipoAlerta.findByPk(id);
             if (!TipoAlerta) {
                 throw new Error("Tipo alerta inexistente");
                 
@@ -44,7 +44,7 @@ class TiposAlertasService{
     }
     async delete(id){
         try {
-            const TipoAlerta = await TiposAlertas.findByPk(id);
+            const TipoAlerta = await TipoAlerta.findByPk(id);
             if (!TipoAlerta) {
                 throw new Error("Tipo alerta inexistente");
                 
@@ -59,7 +59,7 @@ class TiposAlertasService{
     //inecesario
     async getByName(nombre){
         try {
-            const TipoAlerta = await TiposAlertas.findOne({where: {nombre}});
+            const TipoAlerta = await TipoAlerta.findOne({where: {nombre}});
             if (!TipoAlerta) {
                 throw new Error("Tipo Alerta inexistente");
                 
@@ -71,4 +71,4 @@ class TiposAlertasService{
         }
     }
 }
-export const tiposAlertasService = new TiposAlertasService();
+export const tipoAlertaService = new TipoAlertaService();

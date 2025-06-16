@@ -1,5 +1,5 @@
 import { Router } from "express";
-import {crearTiposAlerta, obtenerTipoAlerta, obtenerTipoAlertaPorId, actualizarTipoAlerta, eliminarTipoAlerta} from "./Tipos_Alertas.controller.js";
+import {crearTiposAlerta, obtenerTipoAlerta, obtenerTipoAlertaPorId, actualizarTipoAlerta, eliminarTipoAlerta} from "./Tipo_Alerta.controller.js";
 const router = Router();
 
 router.post("/Tipos_Alertas", crearTiposAlerta);

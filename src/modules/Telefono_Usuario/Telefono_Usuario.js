@@ -4,7 +4,7 @@ import { Usuario } from "../Usuario/Usuario.js";
 import { Tipo_Telefono } from "../Tipo_Telefono/Tipo_Telefono.js";
 
 export const TelefonoUsuario = sequelize.define(
-  "telefonos_usuario",
+  "telefono_usuario",
   {
     id_telefono: {
       type: DataTypes.INTEGER,
@@ -33,7 +33,7 @@ export const TelefonoUsuario = sequelize.define(
     },
     es_principal:{
       type: DataTypes.BOOLEAN,
-      defaultValue: true,
+      allowNull: false
     }
   },
   {

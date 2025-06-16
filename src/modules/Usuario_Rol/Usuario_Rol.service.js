@@ -1,9 +1,9 @@
-import { UsuariosRoles } from "./Usuarios_Roles.js";
+import { UsuarioRol } from "./Usuario_Rol.js";
 
-class UsuarioRolesService{
+class UsuarioRolService{
     async getAll() {
             try {
-                const usuariosRoles = await UsuariosRoles.findAll();
+                const usuariosRoles = await UsuarioRol.findAll();
                 return usuariosRoles;
             } catch (error) {
                 throw new Error("Error al obtener los roles de usuario: " + error.message);
@@ -12,7 +12,7 @@ class UsuarioRolesService{
     
         async getById(id) {
             try {
-                const UsuarioRol = await UsuariosRoles.findByPk(id);
+                const UsuarioRol = await UsuarioRol.findByPk(id);
                 if (!UsuarioRol) {
                     throw new Error("Rol de Usuario no encontrada");
                 }
@@ -24,7 +24,7 @@ class UsuarioRolesService{
     
         async create(data) {
             try {
-                const nuevaUsuarioRol = await UsuariosRoles.create(data);
+                const nuevaUsuarioRol = await UsuarioRol.create(data);
                 return nuevaUsuarioRol;
             } catch (error) {
                 throw new Error("Error al crear el rol de usuario: " + error.message);
@@ -33,7 +33,7 @@ class UsuarioRolesService{
     
         async update(id, data) {
             try {
-                const UsuarioRol = await UsuariosRoles.findByPk(id);
+                const UsuarioRol = await UsuarioRol.findByPk(id);
                 if (!UsuarioRol) {
                     throw new Error("Rol de Usuario no encontrada");
                 }
@@ -46,7 +46,7 @@ class UsuarioRolesService{
     
         async delete(id) {
             try {
-                const UsuarioRol = await UsuariosRoles.findByPk(id);
+                const UsuarioRol = await UsuarioRol.findByPk(id);
                 if (!UsuarioRol) {
                     throw new Error("Rol de Usuario no encontrada");
                 }
@@ -59,4 +59,4 @@ class UsuarioRolesService{
     
 }
 
-export const usuarioRolService = new UsuarioRolesService();
+export const usuarioRolService = new UsuarioRolService();

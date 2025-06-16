@@ -18,13 +18,13 @@ import { TipoMantenimiento } from '../../modules/Tipo_Mantenimiento/Tipo_Manteni
 import { Alerta_Reparacion } from '../../modules/Alerta_Reparacion/Alerta_Reparacion.js';
 
 import { EstadoReparacion } from '../../modules/Estado_Reparacion/Estado_Reparacion.js';
-import { TiposAlertas } from '../../modules/Tipos_Alertas/Tipos_Alertas.js';
+import { TiposAlertas } from '../../modules/Tipo_Alerta/Tipo_Alerta.js';
 
 import { HistorialUsoHerramienta } from '../../modules/Historial_Uso_Herramienta/Historial_Uso_Herramienta.js';
 import { PedidoMaterial } from '../../modules/Pedido_Material/Pedido_Material.js';
 import { PedidoHerramienta } from '../../modules/Pedido_Herramienta/Pedido_Herramienta.js';
 import { EntregaPedido } from '../../modules/Entrega_Pedidio/Entrega_Pedido.js';
-import { DetalleEntrega } from '../../modules/Detalle_Entrega/Detalle_Entrega.js';
+import { Detalle_Entrega } from '../../modules/Detalle_Entrega/Detalle_Entrega.js';
 import { HistorialPedido } from '../../modules/Historial_Pedido/Historial_Pedido.js';
 import { TransaccionFinanciera } from '../../modules/Transaccion_Financiera/Transaccion_Financiera.js';
 import { DetalleTransaccion } from '../../modules/Detalle_Transaccion/Detalle_Transaccion.js';
@@ -42,16 +42,16 @@ import { Turno } from '../../modules/Turno/Turno.js';
 import { TipoTelefono } from '../../modules/Tipo_Telefono/Tipo_Telefono.js';
 import { TipoMateriaPrima } from '../../modules/Tipo_Materia_Prima/Tipo_Materia_Prima.js';
 
-import { UsuariosRoles } from '../../modules/Usuarios_Roles/Usuarios_Roles.js';
+import { UsuariosRoles } from '../../modules/Usuario_Rol/Usuario_Rol.js';
 import { Permisos } from '../../modules/Permisos/Permisos.js';
 import { Rol } from '../../modules/Rol/Rol.js';
 //import { EstadoReparacion } from '../../modules/Estado_Reparacion/Estado_Reparacion.js';
 //import { TiposAlertas } from '../../modules/Tipos_Alertas/Tipos_Alertas.js';
-import { EstadoDevolucion } from '../../modules/Estados_Devolucion/Estado_Devolucion.js';
-import { EstadoPedido } from '../../modules/Estados_Pedido/Estado_Pedido.js';
+import { EstadoDevolucion } from '../../modules/Estado_Devolucion/Estado_Devolucion.js';
+import { EstadoPedido } from '../../modules/Estado_Pedido/Estado_Pedido.js';
 import { EstadoEntrega } from '../../modules/Estado_Entrega/Estado_Entrega.js';
-import { RazonesPausaPedido } from '../../modules/Razones_Pausa_Pedido/Razones_Pausa_Pedido.js';
-import { DepartamentosUniversidad } from '../../modules/Departamentos_Universidad/Departamentos_Universidad.js';
+import { RazonesPausaPedido } from '../../modules/Razon_Pausa_Pedido/Razon_Pausa_Pedido.js';
+import { DepartamentosUniversidad } from '../../modules/Departamento_Universidad/Departamento_Universidad.js';
 import { EstadoTransaccion } from '../../modules/Estado_Transaccion/Estado_Transaccion.js';
 import { MetodoPago } from '../../modules/Metodo_Pago/Metodo_Pago.js';
 import { TiposTransaccion } from '../../modules/Tipos_Transaccion/Tipos_Transaccion.js';
@@ -126,10 +126,10 @@ EntregaPedido.belongsTo(Usuario, { foreignKey: 'entregado_por', as: 'usuarioEntr
 EntregaPedido.belongsTo(Usuario, { foreignKey: 'recibido_por', as: 'usuarioRecibe' });
 EntregaPedido.belongsTo(EstadoEntrega, { foreignKey: 'estado_entrega_id' });
 
-DetalleEntrega.belongsTo(EntregaPedido, { foreignKey: 'entrega_id' });
-DetalleEntrega.belongsTo(MateriaPrima, { foreignKey: 'material_id' });
-DetalleEntrega.belongsTo(PedidoMaterial, { foreignKey: 'pedido_material_id' });
-DetalleEntrega.belongsTo(UnidadMedida, { foreignKey: 'unidad_medida_id' });
+Detalle_Entrega.belongsTo(EntregaPedido, { foreignKey: 'entrega_id' });
+Detalle_Entrega.belongsTo(MateriaPrima, { foreignKey: 'material_id' });
+Detalle_Entrega.belongsTo(PedidoMaterial, { foreignKey: 'pedido_material_id' });
+Detalle_Entrega.belongsTo(UnidadMedida, { foreignKey: 'unidad_medida_id' });
 
 HistorialPedido.belongsTo(Pedido, { foreignKey: 'pedido_id' });
 HistorialPedido.belongsTo(Usuario, { foreignKey: 'usuario_id' });
