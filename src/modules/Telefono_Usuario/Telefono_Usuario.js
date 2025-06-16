@@ -33,7 +33,7 @@ export const TelefonoUsuario = sequelize.define(
     },
     es_principal:{
       type: DataTypes.BOOLEAN,
-      defaultValue: 1,
+      defaultValue: true,
     }
   },
   {

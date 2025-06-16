@@ -1,4 +1,4 @@
-import { TiposAlertas } from "./TiposAlertas.js";
+import { TiposAlertas } from "./Tipos_Alertas.js";
 
 class TiposAlertasService{
     async getAll(){

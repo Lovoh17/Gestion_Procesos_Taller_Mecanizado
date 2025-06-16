@@ -15,7 +15,7 @@ import { Mantenimiento } from '../../modules/Mantenimiento/Mantenimiento.js';
 import { EstadoMantenimiento } from '../../modules/Estado_Mantenimiento/Estado_Mantenimiento.js';
 import { PrioridadMantenimiento } from '../../modules/Prioridad_Mantenimiento/Prioridad_Mantenimiento.js';
 import { TipoMantenimiento } from '../../modules/Tipo_Mantenimiento/Tipo_Mantenimiento.js';
-import { AlertaReparacion } from '../../modules/Alerta_Reparacion/Alerta_Reparacion.js';
+import { Alerta_Reparacion } from '../../modules/Alerta_Reparacion/Alerta_Reparacion.js';
 
 import { EstadoReparacion } from '../../modules/Estado_Reparacion/Estado_Reparacion.js';
 import { TiposAlertas } from '../../modules/Tipos_Alertas/Tipos_Alertas.js';
@@ -51,7 +51,7 @@ import { EstadoDevolucion } from '../../modules/Estados_Devolucion/Estado_Devolu
 import { EstadoPedido } from '../../modules/Estados_Pedido/Estado_Pedido.js';
 import { EstadoEntrega } from '../../modules/Estado_Entrega/Estado_Entrega.js';
 import { RazonesPausaPedido } from '../../modules/Razones_Pausa_Pedido/Razones_Pausa_Pedido.js';
-import { DepartamentoUniversidad } from '../../modules/Departamentos_Universidad/Departamentos_Universidad.js';
+import { DepartamentosUniversidad } from '../../modules/Departamentos_Universidad/Departamentos_Universidad.js';
 import { EstadoTransaccion } from '../../modules/Estado_Transaccion/Estado_Transaccion.js';
 import { MetodoPago } from '../../modules/Metodo_Pago/Metodo_Pago.js';
 import { TiposTransaccion } from '../../modules/Tipos_Transaccion/Tipos_Transaccion.js';
@@ -99,11 +99,11 @@ Mantenimiento.belongsTo(Usuario, { foreignKey: 'tecnico_asignado_id', as: 'tecni
 Mantenimiento.belongsTo(Usuario, { foreignKey: 'mantenimiento_hecho_por', as: 'hechoPor' });
 Mantenimiento.belongsTo(Usuario, { foreignKey: 'actualizado_por', as: 'actualizadoPor' });
 
-AlertaReparacion.belongsTo(Herramienta, { foreignKey: 'herramienta_id' });
-AlertaReparacion.belongsTo(TiposAlertas, { foreignKey: 'tipo_alerta_id' });
-AlertaReparacion.belongsTo(PrioridadMantenimiento, { foreignKey: 'prioridad_id' });
-AlertaReparacion.belongsTo(EstadoReparacion, { foreignKey: 'estado_reparacion' });
-AlertaReparacion.belongsTo(Usuario, { foreignKey: 'resuelta_por', as: 'usuarioResuelve' });
+Alerta_Reparacion.belongsTo(Herramienta, { foreignKey: 'herramienta_id' });
+Alerta_Reparacion.belongsTo(TiposAlertas, { foreignKey: 'tipo_alerta_id' });
+Alerta_Reparacion.belongsTo(PrioridadMantenimiento, { foreignKey: 'prioridad_id' });
+Alerta_Reparacion.belongsTo(EstadoReparacion, { foreignKey: 'estado_reparacion' });
+Alerta_Reparacion.belongsTo(Usuario, { foreignKey: 'resuelta_por', as: 'usuarioResuelve' });
 
 HistorialUsoHerramienta.belongsTo(Herramienta, { foreignKey: 'herramienta_id' });
 HistorialUsoHerramienta.belongsTo(Usuario, { foreignKey: 'usuario_id' });
@@ -138,7 +138,7 @@ HistorialPedido.belongsTo(EstadoPedido, { foreignKey: 'estado_nuevo_id', as: 'es
 HistorialPedido.belongsTo(RazonesPausaPedido, { foreignKey: 'razon_pausa_id' });
 
 TransaccionFinanciera.belongsTo(TiposTransaccion, { foreignKey: 'tipo_transaccion_id' });
-TransaccionFinanciera.belongsTo(DepartamentoUniversidad, { foreignKey: 'departamento_id' });
+TransaccionFinanciera.belongsTo(DepartamentosUniversidad, { foreignKey: 'departamento_id' });
 TransaccionFinanciera.belongsTo(EstadoTransaccion, { foreignKey: 'estado_transaccion_id' });
 TransaccionFinanciera.belongsTo(Usuario, { foreignKey: 'aprobado_por', as: 'usuarioAprueba' });
 TransaccionFinanciera.belongsTo(Usuario, { foreignKey: 'creado_por', as: 'usuarioCrea' });
