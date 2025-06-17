@@ -77,7 +77,7 @@ export const Pedido = sequelize.define("pedidos", {
     type: DataTypes.SMALLINT,
     allowNull: false,
     references: {
-      model: "estado_pedido",
+      model: "estados_pedido",
       key: "id",
     },
   },
