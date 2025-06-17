@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 
 import AlertaReparacionRoutes from './modules/Alerta_Reparacion/Alerta_Reparacion.routes.js';
-import DepartamentosUniversidadRoutes from './modules/Departamentos_Universidad/Departamentos_Universidad.routes.js';
+import DepartamentosUniversidadRoutes from './modules/Departamento_Universidad/Departamento_Universidad.routes.js';
 import DetalleEntregaRoutes from './modules/Detalle_Entrega/Detalle_Entrega.routes.js';
 import DetalleTransaccionRoutes from './modules/Detalle_Transaccion/Detalle_Transaccion.routes.js';
 import EntregaPedidoRoutes from './modules/Entrega_Pedidio/Entrega_Pedido.routes.js'; //---------
@@ -12,8 +12,8 @@ import EstadoMantenimientoRoutes from './modules/Estado_Mantenimiento/Estado_Man
 import EstadoReparacionRoutes from './modules/Estado_Reparacion/Estado_Reparacion.routes.js';
 import EstadoTransaccionRoutes from './modules/Estado_Transaccion/Estado_Transaccion.routes.js';
 import EstadoUsuarioRoutes from './modules/Estado_Usuario/Estado_Usuario.routes.js';
-import EstadosDevolucionRoutes from './modules/Estados_Devolucion/Estado_Devoluvion.routes.js';
-import EstadosPedidosRoutes from './modules/Estados_Pedido/Estado_Pedido.routes.js';
+import EstadosDevolucionRoutes from './modules/Estado_Devolucion/Estado_Devolucion.routes.js';
+import EstadosPedidosRoutes from './modules/Estado_Pedido/Estado_Pedido.routes.js';
 import HerramientaRoutes from './modules/Herramienta/Herramienta.routes.js';
 import HistorialMovimientoStockRoutes from './modules/Historial_Movimiento_Stock/Historial_Movimiento_Stock.routes.js';
 import HistorialPedidoRoutes from './modules/Historial_Pedido/Historial_Pedido.routes.js';
@@ -24,13 +24,13 @@ import MetodoPagoRoutes from './modules/Metodo_Pago/Metodo_Pago.routes.js';
 import PedidoRoutes from './modules/Pedido/Pedido.routes.js';
 import PedidoHerramientaRoutes from './modules/Pedido_Herramienta/Pedido_Herramienta.routes.js';
 import PedidoMaterialRoutes from './modules/Pedido_Material/Pedido_Material.routes.js';
-import PermisoRoutes from './modules/Permisos/Permisos.routes.js';
+import PermisoRoutes from './modules/Permiso/Permiso.routes.js';
 import PlanoRoutes from './modules/Plano/Plano.routes.js';
 import PlanoHerramientaRoutes from './modules/Plano_Herramienta/Plano_Herramienta.routes.js';
 import PlanoMaterialRoutes from './modules/Plano_Material/Plano_Material.routes.js';
 import PrioridadMantenimientoRoutes from './modules/Prioridad_Mantenimiento/Prioridad_Mantenimiento.routes.js';
 import PuestoRoutes from './modules/Puesto/Puesto.routes.js';
-import RazonesPausaPedidoRoutes from './modules/Razones_Pausa_Pedido/Razones_Pausa_Pedido.routes.js';
+import RazonesPausaPedidoRoutes from './modules/Razon_Pausa_Pedido/Razon_Pausa_Pedido.routes.js';
 import RolRoutes from './modules/Rol/Rol.routes.js';
 import TelefonoUsuarioRoutes from './modules/Telefono_Usuario/Telefono_Usuario.routes.js';
 import TipoHerramientaRoutes from './modules/Tipo_Herramienta/Tipo_Herramienta.routes.js';
@@ -39,13 +39,13 @@ import TipoMateriaPrimaRoutes from './modules/Tipo_Materia_Prima/Tipo_Materia_Pr
 import TipoPedidoRoutes from './modules/Tipo_Pedido/Tipo_Pedido.routes.js';
 import TipoStockRoutes from './modules/Tipo_Stock/Tipo_Stock.routes.js';
 import TipoTelefonoRoutes from './modules/Tipo_Telefono/Tipo_Telefono.routes.js';
-import TiposAlertasRoutes from './modules/Tipos_Alertas/Tipos_Alertas.routes.js';
-import TiposTransaccionRoutes from './modules/Tipos_Transaccion/Tipos_Transaccion.routes.js';
+import TiposAlertasRoutes from './modules/Tipo_Alerta/Tipo_Alerta.routes.js';
+import TiposTransaccionRoutes from './modules/Tipo_Transaccion/Tipo_Transaccion.routes.js';
 import TransaccionFinancieraRoutes from './modules/Transaccion_Financiera/Transaccion_Financiera.routes.js';
 import Turno from './modules/Turno/Turno.routes.js';
 import UnidadMedidaRoutes from './modules/Unidad_Medida/Unidad_Medida.routes.js';
 import UsuarioRoutes from './modules/Usuario/Usuario.routes.js';
-import UsuarioRolesRoutes from './modules/Usuarios_Roles/Usuarios_Roles.routes.js';
+import UsuarioRolesRoutes from './modules/Usuario_Rol/Usuario_Rol.routes.js';
 import ZonaTrabajoRoutes from './modules/Zona_Trabajo/Zona_Trabajo.routes.js';
 
 const corsOptions = {

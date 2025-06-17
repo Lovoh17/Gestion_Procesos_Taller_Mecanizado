@@ -1,9 +1,9 @@
-import { TipoTransaccion } from "./Tipo_Transaccion.js";
+import { Tipo_Transaccion } from "./Tipo_Transaccion.js";
 
 class TipoTransaccionService{
     async getAll() {
             try {
-                const tiposTransaccion = await TipoTransaccion.findAll();
+                const tiposTransaccion = await Tipo_Transaccion.findAll();
                 return tiposTransaccion;
             } catch (error) {
                 throw new Error("Error al obtener los tipos transaccion: " + error.message);
@@ -12,7 +12,7 @@ class TipoTransaccionService{
     
         async getById(id) {
             try {
-                const TipoTransaccion = await TipoTransaccion.findByPk(id);
+                const TipoTransaccion = await Tipo_Transaccion.findByPk(id);
                 if (!TipoTransaccion) {
                     throw new Error("Tipos de transaccion no encontrado");
                 }
@@ -24,7 +24,7 @@ class TipoTransaccionService{
     
         async create(data) {
             try {
-                const nuevaTipoTransaccion = await TipoTransaccion.create(data);
+                const nuevaTipoTransaccion = await Tipo_Transaccion.create(data);
                 return nuevaTipoTransaccion;
             } catch (error) {
                 throw new Error("Error al crear lo tipo de transaccion: " + error.message);
@@ -33,7 +33,7 @@ class TipoTransaccionService{
     
         async update(id, data) {
             try {
-                const TipoTransaccion = await TipoTransaccion.findByPk(id);
+                const TipoTransaccion = await Tipo_Transaccion.findByPk(id);
                 if (!TipoTransaccion) {
                     throw new Error("Tipo de transaccion no encontrado");
                 }
@@ -46,7 +46,7 @@ class TipoTransaccionService{
     
         async delete(id) {
             try {
-                const TipoTransaccion = await TipoTransaccion.findByPk(id);
+                const TipoTransaccion = await Tipo_Transaccion.findByPk(id);
                 if (!TipoTransaccion) {
                     throw new Error("Tipo de transaccion no encontrado");
                 }

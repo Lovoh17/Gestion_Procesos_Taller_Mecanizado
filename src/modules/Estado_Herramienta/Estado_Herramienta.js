@@ -3,7 +3,7 @@ import { DataTypes } from "sequelize";
 
 export const Estado_Herramienta = sequelize.define("estado_herramienta",{
     id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.SMALLINT,
         primaryKey: true,
         autoIncrement: true,
     },

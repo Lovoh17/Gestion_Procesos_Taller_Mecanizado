@@ -1,40 +1,36 @@
 import { sequelize } from "../../shared/database/database.js";
 import { DataTypes } from "sequelize";
-import { Usuario } from "../Usuario/Usuario.js";
-import { Tipo_Telefono } from "../Tipo_Telefono/Tipo_Telefono.js";
 
-export const TelefonoUsuario = sequelize.define(
-  "telefono_usuario",
-  {
-    id_telefono: {
+export const TelefonoUsuario = sequelize.define("telefonos_usuario",{
+    id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
-    usuario_id: { 
-        type: DataTypes.INTEGER, 
-        allowNull: false,
-        reference:{
-          model: Usuario,
-          key: 'id'
-        }
+    usuario_id: {
+      type: DataTypes.BIGINT,
+      allowNull: false,
+      references: {
+        model: "usuarios",
+        key: "id",
+      },
     },
     tipo_telefono_id: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        reference:{
-          model: Tipo_Telefono,
-          key: 'id'
-        }
+      type: DataTypes.BIGINT,
+      allowNull: false,
+      references: {
+        model: "tipos_telefono",
+        key: "id",
+      },
     },
-    numero:{
+    numero: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
-    es_principal:{
+    es_principal: {
       type: DataTypes.BOOLEAN,
-      allowNull: false
-    }
+      allowNull: false,
+    },
   },
   {
     tableName: "telefonos_usuario",

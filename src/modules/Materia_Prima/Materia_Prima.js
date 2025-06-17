@@ -5,8 +5,8 @@ import { Unidad_Medida } from "../Unidad_Medida/Unidad_Medida.js";
 import { Tipo_Stock } from "../Tipo_Stock/Tipo_Stock.js";
 
 
-export const MateriaPrima = sequelize.define("materia_prima", {
-    id_mp: {
+export const MateriaPrima = sequelize.define("materias_prima", {
+    id: {
       type: DataTypes.BIGINT,
       primaryKey: true,
       autoIncrement: true,

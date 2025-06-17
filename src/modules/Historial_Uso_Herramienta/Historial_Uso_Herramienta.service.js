@@ -1,10 +1,10 @@
-import { Historial_Uso_Herramientas } from "./Historial_Uso_Herramienta.js";
+import { Historial_Uso_Herramienta } from "./Historial_Uso_Herramienta.js";
 import { Op } from "sequelize";
 
 class HistorialUsoHerramientasService {
   async getAll() {
     try {
-      return await Historial_Uso_Herramientas.findAll();
+      return await Historial_Uso_Herramienta.findAll();
     } catch (error) {
       throw new Error("Error al obtener el historial: " + error.message);
     }
@@ -12,7 +12,7 @@ class HistorialUsoHerramientasService {
 
   async getById(id) {
     try {
-      const registro = await Historial_Uso_Herramientas.findByPk(id);
+      const registro = await Historial_Uso_Herramienta.findByPk(id);
       if (!registro) throw new Error("Registro no encontrado");
       return registro;
     } catch (error) {
@@ -22,7 +22,7 @@ class HistorialUsoHerramientasService {
 
   async getByNotas(notas) {
     try {
-      const registros = await Historial_Uso_Herramientas.findAll({
+      const registros = await Historial_Uso_Herramienta.findAll({
         where: {
           notas: { [Op.iLike]: `%${notas}%` }
         }
@@ -36,7 +36,7 @@ class HistorialUsoHerramientasService {
 
   async create(data) {
     try {
-      return await Historial_Uso_Herramientas.create(data);
+      return await Historial_Uso_Herramienta.create(data);
     } catch (error) {
       throw new Error("Error al crear el registro: " + error.message);
     }
