@@ -1,9 +1,9 @@
-import { TipoAlerta } from "./Tipo_Alerta.js";
+import { Tipo_Alerta } from "./Tipo_Alerta.js";
 
 class TipoAlertaService{
     async getAll(){
         try {
-            const tipoAlerta = await TipoAlerta.findAll();
+            const tipoAlerta = await Tipo_Alerta.findAll();
             return tipoAlerta;
         } catch (error) {
             throw new Error("Error al obtener todas los tipos de alertas: "+ error.message);
@@ -11,7 +11,7 @@ class TipoAlertaService{
     }
     async getById(id){
         try {
-            const tipoAlerta = await TipoAlerta.findByPk(id);
+            const tipoAlerta = await Tipo_Alerta.findByPk(id);
             if (!tipoAlerta) {
                 throw new Error("Tipo de alerta no encontrada");
             }
@@ -22,7 +22,7 @@ class TipoAlertaService{
     }
     async create(data){
         try {
-            const nuevoTipoAlerta = await TipoAlerta.create(data);
+            const nuevoTipoAlerta = await Tipo_Alerta.create(data);
             return nuevoTipoAlerta;
         } catch (error) {
             throw new Error("Error al crear un nuevo tipo de alerta: " + error.message);
@@ -30,13 +30,13 @@ class TipoAlertaService{
     }
     async update(id, data){
         try {
-            const TipoAlerta = await TipoAlerta.findByPk(id);
-            if (!TipoAlerta) {
+            const tipoAlerta = await Tipo_Alerta.findByPk(id);
+            if (!tipoAlerta) {
                 throw new Error("Tipo alerta inexistente");
                 
             }
-            await TipoAlerta.update(data);
-            return TipoAlerta;
+            await tipoAlerta.update(data);
+            return tipoAlerta;
         } catch (error) {
             throw new Error("Error al actualizar: "+ error.message);
             
@@ -44,31 +44,29 @@ class TipoAlertaService{
     }
     async delete(id){
         try {
-            const TipoAlerta = await TipoAlerta.findByPk(id);
-            if (!TipoAlerta) {
+            const tipoAlerta = await Tipo_Alerta.findByPk(id);
+            if (!tipoAlerta) {
                 throw new Error("Tipo alerta inexistente");
                 
             }
-            await TipoAlerta.destroy();
+            await tipoAlerta.destroy();
             return {message: "Se elimino el tipo alerta " + id};
         } catch (error) {
             throw new Error("Error al eliminar el tipo alerta "+ id+ " "+error.message);
             
         }
     }
-    //inecesario
     async getByName(nombre){
         try {
-            const TipoAlerta = await TipoAlerta.findOne({where: {nombre}});
-            if (!TipoAlerta) {
-                throw new Error("Tipo Alerta inexistente");
-                
+            const tipoAlerta = await Tipo_Alerta.findOne({ where: { nombre } });
+            if (!tipoAlerta) {
+                throw new Error("Tipo alerta no encontrada");
             }
-            return TipoAlerta;
+            return tipoAlerta;
         } catch (error) {
-            throw new Error("Error al obtener el tipo alerta por nombre en: "+ error.message);
-            
+            throw new Error("Error al obtener el tipo alerta por nombre: " + error.message);
         }
     }
+    
 }
 export const tipoAlertaService = new TipoAlertaService();

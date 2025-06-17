@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize"
 import { sequelize } from "../../shared/database/database.js"
 
-export const EstadoPedido = sequelize.define("Estado_pedido",{
+export const Estado_Pedido = sequelize.define("estado_pedido",{
     id:{
         type: DataTypes.BIGINT,
         primaryKey: true,
@@ -29,6 +29,6 @@ export const EstadoPedido = sequelize.define("Estado_pedido",{
     }
 },
 {
-    tableName: "estados_pedido",
+    tableName: "estado_pedido",
     timestamps: false,
 });

@@ -1,10 +1,10 @@
-import { EstadoReparacion } from "./Estado_Reparacion.js";
+import { Estado_Reparacion } from "./Estado_Reparacion.js";
 
 class EstadoReparacionService{
     async getAll(){
         try {
-            const EstadoReparacion = await EstadoReparacion.findAll();
-            return EstadoReparacion;
+            const estadoReparacion = await Estado_Reparacion.findAll();
+            return estadoReparacion;
         } catch (error) {
             throw new Error("Error al obtener todos los Estado Reparacion: " + error.message);
             
@@ -12,18 +12,18 @@ class EstadoReparacionService{
     }
     async getById(id){
         try {
-            const EstadoReparacion = await EstadoReparacion.findByPk(id);
-            if(!EstadoReparacion){
+            const estadoReparacion = await Estado_Reparacion.findByPk(id);
+            if(!estadoReparacion){
                 throw new Error("Estado reparacion no encontrado (el id no es correcto)")
             }
-            return EstadoReparacion;
+            return estadoReparacion;
         } catch (error) {
             throw new Error("Error al obtener el estado de reparacion: " + error.message)
         }
     }
     async create(data){
         try {
-            const nuevoEstadoReparacion = await EstadoReparacion.create(data);
+            const nuevoEstadoReparacion = await Estado_Reparacion.create(data);
             return nuevoEstadoReparacion;
         } catch (error) {
             throw new Error("Error al crear el estado reparacion "+ error.message);
@@ -32,40 +32,30 @@ class EstadoReparacionService{
     }
     async update(id, data){
         try {
-            const EstadoReparacion = await EstadoReparacion.findByPk(id);
-            if (!EstadoReparacion) {
+            const estadoReparacion = await Estado_Reparacion.findByPk(id);
+            if (!estadoReparacion) {
                 throw new Error("Estado de reparacion no encontrado");
             }
-            await EstadoReparacion.update(data);
-            return EstadoReparacion;
+            await estadoReparacion.update(data);
+            return estadoReparacion;
         } catch (error) {
             throw new Error("Error al actualizar el estado de reparacion: " + error.message);
         }
     }
     async delete(id){
         try {
-            const EstadoReparacion = await EstadoReparacion.findByPk(id);
-            if (!EstadoReparacion) {
+            const estadoReparacion = await Estado_Reparacion.findByPk(id);
+            if (!estadoReparacion) {
                 throw new Error("Estado reparacion no encontrado");               
             }
-            await EstadoReparacion.destroy();
+            await estadoReparacion.destroy();
             return {message: "Estado Reparacion eliminada"};
         } catch (error) {
             throw new Error("Error al eliminar el estado reparacion");
             
         }
     }
-    async getByName(nombre){
-        try {
-            const EstadoReparacion = await EstadoReparacion.findOne({where: {nombre}});
-            if (!EstadoReparacion) {
-                throw new Error("Estado Reparacion no encontrado");
-            }
-            return EstadoReparacion;
-        } catch (error) {
-            throw new Error("Error al obtener el estado reparacion por nombre " + error.message);        
-        }
-    }
+    
 }
 
 export const estadoReparacionService = new EstadoReparacionService();

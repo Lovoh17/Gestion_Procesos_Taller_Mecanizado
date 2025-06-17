@@ -1,7 +1,7 @@
 import { sequelize } from "../../shared/database/database.js";
 import { DataTypes } from "sequelize";
 
-export const TelefonoUsuario = sequelize.define("telefonos_usuario",{
+export const Telefono_Usuario = sequelize.define("telefono_usuario",{
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -33,7 +33,7 @@ export const TelefonoUsuario = sequelize.define("telefonos_usuario",{
     },
   },
   {
-    tableName: "telefonos_usuario",
+    tableName: "telefono_usuario",
     timestamps: false,
   }
 );

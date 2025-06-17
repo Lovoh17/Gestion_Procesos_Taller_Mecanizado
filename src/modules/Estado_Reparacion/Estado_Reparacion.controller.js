@@ -22,15 +22,7 @@ export const obtenerEstadosReparacionPorId = async (req, res) => {
     }
 }
 
-export const obtenerEstadoReparacionPorNombre = async (req, res) => {
-    try {
-        const {nombre} = req.params;
-        const EstadoReparacion = await estadoReparacionService.getByName(nombre);
-        res.status(200).json(EstadoReparacion);
-    } catch (error) {
-        res.status(500).json({error: error.message});
-    }
-}
+
 
 export const obtenerEstadosReparacion = async (req, res)=>{
     try {
@@ -41,7 +33,7 @@ export const obtenerEstadosReparacion = async (req, res)=>{
     }
 }
 
-export const actualizarEstadoTrabajo = async (req, res) =>{
+export const actualizarEstadoReparacion = async (req, res) =>{
     try {
         const {id} = req.params;
         const { nombre_estado} = req.body;
@@ -52,7 +44,7 @@ export const actualizarEstadoTrabajo = async (req, res) =>{
     }
 }
 
-export const eliminarEstadoTrabajo = async (req, res) => {
+export const eliminarEstadoReparacion = async (req, res) => {
     try {
         const {id} = req.params;
         await estadoReparacionService.delete(id);

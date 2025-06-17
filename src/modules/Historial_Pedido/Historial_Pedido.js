@@ -32,7 +32,7 @@ export const Historial_Pedido = sequelize.define("historial_pedidos", {
     type: DataTypes.SMALLINT,
     allowNull: true,
     references: {
-      model: "estados_pedido",
+      model: "Estado_pedido",
       key: "id",
     },
   },
@@ -40,7 +40,7 @@ export const Historial_Pedido = sequelize.define("historial_pedidos", {
     type: DataTypes.SMALLINT,
     allowNull: true,
     references: {
-      model: "estados_pedido",
+      model: "Estado_pedido",
       key: "id",
     },
   },
@@ -48,7 +48,7 @@ export const Historial_Pedido = sequelize.define("historial_pedidos", {
     type: DataTypes.SMALLINT,
     allowNull: true,
     references: {
-      model: "razones_pausa_pedido",
+      model: "razon_pausa_pedido",
       key: "id",
     },
   },

@@ -1,13 +1,12 @@
 import { Router } from "express";
-import {crearEstadoReparacion, obtenerEstadosReparacion, obtenerEstadosReparacionPorId, obtenerEstadoReparacionPorNombre, actualizarEstadoTrabajo, eliminarEstadoTrabajo} from "./Estado_Reparacion.controller.js";
+import {crearEstadoReparacion, obtenerEstadosReparacion, obtenerEstadosReparacionPorId, actualizarEstadoReparacion, eliminarEstadoReparacion} from "./Estado_Reparacion.controller.js";
 
 const router = new Router();
 
 router.post("/EstadoReparacion", crearEstadoReparacion);
 router.get("/EstadoReparacion", obtenerEstadosReparacion);
 router.get("/EstadoReparacion/:id", obtenerEstadosReparacionPorId);
-router.get("/EstadoReparacion/nombre/:nombre", obtenerEstadoReparacionPorNombre);
-router.put("/EstadoReparacion/:id", actualizarEstadoTrabajo);
-router.delete("/EstadoReparacion/:id", eliminarEstadoTrabajo);
+router.put("/EstadoReparacion/:id", actualizarEstadoReparacion);
+router.delete("/EstadoReparacion/:id", eliminarEstadoReparacion);
 
 export default router;

@@ -1,7 +1,7 @@
 import { sequelize } from "../../shared/database/database.js";
 import { DataTypes } from "sequelize";
 
-export const Rol = sequelize.define("roles", {
+export const Rol = sequelize.define("rol", {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -13,5 +13,5 @@ export const Rol = sequelize.define("roles", {
     }
 },{
     timestamps: false,
-    tableName: "roles",
+    tableName: "rol",
 });

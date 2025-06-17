@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize"
 import { sequelize } from "../../shared/database/database.js"
 
-export const DepartamentoUniversidad = sequelize.define("departamentos_universidad",{
+export const Departamento_Universidad = sequelize.define("departamento_universidad",{
     id:{
         type: DataTypes.BIGINT,
         primaryKey: true,

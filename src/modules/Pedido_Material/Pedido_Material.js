@@ -19,7 +19,7 @@ export const Pedido_Material = sequelize.define("pedido_materiales", {
     type: DataTypes.BIGINT,
     allowNull: false,
     references: {
-      model: "materias_prima",
+      model: "materia_prima",
       key: "id",
     },
   },

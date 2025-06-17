@@ -1,9 +1,9 @@
-import { RazonPausaPedido } from "./Razon_Pausa_Pedido.js";
+import { Razon_Pausa_Pedido } from "./Razon_Pausa_Pedido.js";
 
 class RazonPausaPedidoService{
     async getAll() {
             try {
-                const razones_pausa_pedido = await RazonPausaPedido.findAll();
+                const razones_pausa_pedido = await Razon_Pausa_Pedido.findAll();
                 return razones_pausa_pedido;
             } catch (error) {
                 throw new Error("Error al obtener las razones para pausa el pedido: " + error.message);
@@ -12,7 +12,7 @@ class RazonPausaPedidoService{
     
         async getById(id) {
             try {
-                const razones_pausa_pedido = await RazonPausaPedido.findByPk(id);
+                const razones_pausa_pedido = await Razon_Pausa_Pedido.findByPk(id);
                 if (!razones_pausa_pedido) {
                     throw new Error("Razones pausa pedido no encontrada");
                 }
@@ -24,7 +24,7 @@ class RazonPausaPedidoService{
     
         async create(data) {
             try {
-                const razones_pausa_pedido = await RazonPausaPedido.create(data);
+                const razones_pausa_pedido = await Razon_Pausa_Pedido.create(data);
                 return razones_pausa_pedido;
             } catch (error) {
                 throw new Error("Error al crear la razones pausa pedido: " + error.message);
@@ -33,7 +33,7 @@ class RazonPausaPedidoService{
     
         async update(id, data) {
             try {
-                const razones_pausa_pedido = await RazonPausaPedido.findByPk(id);
+                const razones_pausa_pedido = await Razon_Pausa_Pedido.findByPk(id);
                 if (!razones_pausa_pedido) {
                     throw new Error("Razones pausa pedido no encontrada");
                 }
@@ -46,7 +46,7 @@ class RazonPausaPedidoService{
     
         async delete(id) {
             try {
-                const razones_pausa_pedido = await RazonPausaPedido.findByPk(id);
+                const razones_pausa_pedido = await Razon_Pausa_Pedido.findByPk(id);
                 if (!razones_pausa_pedido) {
                     throw new Error("Razones pausa pedido no encontrada");
                 }

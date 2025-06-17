@@ -1,9 +1,9 @@
-import { DepartamentoUniversidad} from "./Departamento_Universidad.js";
+import { Departamento_Universidad} from "./Departamento_Universidad.js";
 
 class DepartamentoUniversidadService{
     async getAll() {
             try {
-                const departamento_universidad = await DepartamentoUniversidad.findAll();
+                const departamento_universidad = await Departamento_Universidad.findAll();
                 return departamento_universidad;
             } catch (error) {
                 throw new Error("Error al obtener los departamentos: " + error.message);
@@ -12,7 +12,7 @@ class DepartamentoUniversidadService{
     
         async getById(id) {
             try {
-                const departamento_universidad = await DepartamentoUniversidad.findByPk(id);
+                const departamento_universidad = await Departamento_Universidad.findByPk(id);
                 if (!zonaTrabajo) {
                     throw new Error("Departamento universidad no encontrado");
                 }
@@ -24,7 +24,7 @@ class DepartamentoUniversidadService{
     
         async create(data) {
             try {
-                const nuevoDepartamento = await DepartamentoUniversidad.create(data);
+                const nuevoDepartamento = await Departamento_Universidad.create(data);
                 return nuevoDepartamento;
             } catch (error) {
                 throw new Error("Error al crear el departamento: " + error.message);
@@ -33,7 +33,7 @@ class DepartamentoUniversidadService{
     
         async update(id, data) {
             try {
-                const departamento_universidad = await DepartamentoUniversidad.findByPk(id);
+                const departamento_universidad = await Departamento_Universidad.findByPk(id);
                 if (!departamento_universidad) {
                     throw new Error("Departamento universidad no encontrada");
                 }
@@ -46,7 +46,7 @@ class DepartamentoUniversidadService{
     
         async delete(id) {
             try {
-                const departamento_universidad = await DepartamentoUniversidad.findByPk(id);
+                const departamento_universidad = await Departamento_Universidad.findByPk(id);
                 if (!departamento_universidad) {
                     throw new Error("departamento universitario no encontrado");
                 }

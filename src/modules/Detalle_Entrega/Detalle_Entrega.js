@@ -19,7 +19,7 @@ export const Detalle_Entrega = sequelize.define("detalle_entregas", {
     type: DataTypes.BIGINT,
     allowNull: false,
     references: {
-      model: "materias_prima",
+      model: "materia_prima",
       key: "id",
     },
   },

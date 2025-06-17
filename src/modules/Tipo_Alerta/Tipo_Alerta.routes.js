@@ -1,11 +1,12 @@
 import { Router } from "express";
-import {crearTiposAlerta, obtenerTipoAlerta, obtenerTipoAlertaPorId, actualizarTipoAlerta, eliminarTipoAlerta} from "./Tipo_Alerta.controller.js";
+import {crearTiposAlerta, obtenerTipoAlerta, obtenerTipoAlertaPorId, actualizarTipoAlerta, eliminarTipoAlerta, obtenerTipoAlertaPorNombre} from "./Tipo_Alerta.controller.js";
 const router = Router();
 
-router.post("/Tipos_Alertas", crearTiposAlerta);
+router.post("/Tipo_Alerta", crearTiposAlerta);
 router.get("/Tipos_Alertas", obtenerTipoAlerta);
-router.get("/Tipos_Alertas/:id", obtenerTipoAlertaPorId);
-router.put("/Tipos_Alertas/:id", actualizarTipoAlerta);
-router.delete("/Tipos_Alertas/:id", eliminarTipoAlerta);
+router.get("/Tipo_Alerta/:id", obtenerTipoAlertaPorId);
+router.put("/Tipo_Alerta/:id", actualizarTipoAlerta);
+router.delete("/Tipo_Alerta/:id", eliminarTipoAlerta);
+router.get("/Tipo_Alerta/:nombre_alertas", obtenerTipoAlertaPorNombre);
 
 export default router;

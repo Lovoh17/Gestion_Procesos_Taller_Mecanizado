@@ -1,9 +1,9 @@
-import {TelefonoUsuario } from "./Telefono_Usuario.js";
+import {Telefono_Usuario } from "./Telefono_Usuario.js";
 
 class TelefonoUsuarioService{
     async getAll() {
         try {
-            const telefonosUsuario = await TelefonoUsuario.findAll();
+            const telefonosUsuario = await Telefono_Usuario.findAll();
             return telefonosUsuario;
         } catch (error) {
             throw new Error("Error al obtener los telefonos de usuario: " + error.message);
@@ -12,7 +12,7 @@ class TelefonoUsuarioService{
 
     async getById(id) {
         try {
-            const telefonoUsuario = await TelefonoUsuario.findByPk(id);
+            const telefonoUsuario = await Telefono_Usuario.findByPk(id);
             if (!telefonoUsuario) {
                 throw new Error("Telefono de Usuario no encontrada");
             }
@@ -24,7 +24,7 @@ class TelefonoUsuarioService{
 
     async create(data) {
         try {
-            const nuevaZonaTrabajo = await TelefonoUsuario.create(data);
+            const nuevaZonaTrabajo = await Telefono_Usuario.create(data);
             return nuevaZonaTrabajo;
         } catch (error) {
             throw new Error("Error al crear el telefono de usuario: " + error.message);
@@ -33,7 +33,7 @@ class TelefonoUsuarioService{
 
     async update(id, data) {
         try {
-            const telefonoUsuario = await TelefonoUsuario.findByPk(id);
+            const telefonoUsuario = await Telefono_Usuario.findByPk(id);
             if (!telefonoUsuario) {
                 throw new Error("Telefono de Usuario no encontrada");
             }
@@ -46,7 +46,7 @@ class TelefonoUsuarioService{
 
     async delete(id) {
         try {
-            const telefonoUsuario = await TelefonoUsuario.findByPk(id);
+            const telefonoUsuario = await Telefono_Usuario.findByPk(id);
             if (!telefonoUsuario) {
                 throw new Error("Telefono de Usuario no encontrada");
             }

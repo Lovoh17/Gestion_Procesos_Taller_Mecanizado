@@ -20,7 +20,7 @@ export const PlanoMaterial = sequelize.define("plano_materiales", {
     type: DataTypes.BIGINT,
     allowNull: false,
     references: { 
-      model: "materias_prima", 
+      model: "materia_prima", 
       key: "id"
     }
   },

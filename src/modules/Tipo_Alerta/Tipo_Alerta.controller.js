@@ -21,9 +21,15 @@ export const obtenerTipoAlertaPorId = async (req,res) =>{
         res.status(500).json({error: error.message});
     }
 }
-
-
-
+export const obtenerTipoAlertaPorNombre = async (req, res) =>{
+    try {
+        const {nombre_alertas} = req.body;
+        const tipoAlerta = await tipoAlertaService.getByName(nombre_alertas);
+        res.status(200).json(tipoAlerta);
+    } catch (error) {
+        res.status(500).json({error: error.message});
+    }
+}
 export const obtenerTipoAlerta = async (req, res) =>{
     try {
         const TipoAlerta = await tipoAlertaService.getAll();

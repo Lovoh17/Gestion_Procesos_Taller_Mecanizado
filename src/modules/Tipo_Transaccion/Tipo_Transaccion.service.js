@@ -12,11 +12,11 @@ class TipoTransaccionService{
     
         async getById(id) {
             try {
-                const TipoTransaccion = await Tipo_Transaccion.findByPk(id);
-                if (!TipoTransaccion) {
+                const tipoTransaccion = await Tipo_Transaccion.findByPk(id);
+                if (!tipoTransaccion) {
                     throw new Error("Tipos de transaccion no encontrado");
                 }
-                return TipoTransaccion;
+                return tipoTransaccion;
             } catch (error) {
                 throw new Error("Error al obtener el tipo de transaccion: " + error.message);
             }
@@ -33,12 +33,12 @@ class TipoTransaccionService{
     
         async update(id, data) {
             try {
-                const TipoTransaccion = await Tipo_Transaccion.findByPk(id);
-                if (!TipoTransaccion) {
+                const tipoTransaccion = await Tipo_Transaccion.findByPk(id);
+                if (!tipoTransaccion) {
                     throw new Error("Tipo de transaccion no encontrado");
                 }
-                await TipoTransaccion.update(data);
-                return TipoTransaccion;
+                await tipoTransaccion.update(data);
+                return tipoTransaccion;
             } catch (error) {
                 throw new Error("Error al actualizar el tipo de transaccion: " + error.message);
             }
@@ -46,11 +46,11 @@ class TipoTransaccionService{
     
         async delete(id) {
             try {
-                const TipoTransaccion = await Tipo_Transaccion.findByPk(id);
-                if (!TipoTransaccion) {
+                const tipoTransaccion = await Tipo_Transaccion.findByPk(id);
+                if (!tipoTransaccion) {
                     throw new Error("Tipo de transaccion no encontrado");
                 }
-                await TipoTransaccion.destroy();
+                await tipoTransaccion.destroy();
                 return { message: "Tipo de transaccion eliminado" };
             } catch (error) {
                 throw new Error("Error al eliminar el tipo de transaccion: " + error.message);
