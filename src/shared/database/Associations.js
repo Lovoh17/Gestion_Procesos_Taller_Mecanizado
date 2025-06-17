@@ -72,7 +72,7 @@ Mantenimiento.belongsTo(Usuario, { foreignKey: 'actualizado_por', as: 'actualiza
 Alerta_Reparacion.belongsTo(Herramienta, { foreignKey: 'herramienta_id' });
 Alerta_Reparacion.belongsTo(TipoAlerta, { foreignKey: 'tipo_alerta_id' });
 Alerta_Reparacion.belongsTo(Prioridad_Mantenimiento, { foreignKey: 'prioridad_id' });
-Alerta_Reparacion.belongsTo(EstadoReparacion, { foreignKey: 'estado_reparacion' });
+Alerta_Reparacion.belongsTo(EstadoReparacion, { foreignKey: 'estado_reparacion', as: 'estadoReparacion' });
 Alerta_Reparacion.belongsTo(Usuario, { foreignKey: 'resuelta_por', as: 'usuarioResuelve' });
 
 Historial_Uso_Herramienta.belongsTo(Herramienta, { foreignKey: 'herramienta_id' });
