@@ -2,7 +2,7 @@ import { estadoDevolucionService } from "./Estado_Devolucion.service.js";
 
 export const crearEstadoDevolucion = async (req, res) => {
     try {
-        const { nombre_estado} = req.body;
+        const { nombre_estado } = req.body;
         const nuevaEstadoDevolucion = await estadoDevolucionService.create({
             nombre_estado,
             
@@ -36,7 +36,7 @@ export const obtenerEstadoDevolucion = async (req, res) => {
 export const actualizarEstadoDevolucion = async (req, res) => {
     try {
         const { id } = req.params;
-        const { nombre_estado} = req.body;
+        const { nombre_estado } = req.body;
         const estados_devolucionActualizada = await estadoDevolucionService.update(id, {
             nombre_estado
         });

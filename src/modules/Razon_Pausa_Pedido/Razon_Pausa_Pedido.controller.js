@@ -6,7 +6,6 @@ export const crearRazonesPP = async (req, res) => {
         const nuevo = await razonPausaPedidoService.create({
             nombre,
             descripcion,
-            
         });
         res.status(201).json(nuevo);
     } catch (error) {

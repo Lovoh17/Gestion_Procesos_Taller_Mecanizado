@@ -7,6 +7,10 @@ export const Mantenimiento = sequelize.define("mantenimientos", {
     primaryKey: true,
     autoIncrement: true,
   },
+  nombre: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
   herramienta_id: {
     type: DataTypes.BIGINT,
     allowNull: false,

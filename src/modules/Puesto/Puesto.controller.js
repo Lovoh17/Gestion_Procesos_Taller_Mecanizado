@@ -2,11 +2,12 @@ import { puestoService } from "./Puesto.service.js";
 
 export const crearPuesto = async (req, res) => {
     try {
-        const { nombre, descripcion, responsable_id } = req.body;
+        const { nombre_puesto, descripcion, nivel_jerarquico, es_supervisor} = req.body;
         const nuevoPuesto = await puestoService.create({
-            nombre,
+            nombre_puesto,
             descripcion,
-            responsable_id
+            nivel_jerarquico,
+            es_supervisor
         });
         res.status(201).json(nuevoPuesto);
     } catch (error) {
@@ -26,8 +27,8 @@ export const obtenerPuestoPorId = async (req, res) => {
 
 export const obtenerPuestoPorNombre = async (req, res) => {
     try {
-        const { nombre } = req.params;
-        const puesto = await puestoService.getByName(nombre);
+        const { nombre_puesto } = req.params;
+        const puesto = await puestoService.getByName(nombre_puesto);
         res.status(200).json(puesto);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -46,11 +47,12 @@ export const obtenerPuestos = async (req, res) => {
 export const actualizarPuesto = async (req, res) => {
     try {
         const { id } = req.params;
-        const { nombre, descripcion, responsable_id } = req.body;
+        const { nombre_puesto, descripcion, nivel_jerarquico, es_supervisor} = req.body;
         const puestoActualizado = await puestoService.update(id, {
-            nombre,
+            nombre_puesto,
             descripcion,
-            responsable_id
+            nivel_jerarquico,
+            es_supervisor
         });
         res.status(200).json(puestoActualizado);
     } catch (error) {

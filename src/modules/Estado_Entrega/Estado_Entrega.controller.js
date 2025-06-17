@@ -5,7 +5,7 @@ export const crearEstadoEntrega = async (req, res) => {
         const { nombre, descripcion } = req.body;
         const nuevaEstadoEntrega = await estadoEntregaService.create({
             nombre,
-            descripcion,
+            descripcion
         });
         res.status(200).json(nuevaEstadoEntrega);
     } catch (error) {
@@ -40,7 +40,7 @@ export const actualizarEstadoEntrega = async (req, res) => {
         const { nombre, descripcion} = req.body;
         const estado_entrega = await estadoEntregaService.update(id, {
             nombre,
-            descripcion,
+            descripcion
         });
         res.status(200).json(estado_entrega);
     } catch (error) {

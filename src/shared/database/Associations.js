@@ -5,7 +5,6 @@ import { TelefonoUsuario } from '../../modules/Telefono_Usuario/Telefono_Usuario
 import { MateriaPrima } from '../../modules/Materia_Prima/Materia_Prima.js';
 import { Herramienta } from '../../modules/Herramienta/Herramienta.js';
 
-// AYALA
 import { HistorialMovimientoStock } from '../../modules/Historial_Movimiento_Stock/Historial_Movimiento_Stock.js';
 import { Plano } from '../../modules/Plano/Plano.js';
 import { PlanoMaterial } from '../../modules/Plano_Material/Plano_Material.js';
@@ -60,8 +59,6 @@ HistorialMovimientoStock.belongsTo(Unidad_Medida, { foreignKey: 'unidad_medida_i
 HistorialMovimientoStock.belongsTo(Tipo_Stock, { foreignKey: 'origen_stock_id', as: 'origenStock' });
 HistorialMovimientoStock.belongsTo(Tipo_Stock, { foreignKey: 'destino_stock_id', as: 'destinoStock' });
 HistorialMovimientoStock.belongsTo(Pedido, { foreignKey: 'pedido_id' });
-//HistorialMovimientoStock.belongsTo(PedidoMaterial, { foreignKey: 'pedido_material_id' });
-//HistorialMovimientoStock.belongsTo(PedidoHerramienta, { foreignKey: 'pedido_herramienta_id' });
 HistorialMovimientoStock.belongsTo(Usuario, { foreignKey: 'usuario_id' });
 
 Mantenimiento.belongsTo(Herramienta, { foreignKey: 'herramienta_id' });

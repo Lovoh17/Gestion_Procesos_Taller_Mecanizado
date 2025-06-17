@@ -2,10 +2,9 @@ import { departamentoUniversidadService } from "./Departamento_Universidad.servi
 
 export const crearDepartamentoU = async (req, res) => {
     try {
-        const { nombre, descripcion} = req.body;
+        const { nombre } = req.body;
         const nuevoDepartamento = await departamentoUniversidadService.create({
-            nombre,
-            descripcion
+            nombre, 
         });
         res.status(200).json(nuevoDepartamento);
     } catch (error) {
@@ -37,10 +36,9 @@ export const obtenerDepartamentoU = async (req, res) => {
 export const actualizarDepartamentoU = async (req, res) => {
     try {
         const { id } = req.params;
-        const { nombre, descripcion } = req.body;
+        const { nombre } = req.body;
         const departamentoU = await departamentoUniversidadService.update(id, {
-            nombre,
-            descripcion
+            nombre
         });
         res.status(200).json(departamentoU);
     } catch (error) {

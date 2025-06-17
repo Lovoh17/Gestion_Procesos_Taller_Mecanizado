@@ -1,9 +1,6 @@
 import { sequelize } from '../../shared/database/database.js';
 import { DataTypes } from 'sequelize';
 
-import { Plano } from '../../modules/Plano/Plano.js';
-import { Herramienta } from '../Herramienta/Herramienta.js';
-
 export const PlanoHerramienta = sequelize.define('plano_herramientas', {
     id: { 
         type: DataTypes.BIGINT,
@@ -14,15 +11,17 @@ export const PlanoHerramienta = sequelize.define('plano_herramientas', {
         type: DataTypes.BIGINT,
         allowNull: false,
         references: {
-            model: Plano,
-            key: 'id' }
+            model: "planos",
+            key: "id"
+        }
     },
     herramienta_id: {
         type: DataTypes.BIGINT,
         allowNull: false,
         references: { 
-            model: Herramienta, 
-            key: 'id' }
+            model: "herramientas", 
+            key: "id"
+        }
     },
     cantidad_necesaria: { 
         type: DataTypes.INTEGER, 
@@ -30,10 +29,12 @@ export const PlanoHerramienta = sequelize.define('plano_herramientas', {
     },    
     tiempo_estimado_uso: {
         type: DataTypes.DECIMAL,
+        allowNull: true,
         comment: 'Horas estimadas de uso (trigger a herramienta)'
     },
     notas: { 
-        type: DataTypes.TEXT
+        type: DataTypes.TEXT,
+        allowNull: true
     }
 }, {
   timestamps: false,
