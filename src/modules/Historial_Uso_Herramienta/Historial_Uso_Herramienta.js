@@ -1,7 +1,7 @@
 import { sequelize } from "../../shared/database/database.js";
 import { DataTypes } from "sequelize";
 
-export const Historial_Uso_Herramientas = sequelize.define("historial_uso_herramientas", {
+export const Historial_Uso_Herramienta = sequelize.define("historial_uso_herramientas", {
   id: {
     type: DataTypes.BIGINT,
     primaryKey: true,

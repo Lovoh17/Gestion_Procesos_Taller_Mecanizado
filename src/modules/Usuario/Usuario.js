@@ -1,12 +1,7 @@
 import { sequelize } from "../../shared/database/database.js";
 import { DataTypes } from "sequelize";
-import { Puesto } from "../Puesto/Puesto.js";
-import { Estado_Usuario } from "../Estado_Usuario/Estado_Usuario.js";
-import { Turno } from "../Turno/Turno.js";
 
-export const Usuario = sequelize.define(
-  "Usuario",
-  {
+export const Usuario = sequelize.define("usuarios",{
     id: {
       type: DataTypes.BIGINT,
       primaryKey: true,
@@ -32,19 +27,18 @@ export const Usuario = sequelize.define(
     puesto_id: {
       type: DataTypes.BIGINT,
       allowNull: false,
-      reference:{
-        model: Puesto,
-        key: 'id'
-      }
+      references: {
+        model: "puestos",
+        key: "id",
+      },
     },
     estado_id: {
       type: DataTypes.SMALLINT,
       allowNull: false,
-      defaultValue: 1,
-      reference:{
-        model: Estado_Usuario,
-        key: 'id'
-      }
+      references: {
+        model: "estado_usuario",
+        key: "id",
+      },
     },
     foto_ruta: {
       type: DataTypes.STRING,
@@ -62,7 +56,6 @@ export const Usuario = sequelize.define(
     fecha_termino_contrato: {
       type: DataTypes.DATEONLY,
       allowNull: true,
-      comment: "si es permanente null",
     },
     habilidades_tecnicas: {
       type: DataTypes.JSON,
@@ -71,18 +64,18 @@ export const Usuario = sequelize.define(
     turno_id: {
       type: DataTypes.SMALLINT,
       allowNull: false,
-      reference:{
-        model: Turno,
-        key:  'id'
-      }
+      references: {
+        model: "turnos",
+        key: "id",
+      },
     },
     zona_trabajo_id: {
       type: DataTypes.BIGINT,
       allowNull: false,
-      reference:{
-        model: Zona_Trabajo,
-        key: 'id'
-      }
+      references: {
+        model: "zonas_trabajo",
+        key: "id",
+      },
     },
     ultimo_acceso: {
       type: DataTypes.DATE,
