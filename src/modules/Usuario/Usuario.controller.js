@@ -2,7 +2,7 @@ import { usuarioService } from "./Usuario.service.js";
 
 export const crearUsuario = async (req, res) => {
     try {
-        const { nombre, apellido, email, password, puesto_id, estado_id, foto_ruta, es_subcontratado, fecha_contratacion, fecha_termino_contrato, habilidades_tecnicas, turno_id, zona_trabajo_id, ultimo_acceso, timestamps } = req.body;
+        const { nombre, apellido, email, password, puesto_id, estado_id, foto_ruta, es_subcontratado, fecha_contratacion, fecha_termino_contrato, habilidades_tecnicas, turno_id, ultimo_acceso, timestamps } = req.body;
         const nuevaUsuario = await usuarioService.create({
             nombre,
             apellido,
@@ -16,7 +16,6 @@ export const crearUsuario = async (req, res) => {
             fecha_termino_contrato,
             habilidades_tecnicas,
             turno_id,
-            zona_trabajo_id,
             ultimo_acceso,
             timestamps
         });
@@ -49,7 +48,7 @@ export const obtenerUsuarios = async (req, res) => {
 export const actualizarUsuario = async (req, res) => {
     try {
         const { id } = req.params;
-        const { nombre, apellido, email, password, puesto_id, estado_id, foto_ruta, es_subcontratado, fecha_contratacion, fecha_termino_contrato, habilidades_tecnicas, turno_id, zona_trabajo_id, ultimo_acceso, timestamps } = req.body;
+        const { nombre, apellido, email, password, puesto_id, estado_id, foto_ruta, es_subcontratado, fecha_contratacion, fecha_termino_contrato, habilidades_tecnicas, turno_id, ultimo_acceso, timestamps } = req.body;
         const usuarioActualizado = await usuarioService.update(id, {
             nombre,
             apellido,
@@ -63,7 +62,6 @@ export const actualizarUsuario = async (req, res) => {
             fecha_termino_contrato,
             habilidades_tecnicas,
             turno_id,
-            zona_trabajo_id,
             ultimo_acceso,
             timestamps
         });

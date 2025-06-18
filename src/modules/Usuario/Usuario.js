@@ -69,14 +69,6 @@ export const Usuario = sequelize.define("usuarios",{
         key: "id",
       },
     },
-    zona_trabajo_id: {
-      type: DataTypes.BIGINT,
-      allowNull: false,
-      references: {
-        model: "zonas_trabajo",
-        key: "id",
-      },
-    },
     ultimo_acceso: {
       type: DataTypes.DATE,
       allowNull: false,
