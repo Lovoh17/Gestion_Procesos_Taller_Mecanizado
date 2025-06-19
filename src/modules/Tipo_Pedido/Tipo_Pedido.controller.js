@@ -2,10 +2,11 @@ import { tipoPedidoService } from "./Tipo_Pedido.service.js";
 
 export const crearTipoPedido = async (req, res) => {
     try {
-        const { nombre, descripcion } = req.body;
+        const { nombre, descripcion, requiere_aprobacion} = req.body;
         const nuevoTipoPedido = await tipoPedidoService.create({
             nombre,
-            descripcion
+            descripcion,
+            requiere_aprobacion
         });
         res.status(201).json(nuevoTipoPedido);
     } catch (error) {
@@ -44,10 +45,11 @@ export const obtenerTipoPedido = async (req, res) => {
 export const actualizarTipoPedido = async (req, res) => {
     try {
         const { id } = req.params;
-        const { nombre, descripcion } = req.body;
+        const { nombre, descripcion, requiere_aprobacion } = req.body;
         const tipoPedidoActualizado = await tipoPedidoService.update(id, {
             nombre,
-            descripcion
+            descripcion,
+            requiere_aprobacion
         });
         res.status(200).json(tipoPedidoActualizado);
     } catch (error) {

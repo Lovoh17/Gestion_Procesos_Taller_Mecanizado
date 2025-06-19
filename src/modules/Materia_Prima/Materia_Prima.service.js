@@ -58,4 +58,4 @@ class MateriaPrimaService {
     }
 }
 
-export const MateriaPrimaService = new MateriaPrimaService();
+export const materiaPrimaService = new MateriaPrimaService();

@@ -58,4 +58,4 @@ class TelefonoUsuarioService{
     }
 }
 
-export const TelefonoUsuarioService = new TelefonoUsuarioService();
+export const telefonoUsuarioService = new TelefonoUsuarioService();

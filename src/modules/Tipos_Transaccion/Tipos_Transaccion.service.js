@@ -59,4 +59,4 @@ class TipoTransaccionService{
     
 }
 
-export const TipoTransaccionService = new TipoTransaccionService();
+export const tipoTransaccionService = new TipoTransaccionService();

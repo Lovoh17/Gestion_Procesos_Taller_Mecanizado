@@ -71,4 +71,4 @@ class TiposAlertasService{
         }
     }
 }
-export const TiposAlertasService = new TiposAlertasService();
+export const tiposAlertasService = new TiposAlertasService();

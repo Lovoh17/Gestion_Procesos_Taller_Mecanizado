@@ -1,9 +1,9 @@
-import { MetodoPagoService } from "./Metodo_Pago.service.js";
+import { metodoPagoService } from "./Metodo_Pago.service.js";
 
 export const crearMetodoPago = async (req, res) => {
     try {
         const { nombre, descripcion, requiere_referencia } = req.body;
-        const nuevaMetodoPago = await MetodoPagoService.create({
+        const nuevaMetodoPago = await metodoPagoService.create({
             nombre,
             descripcion,
             requiere_referencia
@@ -17,7 +17,7 @@ export const crearMetodoPago = async (req, res) => {
 export const obtenerMetodoPagoPorId = async (req, res) => {
     try {
         const { id } = req.params;
-        const MetodoPago = await MetodoPagoService.getById(id);
+        const MetodoPago = await metodoPagoService.getById(id);
         res.status(200).json(MetodoPago);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -28,7 +28,7 @@ export const obtenerMetodoPagoPorId = async (req, res) => {
 
 export const obtenerMetodosPago = async (req, res) => {
     try {
-        const metodosPagos = await MetodoPagoService.getAll();
+        const metodosPagos = await metodoPagoService.getAll();
         res.status(200).json(metodosPagos);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -39,7 +39,7 @@ export const actualizarMetodoPago = async (req, res) => {
     try {
         const { id } = req.params;
         const { nombre, descripcion, requiere_referencia } = req.body;
-        const MetodoPagoActualizada = await MetodoPagoService.update(id, {
+        const MetodoPagoActualizada = await metodoPagoService.update(id, {
             nombre,
             descripcion,
             requiere_referencia
@@ -53,7 +53,7 @@ export const actualizarMetodoPago = async (req, res) => {
 export const eliminarMetodoPago = async (req, res) => {
     try {
         const { id } = req.params;
-        await MetodoPagoService.delete(id);
+        await metodoPagoService.delete(id);
         res.status(200).json({ message: "Metodo de Pago eliminado" });
     } catch (error) {
         res.status(500).json({ error: error.message });

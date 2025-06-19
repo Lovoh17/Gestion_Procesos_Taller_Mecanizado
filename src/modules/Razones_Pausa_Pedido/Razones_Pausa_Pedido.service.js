@@ -58,4 +58,4 @@ class RazonesPausaPedidoService{
         }
     
 }
-export const RazonesPausaPedidoService = new RazonesPausaPedidoService();
+export const razonesPausaPedidoService = new RazonesPausaPedidoService();

@@ -1,9 +1,9 @@
-import { EstadoReparacionService } from "./Estado_Reparacion.service.js";
+import { estadoReparacionService } from "./Estado_Reparacion.service.js";
 
 export const crearEstadoReparacion = async (req, res)=>{
     try {
         const {nombre_estado} = req.body;
-        const nuevoEstadoReparacion = await EstadoReparacionService.create({
+        const nuevoEstadoReparacion = await estadoReparacionService.create({
             nombre_estado,
         });
         res.status(201).json(nuevoEstadoReparacion);
@@ -15,7 +15,7 @@ export const crearEstadoReparacion = async (req, res)=>{
 export const obtenerEstadosReparacionPorId = async (req, res) => {
     try {
         const {id} = req.params;
-        const EstadoReparacion = await EstadoReparacionService.getById(id);
+        const EstadoReparacion = await estadoReparacionService.getById(id);
         res.status(200).json(EstadoReparacion);
     } catch (error) {
         res.status(500).json({error: error.message});
@@ -24,8 +24,8 @@ export const obtenerEstadosReparacionPorId = async (req, res) => {
 
 export const obtenerEstadoReparacionPorNombre = async (req, res) => {
     try {
-        const {nombre} = req.params;
-        const EstadoReparacion = await EstadoReparacionService.getByName(nombre);
+        const {nombre_estado} = req.params;
+        const EstadoReparacion = await estadoReparacionService.getByName(nombre_estado);
         res.status(200).json(EstadoReparacion);
     } catch (error) {
         res.status(500).json({error: error.message});
@@ -34,7 +34,7 @@ export const obtenerEstadoReparacionPorNombre = async (req, res) => {
 
 export const obtenerEstadosReparacion = async (req, res)=>{
     try {
-        const estadoReparacion = await EstadoReparacionService.getAll();
+        const estadoReparacion = await estadoReparacionService.getAll();
         res.status(200).json(estadoReparacion);
     } catch (error) {
         res.status(500).json({error: error.message});
@@ -45,7 +45,7 @@ export const actualizarEstadoTrabajo = async (req, res) =>{
     try {
         const {id} = req.params;
         const { nombre_estado} = req.body;
-        const EstadoReparacion = await EstadoReparacionService.update(id, {nombre_estado});
+        const EstadoReparacion = await estadoReparacionService.update(id, {nombre_estado});
         res.status(200).json(EstadoReparacion);
     } catch (error) {
         res.status(500).json({error: error.message});
@@ -55,7 +55,7 @@ export const actualizarEstadoTrabajo = async (req, res) =>{
 export const eliminarEstadoTrabajo = async (req, res) => {
     try {
         const {id} = req.params;
-        await EstadoReparacionService.delete(id);
+        await estadoReparacionService.delete(id);
         res.status(200).json({message: "Estado de Reparacion eliminado"});
     } catch (error) {
         res.status(500).json({error: error.message});

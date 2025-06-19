@@ -57,4 +57,4 @@ class UsuarioService{
         }
     }
 }
-export const UsuarioService = new UsuarioService();
+export const usuarioService = new UsuarioService();

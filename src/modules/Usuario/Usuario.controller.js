@@ -1,9 +1,9 @@
-import { UsuarioService } from "./Usuario.service.js";
+import { usuarioService } from "./Usuario.service.js";
 
 export const crearUsuario = async (req, res) => {
     try {
-        const { nombre, apellido, email, password, puesto_id, estado_id, foto_ruta, es_subcontratado, fecha_contratacion, fecha_termino_contrato, habilidades_tecnicas, turno_id, zona_trabajo_id, ultimo_acceso, timestamps } = req.body;
-        const nuevaUsuario = await UsuarioService.create({
+        const { nombre, apellido, email, password, puesto_id, estado_id, foto_ruta, es_subcontratado, fecha_contratacion, fecha_termino_contrato, habilidades_tecnicas, turno_id, ultimo_acceso, timestamps } = req.body;
+        const nuevaUsuario = await usuarioService.create({
             nombre,
             apellido,
             email,
@@ -16,7 +16,6 @@ export const crearUsuario = async (req, res) => {
             fecha_termino_contrato,
             habilidades_tecnicas,
             turno_id,
-            zona_trabajo_id,
             ultimo_acceso,
             timestamps
         });
@@ -29,7 +28,7 @@ export const crearUsuario = async (req, res) => {
 export const obtenerUsuarioPorId = async (req, res) => {
     try {
         const { id } = req.params;
-        const usuario = await UsuarioService.getById(id);
+        const usuario = await usuarioService.getById(id);
         res.status(200).json(usuario);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -39,7 +38,7 @@ export const obtenerUsuarioPorId = async (req, res) => {
 
 export const obtenerUsuarios = async (req, res) => {
     try {
-        const usuarios = await UsuarioService.getAll();
+        const usuarios = await usuarioService.getAll();
         res.status(200).json(usuarios);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -49,8 +48,8 @@ export const obtenerUsuarios = async (req, res) => {
 export const actualizarUsuario = async (req, res) => {
     try {
         const { id } = req.params;
-        const { nombre, apellido, email, password, puesto_id, estado_id, foto_ruta, es_subcontratado, fecha_contratacion, fecha_termino_contrato, habilidades_tecnicas, turno_id, zona_trabajo_id, ultimo_acceso, timestamps } = req.body;
-        const usuarioActualizado = await UsuarioService.update(id, {
+        const { nombre, apellido, email, password, puesto_id, estado_id, foto_ruta, es_subcontratado, fecha_contratacion, fecha_termino_contrato, habilidades_tecnicas, turno_id,  ultimo_acceso, timestamps } = req.body;
+        const usuarioActualizado = await usuarioService.update(id, {
             nombre,
             apellido,
             email,
@@ -63,7 +62,6 @@ export const actualizarUsuario = async (req, res) => {
             fecha_termino_contrato,
             habilidades_tecnicas,
             turno_id,
-            zona_trabajo_id,
             ultimo_acceso,
             timestamps
         });
@@ -76,7 +74,7 @@ export const actualizarUsuario = async (req, res) => {
 export const eliminarUsuario = async (req, res) => {
     try {
         const { id } = req.params;
-        await UsuarioService.delete(id);
+        await usuarioService.delete(id);
         res.status(200).json({ message: "Usuario eliminado" });
     } catch (error) {
         res.status(500).json({ error: error.message });

@@ -60,4 +60,4 @@ class EstadoDevolucionService{
     }
 }
 
-export const EstadoDevolucionService = new EstadoDevolucionService();
+export const estadoDevolucionService = new EstadoDevolucionService();

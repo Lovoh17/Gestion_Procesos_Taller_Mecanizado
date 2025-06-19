@@ -59,4 +59,4 @@ class MetodoPagoService{
     
 }
 
-export const MetodoPagoService = new MetodoPagoService();
+export const metodoPagoService = new MetodoPagoService();

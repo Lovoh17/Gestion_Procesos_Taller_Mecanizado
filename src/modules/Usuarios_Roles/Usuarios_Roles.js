@@ -5,7 +5,7 @@ export const Usuarios_Roles = sequelize.define("usuarios_roles",{
     usuario_id:{
         type: DataTypes.BIGINT,
         allowNull: false,
-        reference:{
+        references:{
             model: "usuario",
             key: "id"
         }
@@ -13,13 +13,13 @@ export const Usuarios_Roles = sequelize.define("usuarios_roles",{
     role_id:{
         type: DataTypes.BIGINT,
         allowNull: false,
-        reference:{
+        references:{
             model:"roles",
             key: "id"
         }
     }
 },
 {
-    tableName: "usuario",
+    tableName: "usuarios_roles",
     timestamps: false
 });

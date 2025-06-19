@@ -2,13 +2,14 @@ import { Estado_Entrega } from "./Estado_Entrega.js";
 
 class EstadoEntregaService{
     async getAll() {
-            try {
-                const Estado_Entrega = await Estado_Entrega.findAll();
-                return Estado_Entrega;
-            } catch (error) {
-                throw new Error("Error al obtener los estado entrega: " + error.message);
-            }
+        try {
+            const estados = await Estado_Entrega.findAll();
+            return estados;
+        } catch (error) {
+            throw new Error("Error al obtener los estados de entrega: " + error.message);
         }
+    }
+
     
         async getById(id) {
             try {
@@ -60,4 +61,4 @@ class EstadoEntregaService{
     
 }
 
-export const EstadoEntregaService = new EstadoEntregaService();
+export const estadoEntregaService = new EstadoEntregaService();

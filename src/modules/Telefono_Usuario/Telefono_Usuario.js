@@ -14,15 +14,15 @@ export const Telefono_Usuario = sequelize.define(
     usuario_id: { 
         type: DataTypes.INTEGER, 
         allowNull: false,
-        reference:{
+        references:{
           model: Usuario,
           key: 'id'
         }
     },
     tipo_telefono_id: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         allowNull: false,
-        reference:{
+        references:{
           model: Tipo_Telefono,
           key: 'id'
         }
@@ -33,7 +33,7 @@ export const Telefono_Usuario = sequelize.define(
     },
     es_principal:{
       type: DataTypes.BOOLEAN,
-      defaultValue: 1,
+      defaultValue: true,
     }
   },
   {

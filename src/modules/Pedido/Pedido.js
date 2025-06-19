@@ -4,6 +4,8 @@ import { DataTypes } from "sequelize";
 import { Plano } from "../Plano/Plano.js";
 import { Tipo_Pedido } from "../Tipo_Pedido/Tipo_Pedido.js";
 import { Usuario } from "../Usuario/Usuario.js";
+import { Estado_Pedido } from "../Estados_Pedido/Estados_Pedido.js";
+import { Razones_Pausa_Pedido } from "../Razones_Pausa_Pedido/Razones_Pausa_Pedido.js";
 // import { Estado_Pedido } from "../Estado_Pedido/Estado_Pedido.js"; Falta implementar
 // import { Razon_Pausa_Pedido } from "../Razon_Pausa_Pedido/Razon_Pausa_Pedido.js"; Falta implementar
 
@@ -99,7 +101,7 @@ export const Pedido = sequelize.define("pedidos", {
         type: DataTypes.SMALLINT,
         allowNull: true,
         references: {
-            model: Razon_Pausa_Pedido,
+            model: Razones_Pausa_Pedido,
             key: "id",
       },
     },

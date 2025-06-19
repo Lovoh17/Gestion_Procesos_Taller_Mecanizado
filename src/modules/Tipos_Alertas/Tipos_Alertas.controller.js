@@ -1,9 +1,9 @@
-import { TiposAlertasService } from "./Tipos_Alertas.service.js";
+import { tiposAlertasService } from "./Tipos_Alertas.service.js";
 
 export const crearTiposAlerta = async (req, res) =>{
     try {
         const {nombre_alertas} = req.body;
-        const nuevaTipoAlerta = await TiposAlertasService.create({
+        const nuevaTipoAlerta = await tiposAlertasService.create({
             nombre_alertas
         });
         res.status(200).json(nuevaTipoAlerta);
@@ -15,7 +15,7 @@ export const crearTiposAlerta = async (req, res) =>{
 export const obtenerTipoAlertaPorId = async (req,res) =>{
     try {
         const {id} = req.params;
-        const TipoAlerta = await TiposAlertasService.getById(id);
+        const TipoAlerta = await tiposAlertasService.getById(id);
         res.status(200).json(TipoAlerta);
     } catch (error) {
         res.status(500).json({error: error.message});
@@ -24,8 +24,8 @@ export const obtenerTipoAlertaPorId = async (req,res) =>{
 
 export const obtenerTipoAlertaPorNombre = async (req,res) =>{
     try {
-        const { nombre } = req.params;
-        const TipoAlerta = await TiposAlertasService.getByName(nombre);
+        const { nombre_alertas } = req.params;
+        const TipoAlerta = await tiposAlertasService.getByName(nombre_alertas);
         res.status(200).json(TipoAlerta);
     } catch (error) {
         res.status(500).json({error: error.message});
@@ -34,7 +34,7 @@ export const obtenerTipoAlertaPorNombre = async (req,res) =>{
 
 export const obtenerTipoAlerta = async (req, res) =>{
     try {
-        const TipoAlerta = await TiposAlertasService.getAll();
+        const TipoAlerta = await tiposAlertasService.getAll();
         res.status(200).json(TipoAlerta);
     } catch (error) {
         res.status(500).json({error: error.message});
@@ -44,7 +44,7 @@ export const actualizarTipoAlerta = async (req, res) =>{
     try {
         const { id } = req.params;
         const { nombre_alertas }= req.body;
-        const TipoAlerta = await TiposAlertasService.update(id, {
+        const TipoAlerta = await tiposAlertasService.update(id, {
             nombre_alertas
         });
         res.status(200).json(TipoAlerta);
@@ -56,7 +56,7 @@ export const actualizarTipoAlerta = async (req, res) =>{
 export const eliminarTipoAlerta = async (req, res) =>{
     try {
         const { id }= req.params;
-        await TiposAlertasService.delete(id);
+        await tiposAlertasService.delete(id);
         res.status(200).json({message: "Tipo Alerta " + id+ " eliminarla"});
     } catch (error) {
         res.status(500).json({error: error.message});

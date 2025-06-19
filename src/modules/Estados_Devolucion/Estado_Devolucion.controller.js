@@ -1,9 +1,9 @@
-import { EstadoDevolucionService } from "./Estado_Devolucion.service.js";
+import { estadoDevolucionService } from "./Estado_Devolucion.service.js";
 
 export const crearEstadoDevolucion = async (req, res) => {
     try {
         const { nombre_estado} = req.body;
-        const nuevaEstadoDevolucion = await EstadoDevolucionService.create({
+        const nuevaEstadoDevolucion = await estadoDevolucionService.create({
             nombre_estado,
             
         });
@@ -16,7 +16,7 @@ export const crearEstadoDevolucion = async (req, res) => {
 export const obtenerEstadoDevolucionPorId = async (req, res) => {
     try {
         const { id } = req.params;
-        const estados_devolucion = await EstadoDevolucionService.getById(id);
+        const estados_devolucion = await estadoDevolucionService.getById(id);
         res.status(200).json(estados_devolucion);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -26,7 +26,7 @@ export const obtenerEstadoDevolucionPorId = async (req, res) => {
 
 export const obtenerEstadoDevolucion = async (req, res) => {
     try {
-        const estados_devolucion = await EstadoDevolucionService.getAll();
+        const estados_devolucion = await estadoDevolucionService.getAll();
         res.status(200).json(estados_devolucion);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -37,7 +37,7 @@ export const actualizarEstadoDevolucion = async (req, res) => {
     try {
         const { id } = req.params;
         const { nombre_estado} = req.body;
-        const estados_devolucionActualizada = await EstadoDevolucionService.update(id, {
+        const estados_devolucionActualizada = await estadoDevolucionService.update(id, {
             nombre_estado
         });
         res.status(200).json(estados_devolucionActualizada);
@@ -49,7 +49,7 @@ export const actualizarEstadoDevolucion = async (req, res) => {
 export const eliminarEstadoDevolucion = async (req, res) => {
     try {
         const { id } = req.params;
-        await EstadoDevolucionService.delete(id);
+        await estadoDevolucionService.delete(id);
         res.status(200).json({ message: "Estado devolucion eliminado" });
     } catch (error) {
         res.status(500).json({ error: error.message });

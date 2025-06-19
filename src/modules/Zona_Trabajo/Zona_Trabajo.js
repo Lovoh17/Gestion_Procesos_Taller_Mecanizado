@@ -25,7 +25,7 @@ export const Zona_Trabajo = sequelize.define("zonas_trabajo",{
     responsable_id:{
         type: DataTypes.BIGINT,
         allowNull: false,
-        reference:{
+        references:{
             model: Usuario,
             key: 'id'
         }

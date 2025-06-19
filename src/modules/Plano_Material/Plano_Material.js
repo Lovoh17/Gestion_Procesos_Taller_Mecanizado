@@ -2,7 +2,7 @@ import { sequelize } from '../../shared/database/database.js';
 import { DataTypes } from 'sequelize';
 
 import { Plano } from '../Plano/Plano.js';
-import { MateriaPrima } from '../Materia_Prima/Materia_Prima.js';
+import { Materia_Prima } from '../Materia_Prima/Materia_Prima.js';
 //import { Pedido } from '../Pedido/Pedido.js';
 import { Unidad_Medida } from '../Unidad_Medida/Unidad_Medida.js';
 
@@ -22,7 +22,7 @@ export const PlanoMaterial = sequelize.define('plano_materiales', {
     material_id: {
         type: DataTypes.BIGINT,
         allowNull: false,
-        references: { model: MateriaPrima, key: 'id_mp' }
+        references: { model: Materia_Prima, key: 'id' }
     },
     /*pedido_id: {
         type: DataTypes.BIGINT,
