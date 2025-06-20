@@ -2,26 +2,47 @@ import { usuarioService } from "./Usuario.service.js";
 
 export const crearUsuario = async (req, res) => {
     try {
-        const { nombre, apellido, email, password, puesto_id, estado_id, foto_ruta, es_subcontratado, fecha_contratacion, fecha_termino_contrato, habilidades_tecnicas, turno_id, ultimo_acceso, timestamps } = req.body;
-        const nuevaUsuario = await usuarioService.create({
+        const { nombre, apellido, email, password, puesto_id, estado_id, foto_ruta, 
+               es_subcontratado, fecha_contratacion, fecha_termino_contrato, 
+               habilidades_tecnicas, turno_id } = req.body;
+
+        // Validaciones básicas
+        if (!nombre || !apellido || !email || !password) {
+            return res.status(400).json({
+                success: false,
+                message: 'Nombre, apellido, email y contraseña son requeridos'
+            });
+        }
+
+        const usuarioData = {
             nombre,
             apellido,
             email,
             password,
-            puesto_id,
-            estado_id,
-            foto_ruta,
-            es_subcontratado,
-            fecha_contratacion,
-            fecha_termino_contrato,
-            habilidades_tecnicas,
-            turno_id,
-            ultimo_acceso,
-            timestamps
+            puesto_id: puesto_id || 2,
+            estado_id: estado_id || 1,
+            foto_ruta: foto_ruta || null,
+            es_subcontratado: Boolean(es_subcontratado),
+            fecha_contratacion: fecha_contratacion || null,
+            fecha_termino_contrato: fecha_termino_contrato || null,
+            habilidades_tecnicas: habilidades_tecnicas || null,
+            turno_id: turno_id || null
+        };
+
+        const nuevaUsuario = await usuarioService.create(usuarioData);
+        
+        res.status(201).json({
+            success: true,
+            data: nuevaUsuario,
+            message: 'Usuario creado correctamente'
         });
-        res.status(200).json(nuevaUsuario);
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        console.error('Error al crear usuario:', error);
+        res.status(500).json({ 
+            success: false,
+            message: 'Error al crear usuario',
+            error: process.env.NODE_ENV === 'development' ? error.message : undefined
+        });
     }
 }
 
@@ -35,7 +56,6 @@ export const obtenerUsuarioPorId = async (req, res) => {
     }
 }
 
-
 export const obtenerUsuarios = async (req, res) => {
     try {
         const usuarios = await usuarioService.getAll();
@@ -48,12 +68,26 @@ export const obtenerUsuarios = async (req, res) => {
 export const actualizarUsuario = async (req, res) => {
     try {
         const { id } = req.params;
-        const { nombre, apellido, email, password, puesto_id, estado_id, foto_ruta, es_subcontratado, fecha_contratacion, fecha_termino_contrato, habilidades_tecnicas, turno_id,  ultimo_acceso, timestamps } = req.body;
-        const usuarioActualizado = await usuarioService.update(id, {
+        const { 
+            nombre, 
+            apellido, 
+            email, 
+            password, 
+            puesto_id, 
+            estado_id, 
+            foto_ruta, 
+            es_subcontratado, 
+            fecha_contratacion, 
+            fecha_termino_contrato, 
+            habilidades_tecnicas, 
+            turno_id 
+        } = req.body;
+
+        // Campos que realmente se pueden editar
+        const updateData = {
             nombre,
             apellido,
             email,
-            password,
             puesto_id,
             estado_id,
             foto_ruta,
@@ -61,13 +95,28 @@ export const actualizarUsuario = async (req, res) => {
             fecha_contratacion,
             fecha_termino_contrato,
             habilidades_tecnicas,
-            turno_id,
-            ultimo_acceso,
-            timestamps
+            turno_id
+        };
+
+        // Solo actualizar password si se proporcionó
+        if (password) {
+            updateData.password = password;
+        }
+
+        const usuarioActualizado = await usuarioService.update(id, updateData);
+        
+        res.status(200).json({
+            success: true,
+            data: usuarioActualizado,
+            message: 'Usuario actualizado correctamente'
         });
-        res.status(200).json(usuarioActualizado);
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        console.error('Error al actualizar usuario:', error);
+        res.status(500).json({ 
+            success: false,
+            error: error.message,
+            message: 'Error al actualizar el usuario'
+        });
     }
 }
 
