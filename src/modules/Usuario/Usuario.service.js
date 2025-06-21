@@ -56,5 +56,16 @@ class UsuarioService{
             throw new Error("Error al eliminar usuario: " + error.message);
         }
     }
+    async getByPuestoId(puesto_id){
+        try {
+            const usuarios = await Usuario.findAll({where: puesto_id });
+            if (usuarios.length === 0) {
+                throw new Error("No se encontraron usuarios para el puesto especificado");
+            }
+            return usuarios;
+        } catch (error) {
+            throw new Error("Error al obtener los usuarios mediante id puesto: "+ error.message);
+        }
+    }
 }
 export const usuarioService = new UsuarioService();
