@@ -129,3 +129,13 @@ export const eliminarUsuario = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 }
+
+export const obtenerUsuariosPorIdPuesto = async (req, res)=>{
+    try {
+        const {puesto_id} = req.params;
+        const usuarios = await usuarioService.getByPuestoId(puesto_id);
+        res.status(200).json(usuarios);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+}

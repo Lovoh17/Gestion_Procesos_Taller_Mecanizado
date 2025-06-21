@@ -13,7 +13,7 @@ class DepartamentoUniversidadService{
         async getById(id) {
             try {
                 const departamento_universidad = await Departamento_Universidad.findByPk(id);
-                if (!zonaTrabajo) {
+                if (!departamento_universidad) {
                     throw new Error("Departamento universidad no encontrado");
                 }
                 return departamento_universidad;
