@@ -58,7 +58,7 @@ class UsuarioService{
     }
     async getByPuestoId(puesto_id){
         try {
-            const usuarios = await Usuario.findAll({where: puesto_id });
+            const usuarios = await Usuario.findAll({where: {puesto_id} });
             if (usuarios.length === 0) {
                 throw new Error("No se encontraron usuarios para el puesto especificado");
             }
