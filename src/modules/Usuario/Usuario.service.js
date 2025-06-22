@@ -67,5 +67,10 @@ class UsuarioService{
             throw new Error("Error al obtener los usuarios mediante id puesto: "+ error.message);
         }
     }
+
+    async getByEmail(email) {
+        return await Usuario.findOne({ where: { email } });
+    }
+
 }
 export const usuarioService = new UsuarioService();

@@ -47,6 +47,7 @@ import UnidadMedidaRoutes from './modules/Unidad_Medida/Unidad_Medida.routes.js'
 import UsuarioRoutes from './modules/Usuario/Usuario.routes.js';
 import UsuarioRolesRoutes from './modules/Usuarios_Roles/Usuarios_Roles.routes.js';
 import ZonaTrabajoRoutes from './modules/Zona_Trabajo/Zona_Trabajo.routes.js';
+import AuthRoutes from './modules/Auth/Auth.routes.js';
 
 const corsOptions = {
     origin: '*',
@@ -105,5 +106,6 @@ app.use(UnidadMedidaRoutes);
 app.use(UsuarioRoutes);
 app.use(UsuarioRolesRoutes);
 app.use(ZonaTrabajoRoutes);
+app.use(AuthRoutes);
 
 export default app;

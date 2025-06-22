@@ -1,12 +1,23 @@
 import { usuarioService } from "./Usuario.service.js";
+import bcrypt from "bcrypt";
 
 export const crearUsuario = async (req, res) => {
     try {
-        const { nombre, apellido, email, password, puesto_id, estado_id, foto_ruta, 
-               es_subcontratado, fecha_contratacion, fecha_termino_contrato, 
-               habilidades_tecnicas, turno_id } = req.body;
+        const { 
+            nombre, 
+            apellido, 
+            email, 
+            password, 
+            puesto_id, 
+            estado_id, 
+            foto_ruta, 
+            es_subcontratado, 
+            fecha_contratacion, 
+            fecha_termino_contrato, 
+            habilidades_tecnicas, 
+            turno_id 
+        } = req.body;
 
-        // Validaciones básicas
         if (!nombre || !apellido || !email || !password) {
             return res.status(400).json({
                 success: false,
@@ -14,11 +25,21 @@ export const crearUsuario = async (req, res) => {
             });
         }
 
+        const existente = await usuarioService.getByEmail?.(email);
+        if (existente) {
+            return res.status(409).json({
+                success: false,
+                message: 'El correo ya está en uso'
+            });
+        }
+
+        const hashedPassword = await bcrypt.hash(password, 10);
+
         const usuarioData = {
             nombre,
             apellido,
             email,
-            password,
+            password: hashedPassword, 
             puesto_id: puesto_id || 2,
             estado_id: estado_id || 1,
             foto_ruta: foto_ruta || null,
