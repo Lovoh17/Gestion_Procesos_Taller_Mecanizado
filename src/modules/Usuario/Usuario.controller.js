@@ -15,7 +15,9 @@ export const crearUsuario = async (req, res) => {
             fecha_contratacion, 
             fecha_termino_contrato, 
             habilidades_tecnicas, 
-            turno_id 
+            turno_id,
+            ultimo_acceso,
+            timestamps
         } = req.body;
 
         if (!nombre || !apellido || !email || !password) {
@@ -47,7 +49,9 @@ export const crearUsuario = async (req, res) => {
             fecha_contratacion: fecha_contratacion || null,
             fecha_termino_contrato: fecha_termino_contrato || null,
             habilidades_tecnicas: habilidades_tecnicas || null,
-            turno_id: turno_id || null
+            turno_id: turno_id || null,
+            ultimo_acceso: ultimo_acceso,
+            timestamps: timestamps
         };
 
         const nuevaUsuario = await usuarioService.create(usuarioData);
@@ -121,7 +125,8 @@ export const actualizarUsuario = async (req, res) => {
 
         // Solo actualizar password si se proporcionó
         if (password) {
-            updateData.password = password;
+            const hashedPassword = await bcrypt.hash(password, 10);
+            updateData.password =  hashedPassword;
         }
 
         const usuarioActualizado = await usuarioService.update(id, updateData);
