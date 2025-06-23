@@ -58,4 +58,8 @@ class RazonPausaPedidoService{
         }
     
 }
+<<<<<<< HEAD:src/modules/Razon_Pausa_Pedido/Razon_Pausa_Pedido.service.js
 export const razonPausaPedidoService = new RazonPausaPedidoService();
+=======
+export const razonesPausaPedidoService = new RazonesPausaPedidoService();
+>>>>>>> 3bd2348280a13bfbbc821972e8359a9d3cd09150:src/modules/Razones_Pausa_Pedido/Razones_Pausa_Pedido.service.js

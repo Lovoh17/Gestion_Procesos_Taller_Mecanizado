@@ -3,7 +3,11 @@ import { estadoPedidoService } from "./Estados_Pedido.service.js";
 export const crearEstadoPedido = async (req, res) => {
     try {
         const { nombre, descripcion, color_indicador, permite_edicion, orden_flujo } = req.body;
+<<<<<<< HEAD:src/modules/Estado_Pedido/Estado_Pedido.controller.js
         const nuevoEstadoPedido = await estadoPedidoService.create({
+=======
+        const nuevoestadopedido = await estadoPedidoService.create({
+>>>>>>> 3bd2348280a13bfbbc821972e8359a9d3cd09150:src/modules/Estados_Pedido/Estado_Pedido.controller.js
             nombre,
             descripcion,
             color_indicador,
@@ -19,8 +23,13 @@ export const crearEstadoPedido = async (req, res) => {
 export const obtenerEstadoPedidoPorId = async (req, res) => {
     try {
         const { id } = req.params;
+<<<<<<< HEAD:src/modules/Estado_Pedido/Estado_Pedido.controller.js
         const estado_pedido = await estadoPedidoService.getById(id);
         res.status(200).json(estado_pedido);
+=======
+        const estadopedido = await estadoPedidoService.getById(id);
+        res.status(200).json(estadopedido);
+>>>>>>> 3bd2348280a13bfbbc821972e8359a9d3cd09150:src/modules/Estados_Pedido/Estado_Pedido.controller.js
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -28,8 +37,13 @@ export const obtenerEstadoPedidoPorId = async (req, res) => {
 
 export const obtenerEstadoPedido = async (req, res) => {
     try {
+<<<<<<< HEAD:src/modules/Estado_Pedido/Estado_Pedido.controller.js
         const estado_pedido = await estadoPedidoService.getAll();
         res.status(200).json(estado_pedido);
+=======
+        const estadopedido = await estadoPedidoService.getAll();
+        res.status(200).json(estadopedido);
+>>>>>>> 3bd2348280a13bfbbc821972e8359a9d3cd09150:src/modules/Estados_Pedido/Estado_Pedido.controller.js
     } catch (error) {
         res.status(500).json({ error: error.message });
     }

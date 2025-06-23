@@ -1,25 +1,27 @@
 import { DataTypes } from "sequelize"
 import { sequelize } from "../../shared/database/database.js"
+import { Usuario } from "../Usuario/Usuario.js"
+import { Rol } from "../Rol/Rol.js"
 
 export const UsuarioRol = sequelize.define("usuario_rol",{
     usuario_id:{
         type: DataTypes.BIGINT,
         allowNull: false,
-        reference:{
-            model: "usuario",
+        references:{
+            model: Usuario,
             key: "id"
         }
     },
     role_id:{
         type: DataTypes.BIGINT,
         allowNull: false,
-        reference:{
-            model:"roles",
+        references:{
+            model: Rol,
             key: "id"
         }
     }
 },
 {
-    tableName: "usuario",
+    tableName: "usuarios_roles",
     timestamps: false
 });

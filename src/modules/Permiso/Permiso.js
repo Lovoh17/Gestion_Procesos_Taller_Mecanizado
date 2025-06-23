@@ -10,7 +10,7 @@ export const Permiso = sequelize.define("permisos",{
     role_id:{
         type: DataTypes.BIGINT,
         allowNull: false,
-        reference:{
+        references:{
             model: "roles",
             key: "id"
         }

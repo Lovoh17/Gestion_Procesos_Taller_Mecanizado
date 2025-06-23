@@ -14,6 +14,7 @@ export const HistorialMovimientoStock = sequelize.define("historial_movimientos_
       model: "materias_prima",
       key: "id",
     },
+<<<<<<< HEAD
   },
   cantidad: {
     type: DataTypes.DECIMAL,
@@ -25,6 +26,15 @@ export const HistorialMovimientoStock = sequelize.define("historial_movimientos_
     references: {
       model: "unidades_medida",
       key: "id",
+=======
+    material_id: {
+        type: DataTypes.BIGINT,
+        allowNull: false,
+        refereces: {
+            model: Materia_Prima,
+            key: 'id'
+        }
+>>>>>>> 3bd2348280a13bfbbc821972e8359a9d3cd09150
     },
   },
   origen_stock_id: {

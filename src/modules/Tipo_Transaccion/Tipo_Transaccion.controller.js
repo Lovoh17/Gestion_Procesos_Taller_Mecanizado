@@ -1,4 +1,8 @@
+<<<<<<< HEAD:src/modules/Tipo_Transaccion/Tipo_Transaccion.controller.js
 import { tipoTransaccionService } from "./Tipo_Transaccion.service.js";
+=======
+import { tipoTransaccionService } from "./Tipos_Transaccion.service.js";
+>>>>>>> 3bd2348280a13bfbbc821972e8359a9d3cd09150:src/modules/Tipos_Transaccion/Tipos_Transaccion.controller.js
 
 export const crearTipoTransaccion = async (req, res) => {
     try {

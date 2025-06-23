@@ -2,13 +2,23 @@ import { EstadoEntrega } from "./Estado_Entrega.js";
 
 class EstadoEntregaService{
     async getAll() {
+<<<<<<< HEAD
             try {
                 const estado_Entrega = await EstadoEntrega.findAll();
                 return estado_Entrega;
             } catch (error) {
                 throw new Error("Error al obtener los estado entrega: " + error.message);
             }
+=======
+        try {
+            const estados = await Estado_Entrega.findAll();
+            return estados;
+        } catch (error) {
+            throw new Error("Error al obtener los estados de entrega: " + error.message);
+>>>>>>> 3bd2348280a13bfbbc821972e8359a9d3cd09150
         }
+    }
+
     
         async getById(id) {
             try {

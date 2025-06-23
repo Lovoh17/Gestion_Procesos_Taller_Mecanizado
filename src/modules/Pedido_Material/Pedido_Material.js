@@ -57,6 +57,10 @@ export const Pedido_Material = sequelize.define("pedido_materiales", {
       model: "estado_entrega",
       key: "id",
     },
+<<<<<<< HEAD
+=======
+    //defaultValue: 1,
+>>>>>>> 3bd2348280a13bfbbc821972e8359a9d3cd09150
   },
   tipo_stock_destino: {
     type: DataTypes.SMALLINT,

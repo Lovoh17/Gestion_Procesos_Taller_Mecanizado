@@ -2,13 +2,16 @@ import { telefonoUsuarioService } from "./Telefono_Usuario.service.js";
 
 export const crearTelefonoUsuario = async (req, res) => {
     try {
+<<<<<<< HEAD
         const { usuario_id, tipo_telefono_id, numero, es_principal, timestamps } = req.body;
+=======
+        const { usuario_id, tipo_telefono_id, numero, es_principal } = req.body;
+>>>>>>> 3bd2348280a13bfbbc821972e8359a9d3cd09150
         const nuevaTelefonoUsuario = await telefonoUsuarioService.create({
             usuario_id,
             tipo_telefono_id,
             numero,
-            es_principal,
-            timestamps
+            es_principal
         });
         res.status(200).json(nuevaTelefonoUsuario);
     } catch (error) {
@@ -38,13 +41,16 @@ export const obtenerTelefonosUsuario = async (req, res) => {
 export const actualizarTelefonoUsuario = async (req, res) => {
     try {
         const { id } = req.params;
+<<<<<<< HEAD
         const { usuario_id, tipo_telefono_id, numero, es_principal, timestamps } = req.body;
+=======
+        const { usuario_id, tipo_telefono_id, numero, es_principal } = req.body;
+>>>>>>> 3bd2348280a13bfbbc821972e8359a9d3cd09150
         const telefonoUsuarioActualizada = await telefonoUsuarioService.update(id, {
             usuario_id,
             tipo_telefono_id,
             numero,
             es_principal,
-            timestamps
         });
         res.status(200).json(telefonoUsuarioActualizada);
     } catch (error) {

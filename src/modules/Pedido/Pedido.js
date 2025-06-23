@@ -1,6 +1,17 @@
 import { sequelize } from "../../shared/database/database.js";
 import { DataTypes } from "sequelize";
 
+<<<<<<< HEAD
+=======
+import { Plano } from "../Plano/Plano.js";
+import { Tipo_Pedido } from "../Tipo_Pedido/Tipo_Pedido.js";
+import { Usuario } from "../Usuario/Usuario.js";
+import { Estado_Pedido } from "../Estados_Pedido/Estados_Pedido.js";
+import { Razones_Pausa_Pedido } from "../Razones_Pausa_Pedido/Razones_Pausa_Pedido.js";
+// import { Estado_Pedido } from "../Estado_Pedido/Estado_Pedido.js"; Falta implementar
+// import { Razon_Pausa_Pedido } from "../Razon_Pausa_Pedido/Razon_Pausa_Pedido.js"; Falta implementar
+
+>>>>>>> 3bd2348280a13bfbbc821972e8359a9d3cd09150
 export const Pedido = sequelize.define("pedidos", {
   id: {
     type: DataTypes.BIGINT,
@@ -134,6 +145,85 @@ export const Pedido = sequelize.define("pedidos", {
         if (this.costo_estimado && value <= this.costo_estimado) {
           throw new Error("El precio final debe ser mayor que el costo estimado.");
         }
+<<<<<<< HEAD
+=======
+    },
+    plano_id: {
+        type: DataTypes.BIGINT,
+        allowNull: false,
+        references: {
+            model: Plano,
+            key: "id",
+        }
+    },
+    solicitante_id: {
+        type: DataTypes.BIGINT,
+        allowNull: false,
+        references: {
+            model: Usuario,
+            key: "id",
+        },
+    },
+    aprobador_id: {
+        type: DataTypes.BIGINT,
+        allowNull: true,
+        references: {
+            model: Usuario,
+            key: "id",
+        },
+    },
+    supervisor_id: {
+        type: DataTypes.BIGINT,
+        allowNull: true,
+        references: {
+            model: Usuario,
+            key: "id",
+        },
+        comment: "quien sera el encargado del proyecto",
+    },
+    fecha_solicitud: {
+        type: DataTypes.DATE,
+        allowNull: false,
+    },
+    fecha_aprobacion: {
+        type: DataTypes.DATE,
+        allowNull: true,
+    },
+    fecha_requerida: {
+        type: DataTypes.DATEONLY,
+        allowNull: false,
+    },
+    fecha_estimada_entrega: {
+        type: DataTypes.DATEONLY,
+        allowNull: true,
+    },
+    fecha_completado: {
+        type: DataTypes.DATE,
+        allowNull: true,
+    },
+    estado_id: {
+        type: DataTypes.SMALLINT,
+        allowNull: false,
+        references: {
+            model: Estado_Pedido,
+            key: "id",
+        },
+    },
+    pausado_desde: {
+        type: DataTypes.DATE,
+        allowNull: true,
+    },
+    pausado_hasta: {
+        type: DataTypes.DATE,
+        allowNull: true,
+    },
+    razon_pausa_actual_id: {
+        type: DataTypes.SMALLINT,
+        allowNull: true,
+        references: {
+            model: Razones_Pausa_Pedido,
+            key: "id",
+>>>>>>> 3bd2348280a13bfbbc821972e8359a9d3cd09150
       },
     },
   },

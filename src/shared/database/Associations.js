@@ -19,7 +19,7 @@ import { Alerta_Reparacion } from '../../modules/Alerta_Reparacion/Alerta_Repara
 import { EstadoReparacion } from '../../modules/Estado_Reparacion/Estado_Reparacion.js';
 import { TipoAlerta } from '../../modules/Tipo_Alerta/Tipo_Alerta.js';
 
-import { Historial_Uso_Herramienta } from '../../modules/Historial_Uso_Herramienta/Historial_Uso_Herramienta.js';
+import { Historial_Uso_Herramientas } from '../../modules/Historial_Uso_Herramienta/Historial_Uso_Herramienta.js';
 import { Pedido_Material } from '../../modules/Pedido_Material/Pedido_Material.js';
 import { Pedido_Herramienta } from '../../modules/Pedido_Herramienta/Pedido_Herramienta.js';
 import { Entrega_Pedido } from '../../modules/Entrega_Pedidio/Entrega_Pedido.js';
@@ -75,11 +75,11 @@ Alerta_Reparacion.belongsTo(Prioridad_Mantenimiento, { foreignKey: 'prioridad_id
 Alerta_Reparacion.belongsTo(EstadoReparacion, { foreignKey: 'estado_reparacion', as: 'estadoReparacion' });
 Alerta_Reparacion.belongsTo(Usuario, { foreignKey: 'resuelta_por', as: 'usuarioResuelve' });
 
-Historial_Uso_Herramienta.belongsTo(Herramienta, { foreignKey: 'herramienta_id' });
-Historial_Uso_Herramienta.belongsTo(Usuario, { foreignKey: 'usuario_id' });
-Historial_Uso_Herramienta.belongsTo(Pedido, { foreignKey: 'proyecto_id' });
-Historial_Uso_Herramienta.belongsTo(Estado_Herramienta, { foreignKey: 'estado_devolucion_id' });
-Historial_Uso_Herramienta.belongsTo(Usuario, { foreignKey: 'aprobado_por', as: 'usuarioAprueba' });
+Historial_Uso_Herramientas.belongsTo(Herramienta, { foreignKey: 'herramienta_id' });
+Historial_Uso_Herramientas.belongsTo(Usuario, { foreignKey: 'usuario_id' });
+Historial_Uso_Herramientas.belongsTo(Pedido, { foreignKey: 'proyecto_id' });
+Historial_Uso_Herramientas.belongsTo(Estado_Herramienta, { foreignKey: 'estado_devolucion_id' });
+Historial_Uso_Herramientas.belongsTo(Usuario, { foreignKey: 'aprobado_por', as: 'usuarioAprueba' });
 
 Pedido_Material.belongsTo(Pedido, { foreignKey: 'pedido_id' });
 Pedido_Material.belongsTo(MateriaPrima, { foreignKey: 'material_id' });
@@ -103,6 +103,7 @@ Detalle_Entrega.belongsTo(Unidad_Medida, { foreignKey: 'unidad_medida_id' });
 
 Historial_Pedido.belongsTo(Pedido, { foreignKey: 'pedido_id' });
 Historial_Pedido.belongsTo(Usuario, { foreignKey: 'usuario_id' });
+<<<<<<< HEAD
 Historial_Pedido.belongsTo(EstadoPedido, { foreignKey: 'estado_anterior_id', as: 'estadoAnterior' });
 Historial_Pedido.belongsTo(EstadoPedido, { foreignKey: 'estado_nuevo_id', as: 'estadoNuevo' });
 Historial_Pedido.belongsTo(RazonPausaPedido, { foreignKey: 'razon_pausa_id' });
@@ -110,6 +111,15 @@ Historial_Pedido.belongsTo(RazonPausaPedido, { foreignKey: 'razon_pausa_id' });
 Transaccion_Financiera.belongsTo(Tipo_Transaccion, { foreignKey: 'tipo_transaccion_id' });
 Transaccion_Financiera.belongsTo(DepartamentoUniversidad, { foreignKey: 'departamento_id' });
 Transaccion_Financiera.belongsTo(EstadoTransaccion, { foreignKey: 'estado_transaccion_id' });
+=======
+Historial_Pedido.belongsTo(Estado_Pedido, { foreignKey: 'estado_anterior_id', as: 'estadoAnterior' });
+Historial_Pedido.belongsTo(Estado_Pedido, { foreignKey: 'estado_nuevo_id', as: 'estadoNuevo' });
+//Historial_Pedido.belongsTo(Razon_Pausa_Pedido, { foreignKey: 'razon_pausa_id' });
+
+//Transaccion_Financiera.belongsTo(Tipo_Transaccion, { foreignKey: 'tipo_transaccion_id' });
+Transaccion_Financiera.belongsTo(Departamento_Universidad, { foreignKey: 'departamento_id' });
+Transaccion_Financiera.belongsTo(Estado_Transaccion, { foreignKey: 'estado_transaccion_id' });
+>>>>>>> 3bd2348280a13bfbbc821972e8359a9d3cd09150
 Transaccion_Financiera.belongsTo(Usuario, { foreignKey: 'aprobado_por', as: 'usuarioAprueba' });
 Transaccion_Financiera.belongsTo(Usuario, { foreignKey: 'creado_por', as: 'usuarioCrea' });
 Transaccion_Financiera.belongsTo(MetodoPago, { foreignKey: 'metodo_pago_id' });
@@ -134,22 +144,34 @@ Pedido.belongsTo(Usuario, { foreignKey: 'aprobador_id' });
 Pedido.belongsTo(Usuario, { foreignKey: 'supervisor_id' });
 Pedido.belongsTo(Plano, { foreignKey: 'plano_id' });
 Pedido.belongsTo(Tipo_Pedido, { foreignKey: 'tipo_pedido_id' });
+<<<<<<< HEAD
 Pedido.belongsTo(EstadoPedido, { foreignKey: 'estado_id' });
 Pedido.belongsTo(RazonPausaPedido, { foreignKey: 'razon_pausa_actual_id' });
+=======
+Pedido.belongsTo(Estado_Pedido, { foreignKey: 'estado_id' });
+Pedido.belongsTo(Razones_Pausa_Pedido, { foreignKey: 'razon_pausa_actual_id' });
+>>>>>>> 3bd2348280a13bfbbc821972e8359a9d3cd09150
 
 Herramienta.belongsTo(Tipo_Herramienta,{foreignKey: 'tipo_herramienta_id'});
 Herramienta.belongsTo(Estado_Herramienta, {foreignKey: 'estado_herramienta_id'});
 Herramienta.belongsTo(Zona_Trabajo, { foreignKey: 'zonas_trabajo_id'});
 
-Zona_Trabajo.belongsTo(Usuario, {foreignKey: 'responsable_id'});
 
+Zona_Trabajo.belongsTo(Usuario, {foreignKey: 'responsable_id'});
 Usuario.belongsTo(Puesto, {foreignKey: 'puesto_id'});
 Usuario.belongsTo(Estado_Usuario , {foreignKey: 'estado_id'});
 Usuario.belongsTo(Turno,{ foreignKey: 'turno_id'});
+
 Usuario.belongsTo(Zona_Trabajo, {foreignKey: 'zona_trabajo_id'});
 
+<<<<<<< HEAD
 TelefonoUsuario.belongsTo(Usuario, {foreignKey: 'usuario_id'});
 TelefonoUsuario.belongsTo(Tipo_Telefono, { foreignKey: 'tipo_telefono_id'});
+=======
+
+Telefono_Usuario.belongsTo(Usuario, {foreignKey: 'usuario_id'});
+Telefono_Usuario.belongsTo(Tipo_Telefono, { foreignKey: 'tipo_telefono_id'});
+>>>>>>> 3bd2348280a13bfbbc821972e8359a9d3cd09150
 
 MateriaPrima.belongsTo(Tipo_Materia_Prima, {foreignKey: 'tipo_materia_prima_id'});
 MateriaPrima.belongsTo(Unidad_Medida, { foreignKey: 'unidad_base_id'});

@@ -12,8 +12,13 @@ class DepartamentoUniversidadService{
     
         async getById(id) {
             try {
+<<<<<<< HEAD:src/modules/Departamento_Universidad/Departamento_Universidad.service.js
                 const departamento_universidad = await DepartamentoUniversidad.findByPk(id);
                 if (!zonaTrabajo) {
+=======
+                const departamento_universidad = await Departamento_Universidad.findByPk(id);
+                if (!departamento_universidad) {
+>>>>>>> 3bd2348280a13bfbbc821972e8359a9d3cd09150:src/modules/Departamentos_Universidad/Departamentos_Universidad.service.js
                     throw new Error("Departamento universidad no encontrado");
                 }
                 return departamento_universidad;

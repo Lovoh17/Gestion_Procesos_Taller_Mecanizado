@@ -71,4 +71,8 @@ class TipoAlertaService{
         }
     }
 }
+<<<<<<< HEAD:src/modules/Tipo_Alerta/Tipo_Alerta.service.js
 export const tipoAlertaService = new TipoAlertaService();
+=======
+export const tiposAlertasService = new TiposAlertasService();
+>>>>>>> 3bd2348280a13bfbbc821972e8359a9d3cd09150:src/modules/Tipos_Alertas/Tipos_Alertas.service.js
