@@ -1,6 +1,7 @@
 import { usuarioService } from "./Usuario.service.js";
 import bcrypt from "bcrypt";
 
+
 export const crearUsuario = async (req, res) => {
     try {
         const { 
@@ -16,8 +17,6 @@ export const crearUsuario = async (req, res) => {
             fecha_termino_contrato, 
             habilidades_tecnicas, 
             turno_id,
-            ultimo_acceso,
-            timestamps
         } = req.body;
 
         if (!nombre || !apellido || !email || !password) {
@@ -50,8 +49,8 @@ export const crearUsuario = async (req, res) => {
             fecha_termino_contrato: fecha_termino_contrato || null,
             habilidades_tecnicas: habilidades_tecnicas || null,
             turno_id: turno_id || null,
-            ultimo_acceso: ultimo_acceso,
-            timestamps: timestamps
+            ultimo_acceso:  new Date(),
+            timestamps: true
         };
 
         const nuevaUsuario = await usuarioService.create(usuarioData);
