@@ -34,6 +34,15 @@ export const obtenerMantenimientoPorNombre = async (req, res) => {
         res.status(404).json({ error: error.message });
     }
 };
+export const obtenerMantenimientosPorTecnico = async (req, res) => {
+    try {
+        const { tecnico_asignado_id } = req.params;
+        const mantenimientos = await mantenimientoService.getByTecnico(tecnico_asignado_id);
+        res.status(200).json(mantenimientos);
+    } catch (error) {
+        res.status(404).json({ error: error.message });
+    }
+};
 export const actualizarMantenimiento = async (req, res) => {
     try {
         const { id } = req.params;

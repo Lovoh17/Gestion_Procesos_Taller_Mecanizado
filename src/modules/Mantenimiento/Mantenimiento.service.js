@@ -41,6 +41,20 @@ class MantenimientoService {
         }
     }
 
+    async getByTecnico(tecnico_asignado_id) {
+        try {
+            const mantenimientos = await Mantenimiento.findAll({
+                where: { tecnico_asignado_id }
+            });
+            if (!mantenimientos || mantenimientos.length === 0) {
+                throw new Error("No se encontraron mantenimientos para este técnico");
+            }
+            return mantenimientos;
+        } catch (error) {
+            throw new Error("Error al buscar por técnico: " + error.message);
+        }
+    }
+
     async create(data) {
         try {
             const nuevoMantenimiento = await Mantenimiento.create(data);

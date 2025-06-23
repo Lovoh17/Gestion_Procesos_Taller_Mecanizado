@@ -7,11 +7,7 @@ export const Mantenimiento = sequelize.define("mantenimientos", {
     primaryKey: true,
     autoIncrement: true,
   },
-<<<<<<< HEAD
-  nombre: {
-=======
   nombre:{
->>>>>>> 3bd2348280a13bfbbc821972e8359a9d3cd09150
     type: DataTypes.STRING,
     allowNull: false,
   },

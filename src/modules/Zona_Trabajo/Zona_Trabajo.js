@@ -21,7 +21,6 @@ export const Zona_Trabajo = sequelize.define("zonas_trabajo",
       type: DataTypes.STRING,
       allowNull: false,
     },
-<<<<<<< HEAD
     responsable_id: {
       type: DataTypes.BIGINT,
       allowNull: false,
@@ -32,18 +31,6 @@ export const Zona_Trabajo = sequelize.define("zonas_trabajo",
     },
   },
   {
-=======
-    responsable_id:{
-        type: DataTypes.BIGINT,
-        allowNull: false,
-        references:{
-            model: Usuario,
-            key: 'id'
-        }
-    }
-},
-{
->>>>>>> 3bd2348280a13bfbbc821972e8359a9d3cd09150
     tableName: "zonas_trabajo",
     timestamps: false,
   }

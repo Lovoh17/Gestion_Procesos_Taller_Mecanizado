@@ -1,12 +1,5 @@
 import { sequelize } from "../../shared/database/database.js";
 import { DataTypes } from "sequelize";
-<<<<<<< HEAD
-=======
-import { Puesto } from "../Puesto/Puesto.js";
-import { Estado_Usuario } from "../Estado_Usuario/Estado_Usuario.js";
-import { Turno } from "../Turno/Turno.js";
-import { Zona_Trabajo } from "../Zona_Trabajo/Zona_Trabajo.js";
->>>>>>> 3bd2348280a13bfbbc821972e8359a9d3cd09150
 
 export const Usuario = sequelize.define("usuarios",{
     id: {
@@ -33,7 +26,6 @@ export const Usuario = sequelize.define("usuarios",{
     },
     puesto_id: {
       type: DataTypes.BIGINT,
-<<<<<<< HEAD
       allowNull: false,
       references: {
         model: "puestos",
@@ -47,22 +39,6 @@ export const Usuario = sequelize.define("usuarios",{
         model: "estado_usuario",
         key: "id",
       },
-=======
-      allowNull: true,
-      references:{
-        model: Puesto,
-        key: 'id'
-      }
-    },
-    estado_id: {
-      type: DataTypes.SMALLINT,
-      allowNull: true,
-      //defaultValue: 1,
-      references:{
-        model: Estado_Usuario,
-        key: 'id'
-      }
->>>>>>> 3bd2348280a13bfbbc821972e8359a9d3cd09150
     },
     foto_ruta: {
       type: DataTypes.STRING,
@@ -87,26 +63,12 @@ export const Usuario = sequelize.define("usuarios",{
     },
     turno_id: {
       type: DataTypes.SMALLINT,
-<<<<<<< HEAD
       allowNull: false,
       references: {
         model: "turnos",
         key: "id",
       },
     },
-=======
-      allowNull: true,
-      references:{
-        model: Turno,
-        key:  'id'
-      }
-    },
-    /*zona_trabajo_id: {
-      type: DataTypes.BIGINT,
-      allowNull: false,
-
-    },*/
->>>>>>> 3bd2348280a13bfbbc821972e8359a9d3cd09150
     ultimo_acceso: {
       type: DataTypes.DATE,
       allowNull: false,
