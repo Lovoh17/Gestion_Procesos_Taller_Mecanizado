@@ -6,7 +6,8 @@ import { Usuario } from "../Usuario/Usuario.js"
 export const Zona_Trabajo = sequelize.define("zonas_trabajo",{
     id:{
         type: DataTypes.BIGINT,
-        allowNull: false
+        primaryKey: true,
+        autoIncrement: true
     },
     nombre:{
         type: DataTypes.STRING,
@@ -24,13 +25,13 @@ export const Zona_Trabajo = sequelize.define("zonas_trabajo",{
     responsable_id:{
         type: DataTypes.BIGINT,
         allowNull: false,
-        reference:{
+        references:{
             model: Usuario,
             key: 'id'
         }
     }
 },
 {
-    tableName: "materias_prima",
+    tableName: "zonas_trabajo",
     timestamps: false,
 })

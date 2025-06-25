@@ -6,7 +6,7 @@ import { Tipo_Stock } from "../Tipo_Stock/Tipo_Stock.js";
 
 
 export const Materia_Prima = sequelize.define("materias_prima", {
-    id_mp: {
+    id: {
       type: DataTypes.BIGINT,
       primaryKey: true,
       autoIncrement: true,
@@ -28,7 +28,7 @@ export const Materia_Prima = sequelize.define("materias_prima", {
     tipo_materia_prima_id: {
       type: DataTypes.BIGINT,
       allowNull: false,
-      reference:{
+      references:{
         model: Tipo_Materia_Prima,
         key: 'id'
       }
@@ -36,7 +36,7 @@ export const Materia_Prima = sequelize.define("materias_prima", {
     unidad_base_id: {
       type: DataTypes.BIGINT,
       allowNull: false,
-      reference:{
+      references:{
         model: Unidad_Medida,
         key:'id'
       }
@@ -68,7 +68,7 @@ export const Materia_Prima = sequelize.define("materias_prima", {
     fraccion_unidad_id: {
       type: DataTypes.BIGINT,
       allowNull: false,
-      reference:{
+      references:{
         model: Unidad_Medida,
         key: 'id'
       }
@@ -82,7 +82,7 @@ export const Materia_Prima = sequelize.define("materias_prima", {
       type: DataTypes.SMALLINT,
       allowNull: false,
       comment: "1=pedido internos, 2=pedido externos, 3=prácticas",
-      reference:{
+      references:{
         model:Tipo_Stock,
         key: 'id'
       }
