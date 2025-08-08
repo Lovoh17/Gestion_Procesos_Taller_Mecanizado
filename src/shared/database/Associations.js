@@ -55,6 +55,7 @@ import { Departamento_Universidad } from '../../modules/Departamentos_Universida
 import { Estado_Transaccion } from '../../modules/Estado_Transaccion/Estado_Transaccion.js';
 import { Metodo_Pago } from '../../modules/Metodo_Pago/Metodo_Pago.js';
 import { Tipos_Transaccion } from '../../modules/Tipos_Transaccion/Tipos_Transaccion.js';
+import { Version_Documento } from '../../modules/Version_Documento/Version_Documento.js';
 
 
 
@@ -192,4 +193,10 @@ Usuarios_Roles.belongsTo(Usuario,{ foreignKey: 'usuario_id'});
 Usuarios_Roles.belongsTo(Rol, {foreignKey: 'role_id'});
 
 Permisos.belongsTo(Rol, {foreignKey: 'role_id'});
+
+Plano.hasMany(Version_Documento, { foreignKey: 'planoId' });
+Version_Documento.belongsTo(Plano, { foreignKey: 'planoId', as: 'plano' });
+
+Usuario.hasMany(Version_Documento, { foreignKey: 'creado_por' });
+Version_Documento.belongsTo(Usuario, { foreignKey: 'creado_por', as: 'creadoPor' });
 
