@@ -1,0 +1,433 @@
+--INSERTS--
+
+INSERT INTO public.tipo_herramientas (id, nombre, descripcion, caracteristicas_clave) VALUES
+(1, 'Soldadora MIG', 'Equipo para soldadura MIG/MAG', '{"voltaje": "220V", "amperaje": "140A", "peso": "15kg"}'),
+(2, 'Soldadora TIG', 'Equipo para soldadura TIG', '{"voltaje": "220V", "amperaje": "200A", "peso": "20kg"}'),
+(3, 'Esmeril Angular', 'Herramienta para corte y desbaste', '{"diámetro": "115mm", "potencia": "800W", "rpm": "11000"}'),
+(4, 'Cortadora Plasma', 'Equipo para corte por plasma', '{"corte máximo": "12mm", "consumo": "30A", "peso": "25kg"}'),
+(5, 'Soplete Oxicorte', 'Equipo para corte con oxígeno', '{"presión oxígeno": "8bar", "presión gas": "0.5bar", "peso": "3kg"}');
+
+INSERT INTO public.estado_herramienta (id, nombre, descripcion, permiso_uso, color_indicador, requiere_autorizacion) VALUES
+(1, 'Disponible', 'Herramienta en buen estado y disponible', true, 'verde', false),
+(2, 'En uso', 'Herramienta actualmente en uso', false, 'amarillo', false),
+(3, 'Mantenimiento', 'Herramienta en reparación o mantenimiento', false, 'rojo', true),
+(4, 'Reservado', 'Herramienta reservada para un proyecto', false, 'azul', true),
+(5, 'Dañado', 'Herramienta dañada, no disponible', false, 'rojo', true);
+
+INSERT INTO public.puestos (id, nombre_puesto, descripcion, nivel_jerarquico, es_supervisor) VALUES
+(1, 'Jefe de Taller', 'Responsable general del taller', 1, true),
+(2, 'Supervisor Soldadura', 'Supervisa operaciones de soldadura', 2, true),
+(3, 'Soldador Certificado', 'Personal calificado para soldar', 3, false),
+(4, 'Ayudante Soldadura', 'Asiste en operaciones de soldadura', 4, false),
+(5, 'Almacenista', 'Responsable de materiales y herramientas', 3, false);
+
+INSERT INTO public.estado_usuario (id, nombre, descripcion, permite_acceso, color_indicador, es_editable) VALUES
+(1, 'Activo', 'Usuario activo y con acceso al sistema', true, 'green', true),
+(2, 'Inactivo', 'Usuario inactivo temporalmente', false, 'gray', true),
+(3, 'Vacaciones', 'Usuario en período de vacaciones', false, 'blue', true),
+(4, 'Suspendido', 'Usuario suspendido temporalmente', false, 'yellow', true),
+(5, 'Eliminado', 'Usuario dado de baja del sistema', false, 'red', false);
+
+INSERT INTO public.turnos (id, nombre, hora_inicio, hora_fin, dias_semana) VALUES
+(1, 'Matutino', '08:00:00', '16:00:00', 'Lunes,Martes,Miércoles,Jueves,Viernes'),
+(2, 'Vespertino', '16:00:00', '00:00:00', 'Lunes,Martes,Miércoles,Jueves,Viernes'),
+(3, 'Nocturno', '00:00:00', '08:00:00', 'Lunes,Martes,Miércoles,Jueves,Viernes'),
+(4, 'Fin de Semana', '08:00:00', '14:00:00', 'Sábado,Domingo'),
+(5, 'Flexible', '10:00:00', '18:00:00', 'Lunes,Martes,Miércoles,Jueves,Viernes');
+
+INSERT INTO public.tipo_materias_prima (id, nombre, descripcion) VALUES
+(1, 'Acero al Carbono', 'Acero común para estructuras y soldadura'),
+(2, 'Acero Inoxidable', 'Acero resistente a la corrosión'),
+(3, 'Aluminio', 'Metal ligero para aplicaciones especiales'),
+(4, 'Electrodos', 'Varillas para soldadura por arco'),
+(5, 'Gases', 'Gases para soldadura y corte');
+
+INSERT INTO public.unidades_medida (id, nombre, abreviatura, tipo) VALUES
+(1, 'Metro', 'm', 'longitud'),
+(2, 'Kilogramo', 'kg', 'peso'),
+(3, 'Litro', 'L', 'volumen'),
+(4, 'Unidad', 'u', 'cantidad'),
+(5, 'Pulgada', 'in', 'longitud');
+
+INSERT INTO public.tipos_stock (id, nombre, descripcion, es_exclusivo) VALUES
+(1, 'Stock General', 'Materiales para uso general', false),
+(2, 'Stock Proyectos Externos', 'Materiales reservados para clientes externos', true),
+(3, 'Stock Prácticas', 'Materiales para prácticas de estudiantes', true),
+(4, 'Stock Obsoleto', 'Materiales en desuso o para reciclaje', false);
+
+INSERT INTO public.materias_prima (id, codigo, nombre, descripcion, tipo_materia_prima_id, unidad_base_id, stock_minimo, stock_maximo, unidades_completas, fracciones, stock_total, fraccion_unidad_id, permite_fraccion, pertenece_a_stock_id, costo_unitario, proveedor_principal, tiempo_reposicion, es_controlado, timestamps) VALUES
+(1, 'AC-1010', 'Plancha Acero 1010', 'Plancha de acero al carbono 1/4"', 1, 1, 10, 100, 50, 2.5, 52.5, 1, true, 1, 25.50, 'Aceros Nacionales', 7, true, NOW()),
+(2, 'AI-304', 'Tubo Inox 304', 'Tubo de acero inoxidable 304 2"', 2, 1, 20, 200, 100, 0, 100, 1, false, 2, 45.75, 'Inoxidables S.A.', 14, true, NOW()),
+(3, 'AL-6061', 'Barra Aluminio 6061', 'Barra de aluminio 6061 1/2"', 3, 1, 15, 150, 75, 1.2, 76.2, 1, true, 1, 32.40, 'Aluminios del Norte', 10, false, NOW()),
+(4, 'EL-7018', 'Electrodo 7018', 'Electrodos para soldadura 7018 1/8"', 4, 2, 5, 50, 25, 0, 25, 2, false, 1, 12.80, 'Soldaduras Industriales', 5, true, NOW()),
+(5, 'GS-ARGON', 'Gas Argón', 'Cilindro de gas argón para TIG', 5, 3, 3, 30, 10, 0.5, 10.5, 3, true, 1, 120.00, 'Gases Técnicos', 3, true, NOW());
+
+INSERT INTO public.tipo_pedidos (id, nombre, descripcion, requiere_aprobacion) VALUES
+(1, 'Proyecto Interno', 'Trabajos para mantenimiento interno', false),
+(2, 'Proyecto Externo', 'Trabajos para clientes externos', true),
+(3, 'Prácticas Estudiantes', 'Material para prácticas académicas', true),
+(4, 'Reparación Urgente', 'Pedido para reparaciones inmediatas', false),
+(5, 'Pruebas Calidad', 'Material para pruebas de control de calidad', true);
+
+INSERT INTO public.estados_pedido (id, nombre, descripcion, color_indicador, permite_edicion, orden_flujo) VALUES
+(1, 'Solicitado', 'Pedido creado pero no aprobado', '#FFA500', true, 1),
+(2, 'Aprobado', 'Pedido aprobado para ejecución', '#008000', false, 2),
+(3, 'En Proceso', 'Pedido en proceso de fabricación', '#0000FF', false, 3),
+(4, 'Pausado', 'Pedido detenido temporalmente', '#FFFF00', true, 4),
+(5, 'Completado', 'Pedido finalizado y entregado', '#808080', false, 5);
+
+INSERT INTO public.tipo_mantenimientos (id, nombre, descripcion, frecuencia_recomendada_dias, requiere_aprobacion, nivel_tecnico_requerido) VALUES
+(1, 'Preventivo', 'Mantenimiento programado', 180, false, 'Medio'),
+(2, 'Correctivo', 'Reparación de fallas', 0, true, 'Alto'),
+(3, 'Calibración', 'Ajuste de parámetros', 90, false, 'Alto'),
+(4, 'Limpieza', 'Limpieza general', 30, false, 'Bajo'),
+(5, 'Revisión Seguridad', 'Verificación componentes de seguridad', 60, false, 'Medio');
+
+INSERT INTO public.estado_mantenimiento (id, nombre_estado) VALUES
+(1, 'Pendiente'),
+(2, 'En Proceso'),
+(3, 'Completado'),
+(4, 'Cancelado'),
+(5, 'Reprogramado');
+
+INSERT INTO public.prioridad_mantenimiento (id, nombre_prioridad) VALUES
+(1, 'Crítica'),
+(2, 'Alta'),
+(3, 'Media'),
+(4, 'Baja'),
+(5, 'Programada');
+
+INSERT INTO public.departamentos_universidad (id, nombre) VALUES
+(1, 'Ingeniería Mecánica'),
+(2, 'Ingeniería Industrial'),
+(3, 'Tecnología en Soldadura'),
+(4, 'Mantenimiento de Instalaciones'),
+(5, 'Investigación y Desarrollo');
+
+INSERT INTO public.estado_reparacion (id, nombre_estado) VALUES
+(1, 'Reportada'),
+(2, 'En Diagnóstico'),
+(3, 'En Reparación'),
+(4, 'Esperando Repuestos'),
+(5, 'Completada');
+
+INSERT INTO public.estado_transaccion (id, nombre_estado) VALUES
+(1, 'Pendiente'),
+(2, 'Aprobada'),
+(3, 'Rechazada'),
+(4, 'Procesada'),
+(5, 'Cancelada');
+
+INSERT INTO public.estados_devolucion (id, nombre_estado) VALUES
+(1, 'Completa'),
+(2, 'Parcial'),
+(3, 'Con Daños'),
+(4, 'Tardía'),
+(5, 'Pendiente');
+
+INSERT INTO public.estado_entrega (id, nombre, descripcion) VALUES
+(1, 'Parcial', 'Entrega parcial del material solicitado'),
+(2, 'Completa', 'Entrega completa del material solicitado'),
+(3, 'Verificada', 'Entrega verificada y aceptada'),
+(4, 'Rechazada', 'Entrega rechazada por calidad'),
+(5, 'Pendiente', 'Entrega pendiente de recepción');
+
+INSERT INTO public.razones_pausa_pedido (id, nombre, descripcion) VALUES
+(1, 'Falta de Material', 'Pausado por falta de materiales necesarios'),
+(2, 'Esperando Aprobación', 'Pausado pendiente de aprobación adicional'),
+(3, 'Problema Técnico', 'Pausado por problemas técnicos con equipos'),
+(4, 'Cambio de Diseño', 'Pausado por modificaciones en el diseño'),
+(5, 'Priorización', 'Pausado para dar prioridad a otro pedido');
+
+INSERT INTO public.roles (id, descripcion) VALUES
+(1, 'Administrador'),
+(2, 'Jefe de Taller'),
+(3, 'Supervisor'),
+(4, 'Técnico'),
+(5, 'Almacenista');
+
+INSERT INTO public.tipos_telefono (id, nombre, descripcion) VALUES
+(1, 'Móvil', 'Teléfono celular personal'),
+(2, 'Oficina', 'Teléfono de la empresa'),
+(3, 'Casa', 'Teléfono residencial'),
+(4, 'Emergencia', 'Contacto de emergencia'),
+(5, 'WhatsApp', 'Número para mensajería instantánea');
+
+INSERT INTO public.permisos (id, role_id, descripcion) VALUES
+(1, 1, 'Acceso total al sistema'),
+(2, 2, 'Gestionar pedidos y herramientas'),
+(3, 3, 'Supervisar operaciones'),
+(4, 4, 'Usar herramientas y reportar mantenimiento'),
+(5, 5, 'Gestionar inventario');
+
+INSERT INTO public.tipos_alertas (id, nombre_alertas) VALUES
+(1, 'Mantenimiento Requerido'),
+(2, 'Daño Detectado'),
+(3, 'Calibración Necesaria'),
+(4, 'Revisión de Seguridad'),
+(5, 'Repuesto Agotado');
+
+INSERT INTO public.tipos_transaccion (id, nombre, descripcion, afecta_ingresos, afecta_gastos, es_interno) VALUES
+(1, 'Compra Materiales', 'Adquisición de materias primas', false, true, false),
+(2, 'Venta Servicios', 'Ingresos por trabajos realizados', true, false, false),
+(3, 'Mantenimiento', 'Gastos en reparaciones', false, true, true),
+(4, 'Depreciación', 'Ajuste por depreciación de equipos', false, true, true),
+(5, 'Subvención', 'Fondos recibidos para investigación', true, false, true);
+
+INSERT INTO public.metodo_pago (id, nombre, descripcion, requiere_referencia) VALUES
+(1, 'Transferencia', 'Transferencia bancaria', true),
+(2, 'Efectivo', 'Pago en efectivo', false),
+(3, 'Tarjeta Crédito', 'Pago con tarjeta de crédito', true),
+(4, 'Cheque', 'Pago con cheque', true),
+(5, 'Crédito 30 días', 'Pago a 30 días', true);
+
+INSERT INTO public.usuarios(
+    id, nombre, apellido, email, password, puesto_id, estado_id, foto_ruta, es_subcontratado, fecha_contratacion, fecha_termino_contrato, habilidades_tecnicas, turno_id, ultimo_acceso, timestamps, zona_trabajo_id)
+VALUES 
+    (1, 'Roberto', 'Sánchez', 'roberto.sanchez@taller.edu', 'hashed_password_6', 3, 1, '/img/usuarios/roberto_sanchez.jpg', false, '2023-01-10', NULL, '["soldadura_mig", "medicion_precision"]', 1, NOW(), NOW(), NULL),
+    (2, 'Laura', 'Fernández', 'laura.fernandez@taller.edu', 'hashed_password_7', 4, 1, '/img/usuarios/laura_fernandez.jpg', true, '2023-03-15', '2023-12-31', '["ayudante_soldadura", "seguridad"]', 2, NOW(), NOW(), NULL),
+    (3, 'Pedro', 'Ramírez', 'pedro.ramirez@taller.edu', 'hashed_password_8', 3, 1, '/img/usuarios/pedro_ramirez.jpg', false, '2022-11-20', NULL, '["soldadura_tig", "interpretacion_planos"]', 3, NOW(), NOW(), NULL),
+    (4, 'Sofía', 'Díaz', 'sofia.diaz@taller.edu', 'hashed_password_9', 5, 1, '/img/usuarios/sofia_diaz.jpg', false, '2021-09-05', NULL, '["inventario", "gestion_materiales"]', 1, NOW(), NOW(), NULL),
+    (5, 'Jorge', 'López', 'jorge.lopez@taller.edu', 'hashed_password_10', 2, 1, '/img/usuarios/jorge_lopez.jpg', false, '2020-07-12', NULL, '["supervision", "calidad_soldadura"]', 2, NOW(), NOW(), NULL);
+    
+INSERT INTO public.zonas_trabajo (id, nombre, descripcion, ubicacion, responsable_id) VALUES
+(1, 'Área de Soldadura', 'Zona para trabajos de soldadura', 'Nave principal, lado este', 2),
+(2, 'Área de Corte', 'Zona para corte de materiales', 'Nave principal, lado oeste', 2),
+(3, 'Taller Mecánico', 'Área para trabajos mecánicos', 'Edificio anexo, planta baja', 1),
+(4, 'Laboratorio de Pruebas', 'Área para pruebas de calidad', 'Edificio anexo, primer piso', 5),
+(5, 'Almacén de Herramientas', 'Área de almacenamiento de equipos', 'Nave principal, lado norte', 5);
+
+
+INSERT INTO public.planos (id, nombre, descripcion, version, notas, tipo_pedidos_id, creado_por, estado, archivo_ruta, "timestamp") VALUES
+(1, 'Estructura soporte 101', 'Soporte para equipo pesado', '1.2', 'Revisión de seguridad pendiente', 1, 3, 'aprobado', '/planos/estructura_soporte_101_v1.2.dwg', NOW()),
+(2, 'Bancada de trabajo', 'Bancada ajustable para soldadura', '2.0', 'Versión final', 2, 3, 'aprobado', '/planos/bancada_trabajo_v2.0.dwg', NOW()),
+(3, 'Sistema de almacenamiento', 'Estanterías para taller', '1.0', 'Prototipo inicial', 3, 4, 'borrador', '/planos/sistema_almacenamiento_v1.0.dwg', NOW()),
+(4, 'Mesa de corte', 'Mesa especializada para corte plasma', '1.5', 'Modificaciones en curso', 4, 3, 'borrador', '/planos/mesa_corte_v1.5.dwg', NOW()),
+(5, 'Carro portaherramientas', 'Carro móvil para equipos', '3.1', 'Versión estable', 5, 4, 'aprobado', '/planos/carro_portaherramientas_v3.1.dwg', NOW());
+
+INSERT INTO public.herramientas (id, nombre, tipo_herramienta_id, modelo, fabricante, numero_serie, codigo_inventario, estado_herramienta_id, vida_util_horas, horas_uso_actual, zonas_trabajo_id, fecha_adquisicion, costo_adquisicion, valor_actual, especificaciones_tecnicas, imagen_ruta, fecha_ultimo_mantenimiento, fecha_proximo_mantenimiento, notas, timestamps) VALUES
+(1, 'Soldadora MIG-200', 1, 'PowerMIG 200', 'Lincoln Electric', 'SN-MIG200-001', 'INV-SLD-001', 1, 5000, 1250, 1, '2022-01-15', 25000.00, 18000.00, '{"amperaje_max": "200A", "ciclo_trabajo": "60%"}', '/img/herramientas/soldadora_mig200.jpg', '2023-06-01', '2023-12-01', 'Requiere revisión de cables', NOW()),
+(2, 'Soldadora TIG-ACDC', 2, 'Precision TIG 225', 'Lincoln Electric', 'SN-TIG225-001', 'INV-SLD-002', 1, 6000, 800, 1, '2022-03-10', 32000.00, 28000.00, '{"rango_amperaje": "5-225A", "frecuencia": "20-400Hz"}', '/img/herramientas/soldadora_tig225.jpg', '2023-05-15', '2023-11-15', 'En excelente estado', NOW()),
+(3, 'Esmeril angular 7"', 3, 'GA7020', 'Makita', 'SN-ESM7020-001', 'INV-ESM-001', 1, 1000, 300, 2, '2023-02-20', 4500.00, 4000.00, '{"velocidad": "6600rpm", "potencia": "1800W"}', '/img/herramientas/esmeril_makita.jpg', '2023-07-10', '2024-01-10', 'Disco nuevo instalado', NOW()),
+(4, 'Cortadora plasma 40A', 4, 'Powermax45 XP', 'Hypertherm', 'SN-PLASMA45-001', 'INV-CRT-001', 1, 4000, 500, 2, '2021-11-05', 42000.00, 35000.00, '{"espesor_corte": "16mm", "consumo_aire": "5.6m3/h"}', '/img/herramientas/cortadora_plasma.jpg', '2023-04-20', '2023-10-20', 'Recién calibrada', NOW()),
+(5, 'Soplete oxicorte', 5, 'Victor Performer', 'Victor Technologies', 'SN-SOPVIC-001', 'INV-SOP-001', 1, 3000, 1200, 2, '2020-08-12', 8500.00, 6000.00, '{"presion_oxigeno": "8bar", "presion_gas": "0.5bar"}', '/img/herramientas/soplete_victor.jpg', '2023-03-05', '2023-09-05', 'Requiere cambio de boquillas', NOW());
+
+INSERT INTO public.usuarios_roles (id, usuario_id, role_id) VALUES
+(1, 1, 1),
+(2, 2, 2),
+(3, 3, 4),
+(4, 4, 4),
+(5, 5, 5);
+
+INSERT INTO public.telefonos_usuario (id_telefono, usuario_id, tipo_telefono_id, numero, es_principal) VALUES
+(1, 1, 1, '5551234567', true),
+(2, 1, 2, '5559876543', false),
+(3, 2, 1, '5557654321', true),
+(4, 3, 1, '5556789012', true),
+(5, 4, 1, '5554567890', true),
+(6, 5, 1, '5552345678', true),
+(7, 5, 2, '5558765432', false);
+
+INSERT INTO public.alertas_reparacion (id, herramienta_id, tipo_alerta_id, fecha_generacion, fecha_limite, prioridad_id, estado_reparacion, descripcion, resuelta_por, fecha_resolucion) VALUES
+(1, 2, 2, '2023-10-17 09:15:00', '2023-10-19', 3, 1, 'Fallo en el sistema eléctrico', NULL, NULL),
+(2, 4, 1, '2023-10-18 11:20:00', '2023-10-22', 2, 3, 'Pérdida de presión en el sistema', 4, '2023-10-19 16:45:00'),
+(3, 5, 4, '2023-10-19 14:00:00', '2023-10-25', 4, 1, 'Requiere lubricación general', NULL, NULL),
+(4, 1, 3, '2023-10-20 10:30:00', '2023-10-23', 2, 2, 'Calibración de sensores necesaria', 2, '2023-10-21 09:15:00'),
+(5, 3, 2, '2023-10-21 08:45:00', '2023-10-24', 3, 1, 'Reemplazo de piezas desgastadas', NULL, NULL);
+
+
+INSERT INTO public.pedidos (
+    id, codigo_pedido, tipo_pedido_id, plano_id, solicitante_id, aprobador_id, 
+    supervisor_id, fecha_solicitud, fecha_aprobacion, fecha_requerida, 
+    fecha_estimada_entrega, fecha_completado, estado_id, pausado_desde, 
+    pausado_hasta, razon_pausa_actual_id, contador_pausas, tiempo_total_pausado, 
+    prioridad, proyecto_asociado, costo_estimado, costo_real, precio_final, 
+    notas, "createdAt", "updatedAt"
+) VALUES (
+    1, 'PED-2025-001', 1, 1, 1, 1, 1, 
+    '2025-06-15 09:30:00', '2025-06-16 14:20:00', '2025-06-25 00:00:00', 
+    '2025-06-24 00:00:00', '2025-06-23 16:45:00', 3, NULL, 
+    NULL, NULL, 0, 0, 2, 
+    'PROJ-A001', 450.75, 425.50, 480.00, 
+    'Suministros de oficina para equipo de marketing', 
+    '2025-06-15 09:30:00', '2025-06-23 16:45:00'
+);
+
+INSERT INTO public.pedidos (
+    id, codigo_pedido, tipo_pedido_id, plano_id, solicitante_id, aprobador_id, 
+    supervisor_id, fecha_solicitud, fecha_aprobacion, fecha_requerida, 
+    fecha_estimada_entrega, fecha_completado, estado_id, pausado_desde, 
+    pausado_hasta, razon_pausa_actual_id, contador_pausas, tiempo_total_pausado, 
+    prioridad, proyecto_asociado, costo_estimado, costo_real, precio_final, 
+    notas, "createdAt", "updatedAt"
+) VALUES (
+    2, 'PED-2025-002', 2, 2, 2, 2, 2, 
+    '2025-06-18 11:15:00', NULL, '2025-07-05 00:00:00', 
+    '2025-07-02 00:00:00', NULL, 1, NULL, 
+    NULL, NULL, 0, 0, 1, 
+    'PROJ-B002', 1250.00, NULL, 1375.00, 
+    'Equipos de computación para desarrollo', 
+    '2025-06-18 11:15:00', '2025-06-18 11:15:00'
+);
+
+INSERT INTO public.pedidos (
+    id, codigo_pedido, tipo_pedido_id, plano_id, solicitante_id, aprobador_id, 
+    supervisor_id, fecha_solicitud, fecha_aprobacion, fecha_requerida, 
+    fecha_estimada_entrega, fecha_completado, estado_id, pausado_desde, 
+    pausado_hasta, razon_pausa_actual_id, contador_pausas, tiempo_total_pausado, 
+    prioridad, proyecto_asociado, costo_estimado, costo_real, precio_final, 
+    notas, "createdAt", "updatedAt"
+) VALUES (
+    3, 'PED-2025-003', 3, 3, 3, 3, 3, 
+    '2025-06-10 08:45:00', '2025-06-12 10:30:00', '2025-06-30 00:00:00', 
+    '2025-06-28 00:00:00', NULL, 4, '2025-06-19 00:00:00', 
+    '2025-06-25 00:00:00', 1, 1, 144, 3, 
+    'PROJ-C003', 850.25, NULL, 935.28, 
+    'Materiales de construcción - pausado por presupuesto', 
+    '2025-06-10 08:45:00', '2025-06-19 00:00:00'
+);
+
+INSERT INTO public.pedidos (
+    id, codigo_pedido, tipo_pedido_id, plano_id, solicitante_id, aprobador_id, 
+    supervisor_id, fecha_solicitud, fecha_aprobacion, fecha_requerida, 
+    fecha_estimada_entrega, fecha_completado, estado_id, pausado_desde, 
+    pausado_hasta, razon_pausa_actual_id, contador_pausas, tiempo_total_pausado, 
+    prioridad, proyecto_asociado, costo_estimado, costo_real, precio_final, 
+    notas, "createdAt", "updatedAt"
+) VALUES (
+    4, 'PED-2025-004', 4, 4, 4, 4, 4, 
+    '2025-06-20 14:20:00', '2025-06-21 09:15:00', '2025-07-10 00:00:00', 
+    '2025-07-08 00:00:00', NULL, 2, NULL, 
+    NULL, NULL, 0, 0, 2, 
+    'PROJ-D004', 2100.00, 1950.75, 2310.00, 
+    'Servicios de consultoría externa', 
+    '2025-06-20 14:20:00', '2025-06-21 09:15:00'
+);
+
+INSERT INTO public.pedidos (
+    id, codigo_pedido, tipo_pedido_id, plano_id, solicitante_id, aprobador_id, 
+    supervisor_id, fecha_solicitud, fecha_aprobacion, fecha_requerida, 
+    fecha_estimada_entrega, fecha_completado, estado_id, pausado_desde, 
+    pausado_hasta, razon_pausa_actual_id, contador_pausas, tiempo_total_pausado, 
+    prioridad, proyecto_asociado, costo_estimado, costo_real, precio_final, 
+    notas, "createdAt", "updatedAt"
+) VALUES (
+    5, 'PED-2025-005', 5, 5, 5, 5, 5, 
+    '2025-06-05 16:00:00', '2025-06-06 08:30:00', '2025-06-15 00:00:00', 
+    '2025-06-12 00:00:00', '2025-06-14 13:20:00', 3, NULL, 
+    NULL, NULL, 2, 72, 1, 
+    'PROJ-E005', 320.50, 298.75, 340.00, 
+    'Pedido urgente - suministros críticos con retrasos por proveedor', 
+    '2025-06-05 16:00:00', '2025-06-14 13:20:00'
+);
+
+INSERT INTO public.entregas_pedidos (
+    id, pedido_id, entrega_numero, entregado_por, recibido_por, 
+    fecha_entrega, ubicacion_entrega, estado_entrega_id, metodo_transporte, 
+    documento_entrega, notas
+) VALUES 
+(1, 1, 1, 1, 2, '2025-06-20 10:00:00', 'Taller principal', 1, 'Camión', 'ENT-001.pdf', 'Entrega completa'),
+(2, 2, 1, 2, 3, '2025-06-22 14:30:00', 'Almacén B', 2, 'Furgoneta', 'ENT-002.pdf', 'Faltan 2 unidades'),
+(3, 3, 1, 3, 4, '2025-06-25 09:15:00', 'Zona de soldadura', 3, 'Montacargas', 'ENT-003.pdf', 'Material delicado'),
+(4, 4, 1, 4, 5, '2025-06-28 11:45:00', 'Taller secundario', 1, 'Carretilla', 'ENT-004.pdf', 'Entrega parcial'),
+(5, 5, 1, 5, 1, '2025-07-01 16:20:00', 'Almacén central', 2, 'Camión', 'ENT-005.pdf', 'Verificar calidad');
+
+
+INSERT INTO public.pedido_herramientas (
+    id, pedido_id, herramienta_id, cantidad_solicitada, cantidad_aprobada, 
+    cantidad_asignada, fecha_estimada_devolucion, fecha_real_devolucion, 
+    estado_herramienta_id, notas
+) VALUES 
+(1, 1, 1, 2, 2, 2, '2025-07-10', '2025-07-08', 1, 'Herramientas en buen estado'),
+(2, 2, 2, 1, 1, 1, '2025-07-15', NULL, 2, 'Pendiente de devolución'),
+(3, 3, 3, 3, 2, 2, '2025-07-20', NULL, 3, 'Requiere mantenimiento'),
+(4, 4, 4, 1, 1, 0, '2025-07-25', NULL, 4, 'No asignada aún'),
+(5, 5, 5, 2, 2, 1, '2025-07-30', NULL, 1, 'Una herramienta en uso');
+
+INSERT INTO pedido_materiales (pedido_id, material_id, cantidad_solicitada, cantidad_aprobada, cantidad_entregada, cantidad_devuelta, unidad_medida_id, estado_entrega_id, tipo_stock_destino, costo_unitario, desperdicio_estimado, desperdicio_real, notas)
+VALUES 
+(1, 1, 100, 100, 100, 0, 1, 1, 1, 10.50, 5.0, 3.2, 'Material completo'),
+(2, 2, 50, 45, 45, 5, 2, 2, 2, 8.75, 2.5, 2.5, 'Faltante justificado'),
+(3, 3, 200, 180, 180, 20, 3, 3, 3, 15.00, 10.0, 8.5, 'Desperdicio controlado'),
+(4, 4, 75, 75, 70, 5, 4, 4, 1, 12.30, 3.0, 4.2, 'Mayor desperdicio'),
+(5, 5, 150, 150, 150, 0, 5, 5, 2, 9.99, 7.5, 6.8, 'Buen rendimiento');
+
+INSERT INTO plano_herramientas (plano_id, herramienta_id, cantidad_necesaria, tiempo_estimado_uso, notas)
+VALUES 
+(1, 1, 2, 8.5, 'Para corte principal'),
+(2, 2, 1, 4.0, 'Medición precisa'),
+(3, 3, 3, 12.0, 'Uso continuo'),
+(4, 4, 1, 6.5, 'Solo acabados'),
+(5, 5, 2, 10.0, 'Para ensamblaje');
+
+INSERT INTO plano_materiales (plano_id, material_id, cantidad, cantidad_extra, unidad_medida_id, notas, desperdicio_estimado, pedido_id)
+VALUES 
+(1, 1, 100, 10, 1, 'Material base', 5.0, 1),
+(2, 2, 50, 5, 2, 'Refuerzos', 2.5, 2),
+(3, 3, 200, 20, 3, 'Estructura', 10.0, 3),
+(4, 4, 75, 8, 4, 'Acabados', 3.0, 4),
+(5, 5, 150, 15, 5, 'Soporte', 7.5, 5);
+
+INSERT INTO transacciones_financieras (codigo, tipo_transaccion_id, departamento_id, fecha_transaccion, fecha_creacion, monto_total, descripcion, estado_transaccion_id, aprobado_por, fecha_aprobacion, metodo_pago_id, referencia_pago, creado_por, notas)
+VALUES 
+('TRANS001', 1, 1, '2023-01-10 09:00:00', '2023-01-10 08:30:00', 1500.00, 'Compra materiales proyecto X', 1, 2, '2023-01-10 09:05:00', 1, 'PAGO001', 1, 'Aprobado inmediato'),
+('TRANS002', 2, 2, '2023-01-11 10:15:00', '2023-01-11 09:45:00', 890.50, 'Mantenimiento equipo', 2, 3, '2023-01-11 11:00:00', 2, 'PAGO002', 2, 'Revisión previa'),
+('TRANS003', 3, 3, '2023-01-12 14:30:00', '2023-01-12 14:00:00', 4500.00, 'Nuevas herramientas', 3, 4, '2023-01-12 15:15:00', 3, 'PAGO003', 3, 'Inversión a largo plazo'),
+('TRANS004', 4, 4, '2023-01-13 16:45:00', '2023-01-13 16:15:00', 12000.00, 'Equipo especializado', 4, 5, '2023-01-13 17:30:00', 4, 'PAGO004', 4, 'Compra mayorista'),
+('TRANS005', 5, 5, '2023-01-14 11:20:00', '2023-01-14 10:50:00', 750.25, 'Insumos varios', 5, 1, '2023-01-14 12:00:00', 5, 'PAGO005', 5, 'Gastos operativos');
+
+INSERT INTO historial_pedidos (pedido_id, usuario_id, accion, estado_anterior_id, estado_nuevo_id, razon_pausa_id, comentario_pausa, descripcion, fecha_accion, fecha_resolucion_estimada, cambios)
+VALUES 
+(1, 1, 'Creación', NULL, 1, NULL, NULL, 'Pedido creado por sistema', '2023-01-01 08:00:00', NULL, '{"estado": "Creado"}'),
+(2, 2, 'Aprobación', 1, 2, NULL, NULL, 'Aprobado por supervisor', '2023-01-02 09:15:00', NULL, '{"estado": "Aprobado"}'),
+(3, 3, 'Pausa', 2, 3, 1, 'Falta material', 'Pausado temporalmente', '2023-01-03 10:30:00', '2023-01-10', '{"estado": "Pausado"}'),
+(5, 5, 'Completado', 4, 5, NULL, NULL, 'Pedido finalizado', '2023-01-15 16:00:00', NULL, '{"estado": "Completado"}');
+
+INSERT INTO mantenimientos (nombre, herramienta_id, tipo_mantenimiento_id, fecha_programada, fecha_inicio, fecha_fin, estado_id, prioridad_id, costo_estimado, costo_real, tecnico_asignado_id, descripcion_problema, acciones_realizadas, repuestos_utilizados, horas_trabajo, fecha_creacion, mantenimiento_hecho_por, actualizado_por, fecha_actualizacion)
+VALUES 
+('Mantenimiento preventivo', 1, 1, '2023-02-01', '2023-02-01 08:00:00', '2023-02-01 12:30:00', 1, 1, 150.00, 135.50, 2, 'Mantenimiento rutinario', 'Limpieza y lubricación', '["Aceite", "Filtros"]', 4.5, '2023-01-25 10:00:00', 3, 4, '2023-02-01 13:00:00'),
+('Reparación motor', 2, 2, '2023-02-05', '2023-02-05 09:15:00', '2023-02-07 16:00:00', 2, 2, 500.00, 620.30, 3, 'Motor no enciende', 'Cambio de bobinas y bujías', '["Bobinas", "Bujías"]', 12.0, '2023-02-03 14:30:00', 4, 5, '2023-02-07 17:30:00'),
+('Calibración', 3, 3, '2023-02-10', '2023-02-10 10:30:00', '2023-02-10 14:45:00', 3, 3, 200.00, 180.00, 4, 'Mediciones inexactas', 'Ajuste de calibración', '[]', 4.25, '2023-02-08 11:15:00', 5, 1, '2023-02-10 15:30:00'),
+('Cambio piezas', 4, 4, '2023-02-15', '2023-02-15 13:00:00', '2023-02-16 11:30:00', 4, 4, 350.00, 420.75, 5, 'Desgaste normal', 'Reemplazo de rodamientos', '["Rodamientos"]', 6.5, '2023-02-13 16:45:00', 1, 2, '2023-02-16 12:00:00'),
+('Revisión eléctrica', 5, 5, '2023-02-20', '2023-02-20 15:00:00', '2023-02-21 10:15:00', 5, 5, 280.00, 250.00, 1, 'Cortocircuito', 'Revisión de cableado', '["Cables", "Conectores"]', 5.25, '2023-02-18 09:30:00', 2, 3, '2023-02-21 11:00:00');
+
+INSERT INTO public.detalle_entregas (
+    id, entrega_id, material_id, pedido_material_id, cantidad_entregada, 
+    unidad_medida_id, lote, calidad, ubicacion_destino, notas
+) VALUES 
+(1, 1, 1, 1, 50.0, 1, 'LOTE-2023-001', 'A', 'Almacén Principal', 'Material para proyecto de investigación'),
+(2, 1, 2, 2, 30.0, 2, 'LOTE-2023-002', 'B', 'Taller de Soldadura', 'Material con certificado de calidad'),
+(3, 2, 3, 3, 20.5, 3, 'LOTE-2023-003', 'A', 'Área de Corte', 'Material delicado, manejar con cuidado'),
+(4, 3, 4, 4, 15.0, 4, 'LOTE-2023-004', 'C', 'Laboratorio de Pruebas', 'Material para pruebas destructivas'),
+(5, 4, 5, 5, 10.0, 5, 'LOTE-2023-005', 'A', 'Taller Mecánico', 'Material de alta resistencia');
+
+INSERT INTO public.detalle_transaccion (
+    id, transaccion_id, cantidad, precio_unitario, subtotal, 
+    iva, total, concepto
+) VALUES 
+(1, 1, 10, 25.50, 255.00, 40.80, 295.80, 'Planchas de acero 1010'),
+(2, 1, 5, 45.75, 228.75, 36.60, 265.35, 'Tubos inoxidables 304'),
+(3, 2, 8, 32.40, 259.20, 41.47, 300.67, 'Barras de aluminio 6061'),
+(4, 3, 20, 12.80, 256.00, 40.96, 296.96, 'Electrodos 7018'),
+(5, 4, 2, 120.00, 240.00, 38.40, 278.40, 'Cilindros de gas argón');
+
+INSERT INTO public.historial_movimientos_stock (
+    id, material_id, cantidad, unidad_medida_id, origen_stock_id, 
+    destino_stock_id, usuario_id, fecha_movimiento, tipo_movimiento, 
+    motivo, documento_referencia, pedido_id
+) VALUES 
+(1, 1, 100.0, 1, NULL, 1, 1, '2023-01-10 09:00:00', 'Entrada', 'Compra inicial', 'FAC-001', NULL),
+(2, 2, 50.0, 2, NULL, 2, 2, '2023-01-11 10:15:00', 'Entrada', 'Compra inicial', 'FAC-002', NULL),
+(3, 3, 75.0, 3, 1, 3, 3, '2023-01-12 14:30:00', 'Transferencia', 'Asignación a prácticas', 'TRF-001', 3),
+(4, 4, 25.0, 4, 2, 1, 4, '2023-01-13 16:45:00', 'Transferencia', 'Reabastecimiento stock general', 'TRF-002', NULL),
+(5, 5, 10.0, 5, 1, 2, 5, '2023-01-14 11:20:00', 'Transferencia', 'Asignación a proyecto externo', 'TRF-003', 2);
+
+INSERT INTO public.historial_uso_herramientas (
+    id, herramienta_id, usuario_id, proyecto_id, fecha_uso, 
+    fecha_devolucion, horas_utilizada, estado_devolucion_id, notas, aprobado_por
+) VALUES 
+(1, 1, 1, 1, '2023-02-01 08:00:00', '2023-02-01 16:30:00', 8.5, 1, 'Uso normal, herramienta en buen estado', 2),
+(2, 2, 2, 2, '2023-02-02 09:15:00', '2023-02-03 17:00:00', 15.75, 2, 'Uso intensivo, requiere mantenimiento', 3),
+(3, 3, 3, 3, '2023-02-03 10:30:00', '2023-02-03 14:45:00', 4.25, 3, 'Herramienta devuelta con daños menores', 4),
+(4, 4, 4, 4, '2023-02-04 13:00:00', '2023-02-05 11:30:00', 6.5, 1, 'Uso estándar, sin incidencias', 5),
+(5, 5, 5, 5, '2023-02-05 15:00:00', '2023-02-06 10:15:00', 5.25, 1, 'Herramienta funcionando correctamente', 1);
