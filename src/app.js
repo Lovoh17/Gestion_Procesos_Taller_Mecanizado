@@ -49,6 +49,9 @@ import UsuarioRolesRoutes from './modules/Usuarios_Roles/Usuarios_Roles.routes.j
 import ZonaTrabajoRoutes from './modules/Zona_Trabajo/Zona_Trabajo.routes.js';
 import AuthRoutes from './modules/Auth/Auth.routes.js';
 import VersionDocumentoRoutes from './modules/Version_Documento/Version_Documento.routes.js';
+import AsignacionInteligenteRoutes from './modules/AsignacionPedido/AsignacionInteligente.routes.js';
+import UsuarioCompetenciasRoutes from './modules/Usuario_Competencia/Usuario_Competencia.routes.js';
+import CompetenciaRoutes from './modules/Competencia/Competencia.routes.js';
 
 const corsOptions = {
     origin: '*',
@@ -109,5 +112,8 @@ app.use(UsuarioRolesRoutes);
 app.use(ZonaTrabajoRoutes);
 app.use(AuthRoutes);
 app.use(VersionDocumentoRoutes);
+app.use(AsignacionInteligenteRoutes);
+app.use(UsuarioCompetenciasRoutes);
+app.use(CompetenciaRoutes);
 
 export default app;
