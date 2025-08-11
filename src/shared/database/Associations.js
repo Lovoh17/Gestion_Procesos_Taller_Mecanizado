@@ -57,6 +57,10 @@ import { Metodo_Pago } from '../../modules/Metodo_Pago/Metodo_Pago.js';
 import { Tipos_Transaccion } from '../../modules/Tipos_Transaccion/Tipos_Transaccion.js';
 import { Version_Documento } from '../../modules/Version_Documento/Version_Documento.js';
 
+import { Competencia } from '../../modules/Competencia/Competencia.js';
+import { UsuarioCompetencia } from '../../modules/Usuario_Competencia/Usuario_Competencia.js';
+import { AsignacionPedido } from '../../modules/AsignacionPedido/AsignacionPedido.js';
+
 
 
 //import { Pedido_Material } from '../../modules/Pedido_Material/Pedido_Material.js';
@@ -200,3 +204,35 @@ Version_Documento.belongsTo(Plano, { foreignKey: 'planoId', as: 'plano' });
 Usuario.hasMany(Version_Documento, { foreignKey: 'creado_por' });
 Version_Documento.belongsTo(Usuario, { foreignKey: 'creado_por', as: 'creadoPor' });
 
+
+Usuario.belongsToMany(Competencia, {
+  through: UsuarioCompetencia,
+  foreignKey: 'usuarioId',
+  otherKey: 'competenciaId',
+  as: 'competencias'
+});
+
+Competencia.belongsToMany(Usuario, {
+  through: UsuarioCompetencia,
+  foreignKey: 'competenciaId',
+  otherKey: 'usuarioId',
+  as: 'usuarios'
+});
+
+
+AsignacionPedido.belongsTo(Usuario, { as: "usuario", foreignKey: "usuarioId" });
+AsignacionPedido.belongsTo(Pedido, { as: "pedido", foreignKey: "pedidoId" });
+
+Usuario.belongsToMany(Pedido, {
+  through: AsignacionPedido,
+  foreignKey: "usuarioId",
+  otherKey: "pedidoId",
+  as: "pedidos"
+});
+
+Pedido.belongsToMany(Usuario, {
+  through: AsignacionPedido,
+  foreignKey: "pedidoId",
+  otherKey: "usuarioId",
+  as: "usuarios"
+});

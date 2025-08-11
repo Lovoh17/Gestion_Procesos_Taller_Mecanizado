@@ -10,7 +10,23 @@ import {
   eliminarMultiplesArchivos
 } from "./Archivo.controller.js";
 
-const router = Router();
+import fs from "fs";
+import path from "path";
+
+const uploadDir = path.join(process.cwd(), "uploads");
+
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir, { recursive: true });
+}
+
+
+const tempDir = path.join(process.cwd(), "temp");
+
+if (!fs.existsSync(tempDir)) {
+  fs.mkdirSync(tempDir, { recursive: true });
+}
+
+const router = new Router();
 
 // Configuración Multer
 const storage = multer.diskStorage({
@@ -18,11 +34,20 @@ const storage = multer.diskStorage({
   filename: (req, file, cb) => cb(null, Date.now() + "-" + file.originalname)
 });
 
-const fileFilter = (req, file, cb) => {
-  if (file.mimetype.startsWith("image/")) cb(null, true);
-  else cb(new Error("Solo se permiten imágenes"), false);
-};
+const allowedMimeTypes = [
+  "image/jpeg",
+  "image/png",
+  "image/gif",
+  "application/pdf",
+  "application/msword",                      // .doc
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.document", // .docx
+  // agrega más si quieres...
+];
 
+const fileFilter = (req, file, cb) => {
+  if (allowedMimeTypes.includes(file.mimetype)) cb(null, true);
+  else cb(new Error("Tipo de archivo no permitido"), false);
+};
 const upload = multer({ storage, fileFilter });
 
 // ============ RUTAS CRUD ============
