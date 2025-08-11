@@ -1,8 +1,8 @@
-import Router from 'express';
+import { Router } from 'express';
 
 import {crearUsuarioCompetencia, obtenerUsuarioCompetencia, obtenerUsuarioCompetenciaPorId, actualizarUsuarioCompetencia, eliminarUsuarioCompetencia} from './Usuario_Competencia.controller.js';
 
-const router = new Router();
+const router = Router();
 
 router.post("/UsuarioCompetencia", crearUsuarioCompetencia);
 router.get("/UsuarioCompetencia", obtenerUsuarioCompetencia);

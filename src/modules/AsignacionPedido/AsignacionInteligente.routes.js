@@ -1,8 +1,8 @@
-import Router from 'express';
+import { Router } from 'express';
 
 import {getAllAsignaciones,getAsignacionById, createAsignacion, updateAsignacion, deleteAsignacion, getAsignacionesByPuestoId, sugerirUsuarios} from './AsignacionInteligente.controller.js';
 
-const router = new Router();
+const router = Router();
 
 router.get("/Asignaciones", getAllAsignaciones);
 router.get("/Asignaciones/:id", getAsignacionById);

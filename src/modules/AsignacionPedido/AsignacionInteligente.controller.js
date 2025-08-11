@@ -1,4 +1,4 @@
-import {asignacionInteligenteService} from './AsignacionInteligente.Service.js';
+import {asignacionInteligenteService} from './AsignacionInteligente.service.js';
 
 export const getAllAsignaciones = async (req, res) => {
     try {
