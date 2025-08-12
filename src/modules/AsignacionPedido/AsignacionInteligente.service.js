@@ -91,6 +91,7 @@ class AsignacionInteligenteService {
                 include: [
                     {
                         model: Competencia,
+                        as: "competencias",
                         where: { id: competenciaId },
                         required: true
                     },

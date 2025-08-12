@@ -10,10 +10,6 @@ export const Rol = sequelize.define("roles", {
     descripcion: {
       type: DataTypes.STRING,
       allowNull: false,
-    },
-    permiso_subida: {
-      type: DataTypes.INTEGER,
-      allowNull: false
     }
 },{
     timestamps: false,
