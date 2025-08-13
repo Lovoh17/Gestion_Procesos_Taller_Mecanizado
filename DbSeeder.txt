@@ -431,3 +431,56 @@ INSERT INTO public.historial_uso_herramientas (
 (3, 3, 3, 3, '2023-02-03 10:30:00', '2023-02-03 14:45:00', 4.25, 3, 'Herramienta devuelta con daños menores', 4),
 (4, 4, 4, 4, '2023-02-04 13:00:00', '2023-02-05 11:30:00', 6.5, 1, 'Uso estándar, sin incidencias', 5),
 (5, 5, 5, 5, '2023-02-05 15:00:00', '2023-02-06 10:15:00', 5.25, 1, 'Herramienta funcionando correctamente', 1);
+
+INSERT INTO asignaciones_pedidos ("usuarioId", "pedidoId", "horasAsignadas") VALUES 
+-- Usuario 1 tiene asignaciones en pedidos 1 y 2
+(1, 1, 8),
+(1, 2, 6),
+-- Usuario 2 tiene asignaciones en pedidos 1 y 3  
+(2, 1, 4),
+(2, 3, 10),
+-- Usuario 3 tiene asignaciones en pedidos 2 y 3
+(3, 2, 12),
+(3, 3, 5),
+-- Asignaciones adicionales
+(1, 3, 3),
+(2, 2, 7);
+
+INSERT INTO competencias (nombre) VALUES 
+('JavaScript'),
+('Python'),
+('React'),
+('Node.js'),
+('PostgreSQL'),
+('HTML/CSS'),
+('Git'),
+('Docker'),
+('AWS'),
+('Scrum'),
+('Análisis de Datos'),
+('Machine Learning'),
+('DevOps'),
+('Testing'),
+('UI/UX Design');
+
+INSERT INTO usuarios_competencias ("usuarioId", "competenciaId", nivel) VALUES 
+-- Usuario 1: Desarrollador Full Stack
+(1, 1, 4),  -- JavaScript - Avanzado
+(1, 3, 3),  -- React - Intermedio-Alto
+(1, 4, 3),  -- Node.js - Intermedio-Alto
+(1, 5, 2),  -- PostgreSQL - Intermedio
+(1, 6, 4),  -- HTML/CSS - Avanzado
+
+-- Usuario 2: Backend Developer
+(2, 2, 5),  -- Python - Experto
+(2, 5, 4),  -- PostgreSQL - Avanzado
+(2, 8, 3),  -- Docker - Intermedio-Alto
+(2, 9, 2),  -- AWS - Intermedio
+(2, 1, 2),  -- JavaScript - Intermedio
+
+-- Usuario 3: Data Analyst
+(3, 2, 4),  -- Python - Avanzado
+(3, 11, 5), -- Análisis de Datos - Experto
+(3, 12, 3), -- Machine Learning - Intermedio-Alto
+(3, 5, 3),  -- PostgreSQL - Intermedio-Alto
+(3, 1, 1);  -- JavaScript - Básico
