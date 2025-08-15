@@ -58,7 +58,7 @@ export const eliminarCOH = async (req, res) =>{
 }
 export const obtenerTODOSCOH = async (req,res) =>{
     try {
-        const  checkOH = await checkoutHerramientaService.getAllFOrce();
+        const  checkOH = await checkoutHerramientaService.getAllForce();
         res.status(200).json(checkOH);
     } catch (error) {
         res.status(500).json({error:error.message})

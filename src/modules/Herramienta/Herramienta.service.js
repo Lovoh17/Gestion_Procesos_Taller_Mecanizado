@@ -1,9 +1,10 @@
 import { Usuario } from "../Usuario/Usuario.js";
 import { Herramienta } from "./Herramienta.js";
-import { Estado_Herramienta } from "../Estado_Herramienta/Estado_Herramienta.js";
+import { estadoHerramientaService } from "../Estado_Herramienta/Estado_Herramienta.sevice.js";
+import { checkoutHerramientaService } from "../CheckOut_Herramienta/CheckOutHerramienta.service.js";
 
 
-class HerramientaService{
+class HerramientaService {
     async getAll() {
         try {
             const herramientas = await Herramienta.findAll();
@@ -59,42 +60,76 @@ class HerramientaService{
             throw new Error("Error al eliminar la herramienta: " + error.message);
         }
     }
-    async checkout(id, id_usuario){
+    async checkout(id, id_usuario) {
         try {
-            // obtengo los modelos y verifico
-            const herramienta = await Herramienta.findByPk(id);
-            const usuario = await Usuario.findByPk(id_usuario);
+            // Ejecutar búsquedas en paralelo
+            const [herramienta, usuario] = await Promise.all([
+                Herramienta.findByPk(id),
+                Usuario.findByPk(id_usuario)
+            ]);
 
-            if (!herramienta) {
-                throw new Error("Herramienta no encontrada");
-            }
-            if (!usuario) {
-                throw new Error("Usuario no encontrada");
-            }
-            /* Se comento para probar esta verificacion en el historial de checksOuts
-            //sabiendo que se increso una herramienta existente se verifica su estado
-            const estado_herramienta = await Estado_Herramienta.findOne({
-                where: {id: herramienta.herramienta_id}
-            });
-            const estadoSimplificado = (estado_herramienta.nombre).toLowerCase();
-            if (!estadoSimplificado.include("disponible") ) {
-                if (estadoSimplificado.include("uso")) {
-                    throw new Error("La herramienta esta en uso");
-                }else if (estadoSimplificado.include("dañada")) {
-                    throw new Error("La herramienta esta dañada");
-                }else if (estadoSimplificado.include("reservado")) {
-                    throw new Error("La herramienta esta reservada");
-                }else if (estadoSimplificado.include("mantenimiento")) {
-                    throw new Error("La herramienta esta en mantenimiento");
-                }
-            }
+            if (!herramienta) throw new Error("Herramienta no encontrada");
+            if (!usuario) throw new Error("Usuario no encontrado");
+
             //seguir*/
-        
+            const horaActual = new Date();//aqui
+
+            const CHO = await checkoutHerramientaService.create({
+                herramienta_id: herramienta.id,
+                usuario_id: usuario.id,
+                hora_de_check: horaActual,//en DataTypes es DATEONLY
+                delete: false
+            });
+
+            herramienta.estado_herramienta_id =  await this.buscador("uso"); 
+            console.log("ID herramienta:", id);
+            console.log("Nuevo estado:", herramienta.estado_herramienta_id);
+
+            await this.update(
+                id,
+                { estado_herramienta_id: herramienta.estado_herramienta_id }
+            );
+            return herramienta;
 
         } catch (error) {
-            throw new Error("Error al eliminar la herramienta: " + error.message);
+            throw new Error("Error al hacer checkOut para esta herramienta: " + error.message);
         }
     }
+    async buscador(nombre) {
+        const estadosHerramienta = await estadoHerramientaService.getAll();
+        const estado = estadosHerramienta.find(e => e.nombre.toLowerCase().includes(nombre));
+    
+        if (!estado) {
+            throw new Error("El estado de herramienta que busca no existe.");
+        }
+        return estado.id;
+    }
+
+    async checkin(idCHO) {
+        try {
+            // Buscar el registro de checkout
+            const CHO = await checkoutHerramientaService.getById(idCHO);
+            if (!CHO) throw new Error("Registro de checkout no encontrado");
+    
+            // Buscar herramienta asociada
+            const herramienta = await Herramienta.findByPk(CHO.herramienta_id);
+            if (!herramienta) throw new Error("Herramienta no encontrada");
+    
+            // Cambiar estado del checkout a eliminado
+            CHO.delete = true;
+            await CHO.save();
+    
+            // Cambiar estado de herramienta a "disponible"
+            herramienta.estado_herramienta_id = await this.buscador("disponible");
+            await herramienta.save();
+    
+            return CHO;
+    
+        } catch (error) {
+            throw new Error("Error al hacer checkIn para esta herramienta: " + error.message);
+        }
+    }
+    
 }
 
 export const herramientaService = new HerramientaService();

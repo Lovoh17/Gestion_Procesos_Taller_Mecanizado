@@ -28,7 +28,7 @@ export const CheckoutHerramienta= sequelize.define(
             }
         },
         hora_de_check: {
-            type: DataTypes.DATEONLY,
+            type: DataTypes.DATE,
             allowNull: false
         },
         delete: {

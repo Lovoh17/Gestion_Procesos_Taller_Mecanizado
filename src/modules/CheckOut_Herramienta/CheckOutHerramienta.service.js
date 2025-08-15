@@ -1,4 +1,3 @@
-import { where } from "sequelize";
 import { Estado_Herramienta } from "../Estado_Herramienta/Estado_Herramienta.js";
 import { herramientaService } from "../Herramienta/Herramienta.service.js";
 import { CheckoutHerramienta } from "./CheckOutHerramienta.js";
@@ -12,7 +11,7 @@ class CheckoutHerramientaService{
             throw new Error("Error al obtener todos lo checks de las herramientas: " + error.message);
         }
     }
-    async getAllFOrce(){
+    async getAllForce(){
         try {
             const checkoutHerramienta = await CheckoutHerramienta.findAll();
             return checkoutHerramienta;
@@ -42,22 +41,12 @@ class CheckoutHerramientaService{
             if (!herramienta) {
                 throw new Error("Herramienta no encontrada");
             }
-            const nuevaCOH = await CheckoutHerramienta.create(data);
+            
             const estado_herramienta = await Estado_Herramienta.findOne({
-                where: {id: data.herramienta_id}
+                where: {id: herramienta.estado_herramienta_id}
             });
-            const estadoSimplificado = (estado_herramienta.nombre).toLowerCase();
-            if (!estadoSimplificado.includes("disponible") ) {
-                if (estadoSimplificado.includes("uso")) {
-                    throw new Error("La herramienta esta en uso");
-                }else if (estadoSimplificado.includes("dañada")) {
-                    throw new Error("La herramienta esta dañada");
-                }else if (estadoSimplificado.includes("reservado")) {
-                    throw new Error("La herramienta esta reservada");
-                }else if (estadoSimplificado.includes("mantenimiento")) {
-                    throw new Error("La herramienta esta en mantenimiento");
-                }
-            }
+            this.verificacion(estado_herramienta);
+            const nuevaCOH = await CheckoutHerramienta.create(data);
             return nuevaCOH;
         } catch (error) {
             throw new Error("Error al crear el check de la herramienta: " + error.message);
@@ -66,7 +55,7 @@ class CheckoutHerramientaService{
     }
     async update (id, data){
         try {
-            const checkOH = await CheckoutHerramienta.findByPk(data.herramienta_id);
+            const checkOH = await CheckoutHerramienta.findByPk(id);
             if (!checkOH) {
                 throw new Error("Check no encontrado");
             }
@@ -77,20 +66,9 @@ class CheckoutHerramientaService{
             }
             
             const estado_herramienta = await Estado_Herramienta.findOne({
-                where: {id: data.herramienta_id}
+                where: {id: herramienta.estado_herramienta_id}
             });
-            const estadoSimplificado = (estado_herramienta.nombre).toLowerCase();
-            if (!estadoSimplificado.includes("disponible") ) {
-                if (estadoSimplificado.includes("uso")) {
-                    throw new Error("La herramienta esta en uso");
-                }else if (estadoSimplificado.includes("dañada")) {
-                    throw new Error("La herramienta esta dañada");
-                }else if (estadoSimplificado.includes("reservado")) {
-                    throw new Error("La herramienta esta reservada");
-                }else if (estadoSimplificado.includes("mantenimiento")) {
-                    throw new Error("La herramienta esta en mantenimiento");
-                }
-            }
+            this.verificacion(estado_herramienta);
             await checkOH.update(data);
             return checkOH;
         } catch (error) {
@@ -103,7 +81,7 @@ class CheckoutHerramientaService{
             if (!checkOH) {
                 throw new Error("Check no encontrado");
             }
-            await checkoutHerramientaService.update(id, {
+            await this.update(id, {
                 herramienta_id: checkOH.herramienta_id,
                 usuario_id: checkOH.usuario_id,
                 hora_de_check: checkOH.hora_de_check,
@@ -112,6 +90,20 @@ class CheckoutHerramientaService{
             return { message: "check eliminado correctamente"}
         } catch (error) {
             throw new Error("Error al eliminar el check out herramienta: " + error.message);
+        }
+    }
+    verificacion(estado_herramienta){
+        const estadoSimplificado = (estado_herramienta.nombre).toLowerCase();
+        if (!estadoSimplificado.includes("disponible") ) {
+            if (estadoSimplificado.includes("uso")) {
+                throw new Error("La herramienta esta en uso");
+            }else if (estadoSimplificado.includes("dañada")) {
+                throw new Error("La herramienta esta dañada");
+            }else if (estadoSimplificado.includes("reservado")) {
+                throw new Error("La herramienta esta reservada");
+            }else if (estadoSimplificado.includes("mantenimiento")) {
+                throw new Error("La herramienta esta en mantenimiento");
+            }
         }
     }
 }
