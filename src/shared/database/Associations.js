@@ -60,6 +60,7 @@ import { Version_Documento } from '../../modules/Version_Documento/Version_Docum
 import { Competencia } from '../../modules/Competencia/Competencia.js';
 import { UsuarioCompetencia } from '../../modules/Usuario_Competencia/Usuario_Competencia.js';
 import { AsignacionPedido } from '../../modules/AsignacionPedido/AsignacionPedido.js';
+import { CheckoutHerramienta } from '../../modules/CheckOut_Herramienta/CheckOutHerramienta.js';
 
 
 
@@ -177,13 +178,13 @@ Herramienta.belongsTo(Estado_Herramienta, {foreignKey: 'estado_herramienta_id'})
 Herramienta.belongsTo(Zona_Trabajo, { foreignKey: 'zonas_trabajo_id'});
 
 
-Zona_Trabajo.belongsTo(Usuario, {foreignKey: 'responsable_id'});
+
 Usuario.belongsTo(Puesto, {foreignKey: 'puesto_id'});
 Usuario.belongsTo(Estado_Usuario , {foreignKey: 'estado_id'});
 Usuario.belongsTo(Turno,{ foreignKey: 'turno_id'});
 
 Usuario.belongsTo(Zona_Trabajo, {foreignKey: 'zona_trabajo_id'});
-
+Zona_Trabajo.belongsTo(Usuario, {foreignKey: 'responsable_id'});
 
 Telefono_Usuario.belongsTo(Usuario, {foreignKey: 'usuario_id'});
 Telefono_Usuario.belongsTo(Tipo_Telefono, { foreignKey: 'tipo_telefono_id'});
@@ -235,4 +236,11 @@ Pedido.belongsToMany(Usuario, {
   foreignKey: "pedidoId",
   otherKey: "usuarioId",
   as: "usuarios"
+});
+
+CheckoutHerramienta.belongsTo(Herramienta, {
+  as: "herramienta", foreignKey:"herramienta_id"
+});
+CheckoutHerramienta.belongsTo(Usuario, {
+  as: "usuario", foreignKey:"usuario_id"
 });

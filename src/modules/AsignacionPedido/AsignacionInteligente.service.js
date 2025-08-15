@@ -38,7 +38,7 @@ class AsignacionInteligenteService {
     async create(data) {
         try {
             const count = await AsignacionPedido.count({ where: { usuarioId: data.usuarioId } });
-            if (count > 1) {
+            if (count >= 1) {
                 throw new Error("El trabajador ya tiene 1 pedidos asignados");
             }
 

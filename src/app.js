@@ -53,6 +53,7 @@ import AsignacionInteligenteRoutes from './modules/AsignacionPedido/AsignacionIn
 import UsuarioCompetenciasRoutes from './modules/Usuario_Competencia/Usuario_Competencia.routes.js';
 import CompetenciaRoutes from './modules/Competencia/Competencia.routes.js';
 import ArchivoRouter from './modules/Archivo/Archivo.routes.js';
+import CheckOutHerramientaRouter from './modules/CheckOut_Herramienta/CheckOutHerramienta.routes.js';
 
 const corsOptions = {
     origin: '*',
@@ -117,5 +118,6 @@ app.use(AsignacionInteligenteRoutes);
 app.use(UsuarioCompetenciasRoutes);
 app.use(CompetenciaRoutes);
 app.use(ArchivoRouter);
+app.use(CheckOutHerramientaRouter);
 
 export default app;
