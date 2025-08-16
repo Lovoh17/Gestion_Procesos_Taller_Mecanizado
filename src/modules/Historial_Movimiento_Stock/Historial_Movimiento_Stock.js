@@ -20,7 +20,7 @@ export const HistorialMovimientoStock = sequelize.define('historial_movimientos_
         allowNull: false,
         refereces: {
             model: Materia_Prima,
-            key: 'id_mp'
+            key: 'id'
         }
     },
     cantidad: {

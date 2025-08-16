@@ -2,6 +2,7 @@ import { sequelize } from "../../shared/database/database.js";
 import { DataTypes } from "sequelize";
 import { Tipo_Herramienta } from "../Tipo_Herramienta/Tipo_Herramienta.js";
 import { Estado_Herramienta } from "../Estado_Herramienta/Estado_Herramienta.js" ;
+import { Zona_Trabajo } from "../Zona_Trabajo/Zona_Trabajo.js";
 
 export const Herramienta = sequelize.define(
   "herramientas",
@@ -18,7 +19,7 @@ export const Herramienta = sequelize.define(
     tipo_herramienta_id: {
       type: DataTypes.BIGINT,
       allowNull: false,
-      reference:{
+      references:{
         model: Tipo_Herramienta,
         key: 'id'
       }
@@ -45,8 +46,8 @@ export const Herramienta = sequelize.define(
     estado_herramienta_id: {
       type: DataTypes.SMALLINT,
       allowNull: false,
-      defaultValue: 1,
-      reference:{
+      //defaultValue: 1,
+      references:{
         model: Estado_Herramienta,
         key: 'id'
       }
@@ -65,7 +66,7 @@ export const Herramienta = sequelize.define(
     zonas_trabajo_id: {
       type: DataTypes.SMALLINT,
       allowNull: true,
-      reference:{
+      references:{
         model:Zona_Trabajo,
         key:'id'
       }

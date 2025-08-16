@@ -1,4 +1,4 @@
-import { sequelize } from "../../database/database.js";
+import { sequelize } from "../../shared/database/database.js";
 import { DataTypes } from "sequelize";
 
 export const Prioridad_Mantenimiento = sequelize.define("prioridad_mantenimiento", {

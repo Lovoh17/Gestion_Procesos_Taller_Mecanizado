@@ -3,6 +3,8 @@ import { DataTypes } from "sequelize";
 import { Puesto } from "../Puesto/Puesto.js";
 import { Estado_Usuario } from "../Estado_Usuario/Estado_Usuario.js";
 import { Turno } from "../Turno/Turno.js";
+import { Zona_Trabajo } from "../Zona_Trabajo/Zona_Trabajo.js";
+import { toDefaultValue } from "sequelize/lib/utils";
 
 export const Usuario = sequelize.define(
   "Usuario",
@@ -31,17 +33,17 @@ export const Usuario = sequelize.define(
     },
     puesto_id: {
       type: DataTypes.BIGINT,
-      allowNull: false,
-      reference:{
+      allowNull: true,
+      references:{
         model: Puesto,
         key: 'id'
       }
     },
     estado_id: {
       type: DataTypes.SMALLINT,
-      allowNull: false,
-      defaultValue: 1,
-      reference:{
+      allowNull: true,
+      //defaultValue: 1,
+      references:{
         model: Estado_Usuario,
         key: 'id'
       }
@@ -70,20 +72,22 @@ export const Usuario = sequelize.define(
     },
     turno_id: {
       type: DataTypes.SMALLINT,
-      allowNull: false,
-      reference:{
+      allowNull: true,
+      references:{
         model: Turno,
         key:  'id'
       }
     },
-    zona_trabajo_id: {
+    capacidad_horas_semana:{
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      defaultValue: 40,
+    },
+    /*zona_trabajo_id: {
       type: DataTypes.BIGINT,
       allowNull: false,
-      reference:{
-        model: Zona_Trabajo,
-        key: 'id'
-      }
-    },
+
+    },*/
     ultimo_acceso: {
       type: DataTypes.DATE,
       allowNull: false,

@@ -2,12 +2,13 @@ import { turnoService } from "./Turno.service.js";
 
 export const crearTurno = async (req, res) => {
     try {
-        const { nombre, descripcion, hora_inicio, hora_fin } = req.body;
+        const { nombre, descripcion, hora_inicio, hora_fin,dias_semana  } = req.body;
         const nuevoTurno = await turnoService.create({
             nombre,
             descripcion,
             hora_inicio,
-            hora_fin
+            hora_fin,
+            dias_semana
         });
         res.status(201).json(nuevoTurno);
     } catch (error) {
@@ -47,12 +48,13 @@ export const obtenerTurnos = async (req, res) => {
 export const actualizarTurno = async (req, res) => {
     try {
         const { id } = req.params;
-        const { nombre, descripcion, hora_inicio, hora_fin } = req.body;
+        const { nombre, descripcion, hora_inicio, hora_fin,dias_semana  } = req.body;
         const turnoActualizado = await turnoService.update(id, {
             nombre,
             descripcion,
             hora_inicio,
-            hora_fin
+            hora_fin,
+            dias_semana
         });
         res.status(200).json(turnoActualizado);
     } catch (error) {
