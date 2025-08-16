@@ -64,3 +64,12 @@ export const obtenerTODOSCOH = async (req,res) =>{
         res.status(500).json({error:error.message})
     }
 }
+
+export const getEstadisticasHerramientas = async (req, res) => {
+    try {
+        const estadisticas = await checkoutHerramientaService.getEstadisticasUso({ top: 10 });
+        res.status(200).json(estadisticas);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
