@@ -54,6 +54,8 @@ import UsuarioCompetenciasRoutes from './modules/Usuario_Competencia/Usuario_Com
 import CompetenciaRoutes from './modules/Competencia/Competencia.routes.js';
 import ArchivoRouter from './modules/Archivo/Archivo.routes.js';
 import CheckOutHerramientaRouter from './modules/CheckOut_Herramienta/CheckOutHerramienta.routes.js';
+import ReservaHerramientaRouter from './modules/Reservas_Herramientas/Reserva_Herramienta.routes.js';
+import DashboardRoutes from './modules/Dashboard/Dashboard.routes.js';
 
 const corsOptions = {
     origin: '*',
@@ -119,5 +121,7 @@ app.use(UsuarioCompetenciasRoutes);
 app.use(CompetenciaRoutes);
 app.use(ArchivoRouter);
 app.use(CheckOutHerramientaRouter);
+app.use(ReservaHerramientaRouter);
+app.use(DashboardRoutes);
 
 export default app;

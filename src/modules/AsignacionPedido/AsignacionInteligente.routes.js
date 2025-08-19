@@ -1,4 +1,4 @@
-import Router from 'express';
+import { Router } from "express";
 
 import {getAllAsignaciones,getAsignacionById, createAsignacion, updateAsignacion, deleteAsignacion, getAsignacionesByPuestoId, sugerirUsuarios} from './AsignacionInteligente.controller.js';
 

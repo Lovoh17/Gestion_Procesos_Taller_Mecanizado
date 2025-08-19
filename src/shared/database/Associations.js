@@ -61,6 +61,7 @@ import { Competencia } from '../../modules/Competencia/Competencia.js';
 import { UsuarioCompetencia } from '../../modules/Usuario_Competencia/Usuario_Competencia.js';
 import { AsignacionPedido } from '../../modules/AsignacionPedido/AsignacionPedido.js';
 import { CheckoutHerramienta } from '../../modules/CheckOut_Herramienta/CheckOutHerramienta.js';
+import { Reserva_Herramienta } from '../../modules/Reservas_Herramientas/Reserva_Herramienta.js';
 
 
 
@@ -242,5 +243,13 @@ CheckoutHerramienta.belongsTo(Herramienta, {
   as: "herramienta", foreignKey:"herramienta_id"
 });
 CheckoutHerramienta.belongsTo(Usuario, {
+  as: "usuario", foreignKey:"usuario_id"
+});
+
+Reserva_Herramienta.belongsTo(Herramienta, {
+  as: "herramienta", foreignKey:"herramienta_id"
+});
+
+Reserva_Herramienta.belongsTo(Usuario, {
   as: "usuario", foreignKey:"usuario_id"
 });

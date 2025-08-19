@@ -2,8 +2,27 @@ import { Usuario } from "../Usuario/Usuario.js";
 import { Herramienta } from "./Herramienta.js";
 import { estadoHerramientaService } from "../Estado_Herramienta/Estado_Herramienta.sevice.js";
 import { checkoutHerramientaService } from "../CheckOut_Herramienta/CheckOutHerramienta.service.js";
+import QRCode from "qrcode";
 
 
+function generarCodigoUnico({ prefijo = "HER", longitud = 8 } = {}) {
+    const caracteres = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+    let codigo = "";
+    for (let i = 0; i < longitud; i++) {
+        codigo += caracteres.charAt(Math.floor(Math.random() * caracteres.length));
+    }
+    return `${prefijo}-${codigo}`;
+}
+
+async function generarCodigoUnicoDB({ prefijo = "HER", longitud = 8 } = {}) {
+    let codigo;
+    let existe = true;
+    while (existe) {
+        codigo = generarCodigoUnico({ prefijo, longitud });
+        existe = await Herramienta.findOne({ where: { codigo_unico: codigo } });
+    }
+    return codigo;
+}
 class HerramientaService {
     async getAll() {
         try {
@@ -28,6 +47,12 @@ class HerramientaService {
 
     async create(data) {
         try {
+            const codigo = await generarCodigoUnicoDB({ prefijo: "TL", longitud: 8 });
+            data.codigo_unico = codigo;
+
+            // linoski si se prefiere QR solo descomentar la linea 54
+            //data.codigo_qr = await QRCode.toDataURL(codigo);
+
             const nuevaHerramienta = await Herramienta.create(data);
             return nuevaHerramienta;
         } catch (error) {
