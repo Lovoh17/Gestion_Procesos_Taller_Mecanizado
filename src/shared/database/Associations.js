@@ -175,7 +175,7 @@ Pedido.belongsTo(Estado_Pedido, { foreignKey: 'estado_id' });
 Pedido.belongsTo(Razones_Pausa_Pedido, { foreignKey: 'razon_pausa_actual_id' });
 
 Herramienta.belongsTo(Tipo_Herramienta,{foreignKey: 'tipo_herramienta_id'});
-Herramienta.belongsTo(Estado_Herramienta, {foreignKey: 'estado_herramienta_id'});
+Herramienta.belongsTo(Estado_Herramienta, {foreignKey: 'estado_herramienta_id', as: "estado_herramienta"});
 Herramienta.belongsTo(Zona_Trabajo, { foreignKey: 'zonas_trabajo_id'});
 
 
