@@ -6,33 +6,56 @@ import { Estado_Herramienta } from "../Estado_Herramienta/Estado_Herramienta.js"
 import { Puesto } from "../Puesto/Puesto.js";
 import { AsignacionPedido } from "../AsignacionPedido/AsignacionPedido.js";
 import { CheckoutHerramienta } from "../CheckOut_Herramienta/CheckOutHerramienta.js";
+import { Transaccion_Financiera } from "../Transaccion_Financiera/Transaccion_Financiera.js";
 import { Sequelize } from "sequelize";
 
 class DashboardService {
   async getAdminDashboard() {
     try {
+      // Usuarios por puesto
       const usuariosPorPuesto = await Usuario.findAll({
         attributes: [
           "puesto_id",
           [Sequelize.fn("COUNT", Sequelize.col("Usuario.id")), "total"]
         ],
-        include: [{ model: Puesto, attributes: ["nombre_puesto"] }],
-        group: ["puesto_id", "puesto.id"]
+        include: [{ model: Puesto, attributes: ["nombre"] }],
+        group: ["puesto_id", "Puesto.id"]
       });
 
+      // Pedidos por estado
       const pedidosPorEstado = await Pedido.findAll({
-        attributes: ["estado_id", [Sequelize.fn("COUNT", Sequelize.col("pedidos.id")), "total"]],
-        group: ["estado_id","estados_pedido.id"],
-        include: [{ model: Estado_Pedido, attributes: ["nombre"] }]
+        attributes: ["estado_id", [Sequelize.fn("COUNT", Sequelize.col("id")), "total"]],
+        include: [{ model: Estado_Pedido, attributes: ["nombre"] }],
+        group: ["estado_id", "Estado_Pedido.id"]
       });
 
+      // Herramientas por estado
       const herramientasPorEstado = await Herramienta.findAll({
         attributes: [
           "estado_herramienta_id",
-          [Sequelize.fn("COUNT", Sequelize.col("herramientas.id")), "total"]
+          [Sequelize.fn("COUNT", Sequelize.col("Herramienta.id")), "total"]
         ],
-        include: [{ model: Estado_Herramienta, attributes: ["nombre"], as:"estado_herramienta"}],
-        group: ["estado_herramienta_id", "estado_herramienta.id"]
+        include: [{ model: Estado_Herramienta, attributes: ["nombre"] }],
+        group: ["estado_herramienta_id", "Estado_Herramienta.id"]
+      });
+
+      // Transacciones financieras
+      const transaccionesPorEstado = await Transaccion_Financiera.findAll({
+        attributes: [
+          "estado_transaccion_id",
+          [Sequelize.fn("COUNT", Sequelize.col("id")), "total"],
+          [Sequelize.fn("SUM", Sequelize.col("monto_total")), "monto_total"]
+        ],
+        group: ["estado_transaccion_id"]
+      });
+
+      const transaccionesPorTipo = await Transaccion_Financiera.findAll({
+        attributes: [
+          "tipo_transaccion_id",
+          [Sequelize.fn("COUNT", Sequelize.col("id")), "total"],
+          [Sequelize.fn("SUM", Sequelize.col("monto_total")), "monto_total"]
+        ],
+        group: ["tipo_transaccion_id"]
       });
 
       return {
@@ -47,6 +70,12 @@ class DashboardService {
         herramientas: {
           total: await Herramienta.count(),
           porEstado: herramientasPorEstado
+        },
+        transacciones: {
+          total: await Transaccion_Financiera.count(),
+          montoTotal: await Transaccion_Financiera.sum("monto_total"),
+          porEstado: transaccionesPorEstado,
+          porTipo: transaccionesPorTipo
         }
       };
     } catch (error) {
@@ -56,55 +85,24 @@ class DashboardService {
 
   async getCoordinadorDashboard() {
     try {
-      // Preferiria yo iterar los estado que devolviera y buscar el pendiente o en proceso para asi usarlo y no buscarlo directamente en nombre pero bueno si Hopes le parece optimo asi pues ni modo
-      //Arreglo para que almenos furule un poco
-      /*
-      const estadoPendiente = await Estado_Pedido.findOne({ where: { nombre: "Solicitado" } });
-      const estadoProceso   = await Estado_Pedido.findOne({ where: { nombre: "En Proceso" } });
-      const estadoUso       = await Estado_Herramienta.findOne({ where: { nombre: "En uso" } });*/
-      const estadoPendiente = await Estado_Pedido.findOne({ 
-        where: Sequelize.where(
-          Sequelize.fn('LOWER', Sequelize.col('nombre')), 
-          'solicitado'      
-        )
-      });//especifiquen que no soy telepata/psiquico por si no le dan lo que buscan
-      
-      const estadoProceso = await Estado_Pedido.findOne({ 
-        where: Sequelize.where(
-          Sequelize.fn('LOWER', Sequelize.col('nombre')), 
-          'en proceso'
-        )
+      const pedidosPendientes = await Pedido.count({ where: { estado_id: 1 } });
+      const pedidosEnProceso = await Pedido.count({ where: { estado_id: 2 } });
+      const herramientasEnUso = await Herramienta.count({ where: { estado_herramienta_id: 2 } });
+
+      const transaccionesRecientes = await Transaccion_Financiera.findAll({
+        order: [["fecha_transaccion", "DESC"]],
+        limit: 100
+      });  
+
+      const gastosPorMes = await Transaccion_Financiera.findAll({
+        attributes: [
+          [Sequelize.fn("DATE_TRUNC", "month", Sequelize.col("fecha_transaccion")), "mes"],
+          [Sequelize.fn("SUM", Sequelize.col("monto_total")), "total_mes"]
+        ],
+        group: ["mes"],
+        order: [["mes", "DESC"]],
+        limit: 6
       });
-      
-      const estadoUso = await Estado_Herramienta.findOne({ 
-        where: Sequelize.where(
-          Sequelize.fn('LOWER', Sequelize.col('nombre')), 
-          'en uso'
-        )
-      });
-      // Verificar si se encontraron los estados
-      if (!estadoPendiente) {
-        console.log("Estado 'solicitado' no encontrado");
-      }
-      if (!estadoProceso) {
-        console.log("Estado 'en proceso' no encontrado");
-      }
-      if (!estadoUso) {
-        console.log("Estado 'uso' no encontrado");
-      }
-
-      // Solo hacer las consultas si los estados existen
-      const pedidosPendientes = estadoPendiente 
-        ? await Pedido.count({ where: { estado_id: estadoPendiente.id } })
-        : 0;
-
-      const pedidosEnProceso = estadoProceso 
-        ? await Pedido.count({ where: { estado_id: estadoProceso.id } })
-        : 0;
-
-      const herramientasEnUso = estadoUso 
-        ? await Herramienta.count({ where: { estado_herramienta_id: estadoUso.id } })
-        : 0;
 
       return {
         pedidos: {
@@ -113,6 +111,10 @@ class DashboardService {
         },
         herramientas: {
           enUso: herramientasEnUso
+        },
+        transacciones: {
+          recientes: transaccionesRecientes,
+          gastosPorMes: gastosPorMes
         }
       };
     } catch (error) {
@@ -151,7 +153,7 @@ class DashboardService {
         checkoutId: ch.id,
         herramientaId: ch.herramienta_id,
         horaDeCheck: ch.hora_de_check,
-        detalle: ch.Herramienta // aquí va toda la info de la herramienta
+        detalle: ch.Herramienta 
       }));
 
       return {
