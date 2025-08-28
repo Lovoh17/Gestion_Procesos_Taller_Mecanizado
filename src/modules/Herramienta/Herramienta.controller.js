@@ -99,3 +99,21 @@ export const eliminarHerramienta = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 }
+export const ocuparHerramienta = async (req,res) => {
+    try {
+        const {id, usuario_id} = req.params;
+        const checkherramienta = await herramientaService.checkout(id,usuario_id);
+        res.status(200).json(checkherramienta);
+    } catch (error) {
+        res.status(500).json({error: error.message});
+    }
+}
+export const desOcuparHerramienta = async (req,res) =>{
+    try {
+        const {id} = req.params;
+        const desCheckHerramienta = await herramientaService.checkin(id);
+        res.status(200).json(desCheckHerramienta);
+    } catch (error) {
+        res.status(500).json({error: error.message})
+    }
+}

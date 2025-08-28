@@ -21,6 +21,8 @@ export const crearUsuario = async (req, res) => {
             timestamps
 =======
 import bcrypt from "bcrypt";
+import { asignacionInteligenteService } from "../AsignacionPedido/AsignacionInteligente.service.js";
+
 
 export const crearUsuario = async (req, res) => {
     try {
@@ -37,8 +39,6 @@ export const crearUsuario = async (req, res) => {
             fecha_termino_contrato, 
             habilidades_tecnicas, 
             turno_id,
-            ultimo_acceso,
-            timestamps
         } = req.body;
 
         if (!nombre || !apellido || !email || !password) {
@@ -71,8 +71,8 @@ export const crearUsuario = async (req, res) => {
             fecha_termino_contrato: fecha_termino_contrato || null,
             habilidades_tecnicas: habilidades_tecnicas || null,
             turno_id: turno_id || null,
-            ultimo_acceso: ultimo_acceso,
-            timestamps: timestamps
+            ultimo_acceso:  new Date(),
+            timestamps: true
         };
 
         const nuevaUsuario = await usuarioService.create(usuarioData);
@@ -198,3 +198,45 @@ export const obtenerUsuariosPorIdPuesto = async (req, res)=>{
         res.status(500).json({ error: error.message });
     }
 }
+export const obtenerUsuarioDisponible = async (req, res) => {
+    try {
+        const [asignaciones, usuarios] = await Promise.all([
+            asignacionInteligenteService.getAll(),
+            usuarioService.getAll()
+        ]);
+
+        // Crear un Set de IDs asignados para búsqueda más eficiente
+        const idsAsignados = new Set(
+            asignaciones.map(asig => asig.usuarioId) // ajusta según tu estructura
+        );
+
+        const usuariosConAsignaciones = usuarios.filter(usuario => 
+            idsAsignados.has(usuario.id)
+        );
+        
+        const usuariosDisponibles = usuarios.filter(usuario => 
+            !idsAsignados.has(usuario.id)
+        );
+
+        res.status(200).json({
+            success: true,
+            data: {
+                usuariosAsignados: {
+                    count: usuariosConAsignaciones.length,
+                    usuarios: usuariosConAsignaciones
+                },
+                usuariosDisponibles: {
+                    count: usuariosDisponibles.length,
+                    usuarios: usuariosDisponibles
+                }
+            }
+        });
+
+    } catch (error) {
+        console.error('Error en obtenerUsuarioDisponible:', error);
+        res.status(500).json({
+            success: false,
+            error: error.message
+        });
+    }
+};

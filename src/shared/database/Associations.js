@@ -44,17 +44,51 @@ import { Tipo_Materia_Prima } from '../../modules/Tipo_Materia_Prima/Tipo_Materi
 import { UsuarioRol } from '../../modules/Usuario_Rol/Usuario_Rol.js';
 import { Permiso } from '../../modules/Permiso/Permiso.js';
 import { Rol } from '../../modules/Rol/Rol.js';
-import { EstadoDevolucion } from '../../modules/Estado_Devolucion/Estado_Devolucion.js';
-import { EstadoPedido } from '../../modules/Estado_Pedido/Estado_Pedido.js';
-import { EstadoEntrega } from '../../modules/Estado_Entrega/Estado_Entrega.js';
-import { RazonPausaPedido } from '../../modules/Razon_Pausa_Pedido/Razon_Pausa_Pedido.js';
-import { DepartamentoUniversidad } from '../../modules/Departamento_Universidad/Departamento_Universidad.js';
-import { EstadoTransaccion } from '../../modules/Estado_Transaccion/Estado_Transaccion.js';
-import { MetodoPago } from '../../modules/Metodo_Pago/Metodo_Pago.js';
-import { Tipo_Transaccion } from '../../modules/Tipo_Transaccion/Tipo_Transaccion.js';
+//import { Estado_Reparacion } from '../../modules/Estado_Reparacion/Estado_Reparacion.js';
+//import { Tipos_Alertas } from '../../modules/Tipos_Alertas/Tipos_Alertas.js';
+import { Estados_Devolucion } from '../../modules/Estados_Devolucion/Estado_Devolucion.js';
+import { Estado_Pedido } from '../../modules/Estados_Pedido/Estados_Pedido.js';
+import { Estado_Entrega } from '../../modules/Estado_Entrega/Estado_Entrega.js';
+import { Razones_Pausa_Pedido } from '../../modules/Razones_Pausa_Pedido/Razones_Pausa_Pedido.js';
+import { Departamento_Universidad } from '../../modules/Departamentos_Universidad/Departamentos_Universidad.js';
+import { Estado_Transaccion } from '../../modules/Estado_Transaccion/Estado_Transaccion.js';
+import { Metodo_Pago } from '../../modules/Metodo_Pago/Metodo_Pago.js';
+import { Tipos_Transaccion } from '../../modules/Tipos_Transaccion/Tipos_Transaccion.js';
+import { Version_Documento } from '../../modules/Version_Documento/Version_Documento.js';
 
-// ASOCIASIONES DE MODELOS
-HistorialMovimientoStock.belongsTo(MateriaPrima, { foreignKey: 'material_id' });
+import { Competencia } from '../../modules/Competencia/Competencia.js';
+import { UsuarioCompetencia } from '../../modules/Usuario_Competencia/Usuario_Competencia.js';
+import { AsignacionPedido } from '../../modules/AsignacionPedido/AsignacionPedido.js';
+import { CheckoutHerramienta } from '../../modules/CheckOut_Herramienta/CheckOutHerramienta.js';
+import { Reserva_Herramienta } from '../../modules/Reservas_Herramientas/Reserva_Herramienta.js';
+
+
+
+//import { Pedido_Material } from '../../modules/Pedido_Material/Pedido_Material.js';
+//import { Pedido_Herramienta } from '../../modules/Pedido_Herramienta/Pedido_Herramienta.js';
+
+/*
+Usuario.hasMany(Telefono_Usuario, {
+  foreignKey: 'id_usuario',
+  as: 'telefonos'
+});
+
+Telefono_Usuario.belongsTo(Usuario, {
+  foreignKey: 'id_usuario',
+  as: 'usuario'
+});
+*/
+/*Usuario.belongsTo(Zona, {
+  foreignKey: 'id_zona',
+  as: 'zona'
+});*/
+
+/*Zona.hasMany(Usuario, {
+  foreignKey: 'id_zona',
+  as: 'usuarios'
+});*/
+  
+HistorialMovimientoStock.belongsTo(Materia_Prima, { foreignKey: 'material_id' });
 HistorialMovimientoStock.belongsTo(Unidad_Medida, { foreignKey: 'unidad_medida_id' });
 HistorialMovimientoStock.belongsTo(Tipo_Stock, { foreignKey: 'origen_stock_id', as: 'origenStock' });
 HistorialMovimientoStock.belongsTo(Tipo_Stock, { foreignKey: 'destino_stock_id', as: 'destinoStock' });
@@ -138,19 +172,20 @@ Pedido.belongsTo(EstadoPedido, { foreignKey: 'estado_id' });
 Pedido.belongsTo(RazonPausaPedido, { foreignKey: 'razon_pausa_actual_id' });
 
 Herramienta.belongsTo(Tipo_Herramienta,{foreignKey: 'tipo_herramienta_id'});
-Herramienta.belongsTo(Estado_Herramienta, {foreignKey: 'estado_herramienta_id'});
+Herramienta.belongsTo(Estado_Herramienta, {foreignKey: 'estado_herramienta_id', as: "estado_herramienta"});
 Herramienta.belongsTo(Zona_Trabajo, { foreignKey: 'zonas_trabajo_id'});
 
 
-Zona_Trabajo.belongsTo(Usuario, {foreignKey: 'responsable_id'});
+
 Usuario.belongsTo(Puesto, {foreignKey: 'puesto_id'});
 Usuario.belongsTo(Estado_Usuario , {foreignKey: 'estado_id'});
 Usuario.belongsTo(Turno,{ foreignKey: 'turno_id'});
 
 Usuario.belongsTo(Zona_Trabajo, {foreignKey: 'zona_trabajo_id'});
+Zona_Trabajo.belongsTo(Usuario, {foreignKey: 'responsable_id'});
 
-TelefonoUsuario.belongsTo(Usuario, {foreignKey: 'usuario_id'});
-TelefonoUsuario.belongsTo(Tipo_Telefono, { foreignKey: 'tipo_telefono_id'});
+Telefono_Usuario.belongsTo(Usuario, {foreignKey: 'usuario_id'});
+Telefono_Usuario.belongsTo(Tipo_Telefono, { foreignKey: 'tipo_telefono_id'});
 
 MateriaPrima.belongsTo(Tipo_Materia_Prima, {foreignKey: 'tipo_materia_prima_id'});
 MateriaPrima.belongsTo(Unidad_Medida, { foreignKey: 'unidad_base_id'});
@@ -160,4 +195,58 @@ MateriaPrima.belongsTo(Tipo_Stock, { foreignKey: 'pertenece_a_stock_id'});
 UsuarioRol.belongsTo(Usuario,{ foreignKey: 'usuario_id'});
 UsuarioRol.belongsTo(Rol, {foreignKey: 'role_id'});
 
-Permiso.belongsTo(Rol, {foreignKey: 'role_id'});
+Permisos.belongsTo(Rol, {foreignKey: 'role_id'});
+
+Plano.hasMany(Version_Documento, { foreignKey: 'planoId' });
+Version_Documento.belongsTo(Plano, { foreignKey: 'planoId', as: 'plano' });
+
+Usuario.hasMany(Version_Documento, { foreignKey: 'creado_por' });
+Version_Documento.belongsTo(Usuario, { foreignKey: 'creado_por', as: 'creadoPor' });
+
+
+Usuario.belongsToMany(Competencia, {
+  through: UsuarioCompetencia,
+  foreignKey: 'usuarioId',
+  otherKey: 'competenciaId',
+  as: 'competencias'
+});
+
+Competencia.belongsToMany(Usuario, {
+  through: UsuarioCompetencia,
+  foreignKey: 'competenciaId',
+  otherKey: 'usuarioId',
+  as: 'usuarios'
+});
+
+
+AsignacionPedido.belongsTo(Usuario, { as: "usuario", foreignKey: "usuarioId" });
+AsignacionPedido.belongsTo(Pedido, { as: "pedido", foreignKey: "pedidoId" });
+
+Usuario.belongsToMany(Pedido, {
+  through: AsignacionPedido,
+  foreignKey: "usuarioId",
+  otherKey: "pedidoId",
+  as: "pedidos"
+});
+
+Pedido.belongsToMany(Usuario, {
+  through: AsignacionPedido,
+  foreignKey: "pedidoId",
+  otherKey: "usuarioId",
+  as: "usuarios"
+});
+
+CheckoutHerramienta.belongsTo(Herramienta, {
+  as: "herramienta", foreignKey:"herramienta_id"
+});
+CheckoutHerramienta.belongsTo(Usuario, {
+  as: "usuario", foreignKey:"usuario_id"
+});
+
+Reserva_Herramienta.belongsTo(Herramienta, {
+  as: "herramienta", foreignKey:"herramienta_id"
+});
+
+Reserva_Herramienta.belongsTo(Usuario, {
+  as: "usuario", foreignKey:"usuario_id"
+});

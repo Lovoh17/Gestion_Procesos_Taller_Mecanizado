@@ -124,6 +124,15 @@ export const Herramienta = sequelize.define(
       type: DataTypes.TEXT,
       allowNull: false,
     },
+    codigo_unico: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true
+    },
+    codigo_qr: {
+        type: DataTypes.TEXT, // base64
+        allowNull: true
+    },
     timestamps: {
       type: DataTypes.DATE,
       allowNull: false,

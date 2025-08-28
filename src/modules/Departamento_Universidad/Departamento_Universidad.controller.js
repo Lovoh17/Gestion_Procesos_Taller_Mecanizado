@@ -13,9 +13,7 @@ export const crearDepartamentoU = async (req, res) => {
     try {
         const { nombre, descripcion} = req.body;
         const nuevoDepartamento = await departamentoUniversidadService.create({
-            nombre,
-            descripcion
->>>>>>> 3bd2348280a13bfbbc821972e8359a9d3cd09150:src/modules/Departamentos_Universidad/Departamentos_Universidad.controller.js
+            nombre
         });
         res.status(200).json(nuevoDepartamento);
     } catch (error) {

@@ -21,16 +21,16 @@ export const Zona_Trabajo = sequelize.define("zonas_trabajo",
       type: DataTypes.STRING,
       allowNull: false,
     },
-    responsable_id: {
-      type: DataTypes.BIGINT,
-      allowNull: false,
-      references: {
-        model: "usuarios",
-        key: "id",
-      },
-    },
-  },
-  {
+    responsable_id:{
+        type: DataTypes.BIGINT,
+        allowNull: false,
+        references:{
+            model: "usuarios",
+            key: 'id'
+        }
+    }
+},
+{
     tableName: "zonas_trabajo",
     timestamps: false,
   }
