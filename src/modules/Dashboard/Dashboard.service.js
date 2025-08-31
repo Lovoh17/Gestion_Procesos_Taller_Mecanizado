@@ -18,9 +18,13 @@ class DashboardService {
           "puesto_id",
           [Sequelize.fn("COUNT", Sequelize.col("Usuario.id")), "total"]
         ],
-        include: [{ model: Puesto, attributes: ["nombre"] }],
-        group: ["puesto_id", "Puesto.id"]
+        include: [{
+          model: Puesto,
+          attributes: ["nombre_puesto"]
+        }],
+        group: ["puesto_id", "puesto.id", "puesto.nombre_puesto"]  
       });
+
 
       // Pedidos por estado
       const pedidosPorEstado = await Pedido.findAll({
