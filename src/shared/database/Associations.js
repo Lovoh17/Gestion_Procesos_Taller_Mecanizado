@@ -253,5 +253,3 @@ Reserva_Herramienta.belongsTo(Herramienta, {
 Reserva_Herramienta.belongsTo(Usuario, {
   as: "usuario", foreignKey:"usuario_id"
 });
-
-Pedido.belongsTo(Estado_Pedido, { foreignKey: "estado_id", as: "estado" });

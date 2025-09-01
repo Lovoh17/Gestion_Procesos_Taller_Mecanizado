@@ -28,11 +28,14 @@ class DashboardService {
       const pedidosPorEstado = await Pedido.findAll({
         attributes: [
           "estado_id",
-          [Sequelize.fn("COUNT", Sequelize.col("Pedido.id")), "total"]
+          [Sequelize.fn("COUNT", Sequelize.col("pedidos.id")), "total"] 
         ],
-        include: [{ model: Estado_Pedido, as: "estado", attributes: ["nombre"] }],
-        group: ["Pedido.estado_id", "estado.id", "estado.nombre"]
+        include: [
+          { model: Estado_Pedido, as: "estado", attributes: ["nombre"] }
+        ],
+        group: ["pedidos.estado_id", "estado.id", "estado.nombre"] 
       });
+
 
       // Herramientas por estado
       const herramientasPorEstado = await Herramienta.findAll({
