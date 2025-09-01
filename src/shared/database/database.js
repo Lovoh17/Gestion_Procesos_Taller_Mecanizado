@@ -20,6 +20,7 @@ export const sequelize = new Sequelize(databaseName, databaseUser, databasePassw
     dialectOptions: {
         ssl: {
             require: true,
+            rejectUnauthorized: false
         }
     },
 
