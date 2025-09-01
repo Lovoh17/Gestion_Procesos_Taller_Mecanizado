@@ -25,21 +25,20 @@ class DashboardService {
           group: ["puesto_id", "Puesto.id", "Puesto.nombre_puesto"]  
         });
 
-        // Pedidos por estado - CORREGIDO
-        const pedidosPorEstado = await Pedido.findAll({
-          attributes: [
-            "estado_id",
-            [Sequelize.fn("COUNT", Sequelize.col("Pedido.id")), "total"] 
-          ],
-          include: [{ 
-            model: Estado_Pedido, 
-            attributes: ["nombre"],
-            as: "Estado_Pedido" // Asegúrate de que el alias coincida
-          }],
-          group: ["estado_id", "Estado_Pedido.id", "Estado_Pedido.nombre"]
+        // Pedidos por estado
+        const pedidosPorEstado = await Sequelize.query(`
+          SELECT 
+            p.estado_id,
+            ep.nombre,
+            COUNT(p.id) as total
+          FROM pedidos p
+          INNER JOIN estados_pedido ep ON p.estado_id = ep.id
+          GROUP BY p.estado_id, ep.nombre
+        `, {
+          type: Sequelize.QueryTypes.SELECT
         });
 
-        // Herramientas por estado - CORREGIDO
+        // Herramientas por estado
         const herramientasPorEstado = await Herramienta.findAll({
           attributes: [
             "estado_herramienta_id",
@@ -196,7 +195,7 @@ class DashboardService {
         where: { estado_herramienta_id: estadoReparacion?.id }
       });
 
-      // Herramientas reparadas (opcional: si tienes un estado "disponible" después de reparación)
+      
       const estadoDisponible = await Estado_Herramienta.findOne({ where: { nombre: "Disponible" } });
       const herramientasD = await Herramienta.findAll({
         where: { estado_herramienta_id: estadoDisponible?.id }
