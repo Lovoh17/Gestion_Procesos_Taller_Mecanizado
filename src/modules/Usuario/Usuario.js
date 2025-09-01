@@ -4,6 +4,7 @@ import { Puesto } from "../Puesto/Puesto.js";
 import { Estado_Usuario } from "../Estado_Usuario/Estado_Usuario.js";
 import { Turno } from "../Turno/Turno.js";
 import { Zona_Trabajo } from "../Zona_Trabajo/Zona_Trabajo.js";
+import { toDefaultValue } from "sequelize/lib/utils";
 
 export const Usuario = sequelize.define(
   "Usuario",
@@ -76,6 +77,11 @@ export const Usuario = sequelize.define(
         model: Turno,
         key:  'id'
       }
+    },
+    capacidad_horas_semana:{
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      defaultValue: 40,
     },
     /*zona_trabajo_id: {
       type: DataTypes.BIGINT,

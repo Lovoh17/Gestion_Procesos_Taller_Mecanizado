@@ -1,12 +1,25 @@
 import { usuarioService } from "./Usuario.service.js";
+import bcrypt from "bcrypt";
+import { asignacionInteligenteService } from "../AsignacionPedido/AsignacionInteligente.service.js";
+
 
 export const crearUsuario = async (req, res) => {
     try {
-        const { nombre, apellido, email, password, puesto_id, estado_id, foto_ruta, 
-               es_subcontratado, fecha_contratacion, fecha_termino_contrato, 
-               habilidades_tecnicas, turno_id } = req.body;
+        const { 
+            nombre, 
+            apellido, 
+            email, 
+            password, 
+            puesto_id, 
+            estado_id, 
+            foto_ruta, 
+            es_subcontratado, 
+            fecha_contratacion, 
+            fecha_termino_contrato, 
+            habilidades_tecnicas, 
+            turno_id,
+        } = req.body;
 
-        // Validaciones básicas
         if (!nombre || !apellido || !email || !password) {
             return res.status(400).json({
                 success: false,
@@ -14,11 +27,21 @@ export const crearUsuario = async (req, res) => {
             });
         }
 
+        const existente = await usuarioService.getByEmail?.(email);
+        if (existente) {
+            return res.status(409).json({
+                success: false,
+                message: 'El correo ya está en uso'
+            });
+        }
+
+        const hashedPassword = await bcrypt.hash(password, 10);
+
         const usuarioData = {
             nombre,
             apellido,
             email,
-            password,
+            password: hashedPassword, 
             puesto_id: puesto_id || 2,
             estado_id: estado_id || 1,
             foto_ruta: foto_ruta || null,
@@ -26,7 +49,9 @@ export const crearUsuario = async (req, res) => {
             fecha_contratacion: fecha_contratacion || null,
             fecha_termino_contrato: fecha_termino_contrato || null,
             habilidades_tecnicas: habilidades_tecnicas || null,
-            turno_id: turno_id || null
+            turno_id: turno_id || null,
+            ultimo_acceso:  new Date(),
+            timestamps: true
         };
 
         const nuevaUsuario = await usuarioService.create(usuarioData);
@@ -100,7 +125,8 @@ export const actualizarUsuario = async (req, res) => {
 
         // Solo actualizar password si se proporcionó
         if (password) {
-            updateData.password = password;
+            const hashedPassword = await bcrypt.hash(password, 10);
+            updateData.password =  hashedPassword;
         }
 
         const usuarioActualizado = await usuarioService.update(id, updateData);
@@ -139,3 +165,45 @@ export const obtenerUsuariosPorIdPuesto = async (req, res)=>{
         res.status(500).json({ error: error.message });
     }
 }
+export const obtenerUsuarioDisponible = async (req, res) => {
+    try {
+        const [asignaciones, usuarios] = await Promise.all([
+            asignacionInteligenteService.getAll(),
+            usuarioService.getAll()
+        ]);
+
+        // Crear un Set de IDs asignados para búsqueda más eficiente
+        const idsAsignados = new Set(
+            asignaciones.map(asig => asig.usuarioId) // ajusta según tu estructura
+        );
+
+        const usuariosConAsignaciones = usuarios.filter(usuario => 
+            idsAsignados.has(usuario.id)
+        );
+        
+        const usuariosDisponibles = usuarios.filter(usuario => 
+            !idsAsignados.has(usuario.id)
+        );
+
+        res.status(200).json({
+            success: true,
+            data: {
+                usuariosAsignados: {
+                    count: usuariosConAsignaciones.length,
+                    usuarios: usuariosConAsignaciones
+                },
+                usuariosDisponibles: {
+                    count: usuariosDisponibles.length,
+                    usuarios: usuariosDisponibles
+                }
+            }
+        });
+
+    } catch (error) {
+        console.error('Error en obtenerUsuarioDisponible:', error);
+        res.status(500).json({
+            success: false,
+            error: error.message
+        });
+    }
+};

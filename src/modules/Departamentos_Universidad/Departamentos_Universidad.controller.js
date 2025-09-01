@@ -4,8 +4,7 @@ export const crearDepartamentoU = async (req, res) => {
     try {
         const { nombre, descripcion} = req.body;
         const nuevoDepartamento = await departamentoUniversidadService.create({
-            nombre,
-            descripcion
+            nombre
         });
         res.status(200).json(nuevoDepartamento);
     } catch (error) {

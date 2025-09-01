@@ -26,7 +26,7 @@ export const Zona_Trabajo = sequelize.define("zonas_trabajo",{
         type: DataTypes.BIGINT,
         allowNull: false,
         references:{
-            model: Usuario,
+            model: "usuarios",
             key: 'id'
         }
     }

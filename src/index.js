@@ -1,6 +1,7 @@
 import app  from "./app.js";
 import { sequelize } from "./shared/database/database.js";
 import dotenv from 'dotenv';
+//import admin from "../src/shared/firebase/firebase.js";
 
 if (process.env.NODE_ENV !== 'production') {
   dotenv.config();
@@ -12,7 +13,7 @@ const PORT = process.env.PORT || 3000;
 
 async function main(){
     try{
-        await sequelize.sync({force: false});
+        await sequelize.sync({force: true});
         console.log('Conectado a la BD');
         app.listen(PORT);
         console.log(`Servidor escuchando en el puerto ${PORT}`);

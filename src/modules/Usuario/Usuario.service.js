@@ -58,7 +58,7 @@ class UsuarioService{
     }
     async getByPuestoId(puesto_id){
         try {
-            const usuarios = await Usuario.findAll({where: {puesto_id} });
+            const usuarios = await Usuario.findAll({where: {puesto_id: puesto_id} });
             if (usuarios.length === 0) {
                 throw new Error("No se encontraron usuarios para el puesto especificado");
             }
@@ -67,5 +67,10 @@ class UsuarioService{
             throw new Error("Error al obtener los usuarios mediante id puesto: "+ error.message);
         }
     }
+
+    async getByEmail(email) {
+        return await Usuario.findOne({ where: { email } });
+    }
+
 }
 export const usuarioService = new UsuarioService();
