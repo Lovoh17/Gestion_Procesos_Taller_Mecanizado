@@ -15,14 +15,14 @@ class DashboardService {
   async getAdminDashboard() {
     try {
       // Usuarios por puesto
-      const usuariosPorPuesto = await Usuario.findAll({
-        attributes: [
-          "puesto_id",
-          [Sequelize.fn("COUNT", Sequelize.col("Usuario.id")), "total"]
-        ],
-        include: [{ model: Puesto, attributes: ["nombre_puesto"] }],
-        group: ["puesto_id", "puestos.id"]   // 👈 usa nombre real de tabla
-      });
+    const usuariosPorPuesto = await Usuario.findAll({
+      attributes: [
+        "puesto_id",
+        [Sequelize.fn("COUNT", Sequelize.col("Usuario.id")), "total"]
+      ],
+      include: [{ model: Puesto, as: "puesto", attributes: ["nombre_puesto"] }],
+      group: ["puesto_id", "puesto.id"]   
+    });
 
       // Pedidos por estado
       const pedidosPorEstado = await Pedido.findAll({

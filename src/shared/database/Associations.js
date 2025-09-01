@@ -180,7 +180,7 @@ Herramienta.belongsTo(Zona_Trabajo, { foreignKey: 'zonas_trabajo_id'});
 
 
 
-Usuario.belongsTo(Puesto, {foreignKey: 'puesto_id'});
+Usuario.belongsTo(Puesto, { foreignKey: 'puesto_id', as: 'puesto' });
 Usuario.belongsTo(Estado_Usuario , {foreignKey: 'estado_id'});
 Usuario.belongsTo(Turno,{ foreignKey: 'turno_id'});
 
