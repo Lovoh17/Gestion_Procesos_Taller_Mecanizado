@@ -12,73 +12,90 @@ import { sequelize } from "../../shared/database/database.js";
 
 class DashboardService {
   async getAdminDashboard() {
-      try {
-        // Usuarios por puesto
-        const usuariosPorPuesto = await Usuario.findAll({
-          attributes: [
-            "puesto_id",
-            [Sequelize.fn("COUNT", Sequelize.col("Usuario.id")), "total"]
-          ],
-          include: [{
+    try {
+      // Usuarios por puesto
+      const usuariosPorPuesto = await Usuario.findAll({
+        attributes: [
+          "puesto_id",
+          [Sequelize.fn("COUNT", Sequelize.col("Usuario.id")), "total"]
+        ],
+        include: [
+          {
             model: Puesto,
-            attributes: ["nombre_puesto"]
-          }],
-          group: ["puesto_id", "Puesto.id", "Puesto.nombre_puesto"]  
-        });
-
-
-        // Herramientas por estado - CORREGIDO
-        const herramientasPorEstado = await Herramienta.findAll({
-          attributes: [
-            "estado_herramienta_id",
-            [Sequelize.fn("COUNT", Sequelize.col("Herramienta.id")), "total"]
-          ],
-          include: [{ 
-            model: Estado_Herramienta, 
-            attributes: ["nombre"]
-          }],
-          group: ["estado_herramienta_id", "Estado_Herramienta.id", "Estado_Herramienta.nombre"]
-        });
-
-        // Transacciones financieras
-        const transaccionesPorEstado = await Transaccion_Financiera.findAll({
-          attributes: [
-            "estado_transaccion_id",
-            [Sequelize.fn("COUNT", Sequelize.col("id")), "total"],
-            [Sequelize.fn("SUM", Sequelize.col("monto_total")), "monto_total"]
-          ],
-          group: ["estado_transaccion_id"]
-        });
-
-        const transaccionesPorTipo = await Transaccion_Financiera.findAll({
-          attributes: [
-            "tipo_transaccion_id",
-            [Sequelize.fn("COUNT", Sequelize.col("id")), "total"],
-            [Sequelize.fn("SUM", Sequelize.col("monto_total")), "monto_total"]
-          ],
-          group: ["tipo_transaccion_id"]
-        });
-
-        return {
-          usuarios: {
-            total: await Usuario.count(),
-            porPuesto: usuariosPorPuesto
-          },
-          herramientas: {
-            total: await Herramienta.count(),
-            porEstado: herramientasPorEstado
-          },
-          transacciones: {
-            total: await Transaccion_Financiera.count(),
-            montoTotal: await Transaccion_Financiera.sum("monto_total"),
-            porEstado: transaccionesPorEstado,
-            porTipo: transaccionesPorTipo
+            attributes: [["nombre_puesto", "nombre"]],
           }
-        };
-      } catch (error) {
-        throw new Error("Error al generar dashboard admin: " + error.message);
-      }
+        ],
+        group: ["Usuario.puesto_id", "Puesto.id", "Puesto.nombre_puesto"]
+      });
+
+      // Pedidos por estado
+      const pedidosPorEstado = await Pedido.findAll({
+        attributes: [
+          "estado_id",
+          [Sequelize.fn("COUNT", Sequelize.col("Pedido.id")), "total"]
+        ],
+        include: [{ model: Estado_Pedido, attributes: ["nombre"] }],
+        group: ["Pedido.estado_id", "Estado_Pedido.id", "Estado_Pedido.nombre"]
+      });
+
+      // Herramientas por estado
+      const herramientasPorEstado = await Herramienta.findAll({
+        attributes: [
+          "estado_herramienta_id",
+          [Sequelize.fn("COUNT", Sequelize.col("Herramienta.id")), "total"]
+        ],
+        include: [{ model: Estado_Herramienta, attributes: ["nombre"] }],
+        group: [
+          "Herramienta.estado_herramienta_id",
+          "Estado_Herramienta.id",
+          "Estado_Herramienta.nombre"
+        ]
+      });
+
+      // Transacciones financieras
+      const transaccionesPorEstado = await Transaccion_Financiera.findAll({
+        attributes: [
+          "estado_transaccion_id",
+          [Sequelize.fn("COUNT", Sequelize.col("Transaccion_Financiera.id")), "total"],
+          [Sequelize.fn("SUM", Sequelize.col("monto_total")), "monto_total"]
+        ],
+        group: ["estado_transaccion_id"]
+      });
+
+      const transaccionesPorTipo = await Transaccion_Financiera.findAll({
+        attributes: [
+          "tipo_transaccion_id",
+          [Sequelize.fn("COUNT", Sequelize.col("Transaccion_Financiera.id")), "total"],
+          [Sequelize.fn("SUM", Sequelize.col("monto_total")), "monto_total"]
+        ],
+        group: ["tipo_transaccion_id"]
+      });
+
+      return {
+        usuarios: {
+          total: await Usuario.count(),
+          porPuesto: usuariosPorPuesto
+        },
+        pedidos: {
+          total: await Pedido.count(),
+          porEstado: pedidosPorEstado
+        },
+        herramientas: {
+          total: await Herramienta.count(),
+          porEstado: herramientasPorEstado
+        },
+        transacciones: {
+          total: await Transaccion_Financiera.count(),
+          montoTotal: await Transaccion_Financiera.sum("monto_total"),
+          porEstado: transaccionesPorEstado,
+          porTipo: transaccionesPorTipo
+        }
+      };
+    } catch (error) {
+      throw new Error("Error al generar dashboard admin: " + error.message);
+    }
   }
+
 
   async getCoordinadorDashboard() {
     try {
