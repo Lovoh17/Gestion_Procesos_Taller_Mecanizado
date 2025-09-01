@@ -26,18 +26,6 @@ class DashboardService {
           group: ["puesto_id", "Puesto.id", "Puesto.nombre_puesto"]  
         });
 
-        // Pedidos por estado - VERSION ALTERNATIVA
-        const pedidosPorEstado = await sequelize.query(`
-          SELECT 
-            p.estado_id,
-            ep.nombre,
-            COUNT(p.id) as total
-          FROM pedidos p
-          INNER JOIN estados_pedido ep ON p.estado_id = ep.id
-          GROUP BY p.estado_id, ep.nombre
-        `, {
-          type: Sequelize.QueryTypes.SELECT
-        });
 
         // Herramientas por estado - CORREGIDO
         const herramientasPorEstado = await Herramienta.findAll({
@@ -75,10 +63,6 @@ class DashboardService {
           usuarios: {
             total: await Usuario.count(),
             porPuesto: usuariosPorPuesto
-          },
-          pedidos: {
-            total: await Pedido.count(),
-            porEstado: pedidosPorEstado
           },
           herramientas: {
             total: await Herramienta.count(),
