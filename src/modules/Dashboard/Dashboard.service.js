@@ -11,6 +11,7 @@ import { Sequelize } from "sequelize";
 import { sequelize } from "../../shared/database/database.js";
 
 class DashboardService {
+// 📊 Dashboard Admin
   async getAdminDashboard() {
     try {
       // Usuarios por puesto
@@ -19,13 +20,8 @@ class DashboardService {
           "puesto_id",
           [Sequelize.fn("COUNT", Sequelize.col("Usuario.id")), "total"]
         ],
-        include: [
-          {
-            model: Puesto,
-            attributes: [["nombre_puesto", "nombre"]],
-          }
-        ],
-        group: ["Usuario.puesto_id", "Puesto.id", "Puesto.nombre_puesto"]
+        include: [{ model: Puesto, attributes: ["nombre_puesto"] }],
+        group: ["puesto_id", "puestos.id"]   // 👈 usa nombre real de tabla
       });
 
       // Pedidos por estado
@@ -35,7 +31,7 @@ class DashboardService {
           [Sequelize.fn("COUNT", Sequelize.col("Pedido.id")), "total"]
         ],
         include: [{ model: Estado_Pedido, attributes: ["nombre"] }],
-        group: ["Pedido.estado_id", "Estado_Pedido.id", "Estado_Pedido.nombre"]
+        group: ["estado_id", "estados_pedido.id"]   // 👈 usa nombre real de tabla
       });
 
       // Herramientas por estado
@@ -45,11 +41,7 @@ class DashboardService {
           [Sequelize.fn("COUNT", Sequelize.col("Herramienta.id")), "total"]
         ],
         include: [{ model: Estado_Herramienta, attributes: ["nombre"] }],
-        group: [
-          "Herramienta.estado_herramienta_id",
-          "Estado_Herramienta.id",
-          "Estado_Herramienta.nombre"
-        ]
+        group: ["estado_herramienta_id", "estados_herramienta.id"]
       });
 
       // Transacciones financieras
@@ -95,7 +87,6 @@ class DashboardService {
       throw new Error("Error al generar dashboard admin: " + error.message);
     }
   }
-
 
   async getCoordinadorDashboard() {
     try {
