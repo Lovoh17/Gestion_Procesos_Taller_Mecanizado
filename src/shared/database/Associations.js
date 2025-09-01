@@ -55,6 +55,13 @@ import { Departamento_Universidad } from '../../modules/Departamentos_Universida
 import { Estado_Transaccion } from '../../modules/Estado_Transaccion/Estado_Transaccion.js';
 import { Metodo_Pago } from '../../modules/Metodo_Pago/Metodo_Pago.js';
 import { Tipos_Transaccion } from '../../modules/Tipos_Transaccion/Tipos_Transaccion.js';
+import { Version_Documento } from '../../modules/Version_Documento/Version_Documento.js';
+
+import { Competencia } from '../../modules/Competencia/Competencia.js';
+import { UsuarioCompetencia } from '../../modules/Usuario_Competencia/Usuario_Competencia.js';
+import { AsignacionPedido } from '../../modules/AsignacionPedido/AsignacionPedido.js';
+import { CheckoutHerramienta } from '../../modules/CheckOut_Herramienta/CheckOutHerramienta.js';
+import { Reserva_Herramienta } from '../../modules/Reservas_Herramientas/Reserva_Herramienta.js';
 
 
 
@@ -164,21 +171,21 @@ Pedido.belongsTo(Usuario, { foreignKey: 'aprobador_id' });
 Pedido.belongsTo(Usuario, { foreignKey: 'supervisor_id' });
 Pedido.belongsTo(Plano, { foreignKey: 'plano_id' });
 Pedido.belongsTo(Tipo_Pedido, { foreignKey: 'tipo_pedido_id' });
-Pedido.belongsTo(Estado_Pedido, { foreignKey: 'estado_id' });
+Pedido.belongsTo(Estado_Pedido, { foreignKey: "estado_id", as: "estado" });
 Pedido.belongsTo(Razones_Pausa_Pedido, { foreignKey: 'razon_pausa_actual_id' });
 
 Herramienta.belongsTo(Tipo_Herramienta,{foreignKey: 'tipo_herramienta_id'});
-Herramienta.belongsTo(Estado_Herramienta, {foreignKey: 'estado_herramienta_id'});
+Herramienta.belongsTo(Estado_Herramienta, {foreignKey: 'estado_herramienta_id', as: "estado_herramienta"});
 Herramienta.belongsTo(Zona_Trabajo, { foreignKey: 'zonas_trabajo_id'});
 
 
-Zona_Trabajo.belongsTo(Usuario, {foreignKey: 'responsable_id'});
-Usuario.belongsTo(Puesto, {foreignKey: 'puesto_id'});
+
+Usuario.belongsTo(Puesto, { foreignKey: 'puesto_id', as: 'puesto' });
 Usuario.belongsTo(Estado_Usuario , {foreignKey: 'estado_id'});
 Usuario.belongsTo(Turno,{ foreignKey: 'turno_id'});
 
 Usuario.belongsTo(Zona_Trabajo, {foreignKey: 'zona_trabajo_id'});
-
+Zona_Trabajo.belongsTo(Usuario, {foreignKey: 'responsable_id'});
 
 Telefono_Usuario.belongsTo(Usuario, {foreignKey: 'usuario_id'});
 Telefono_Usuario.belongsTo(Tipo_Telefono, { foreignKey: 'tipo_telefono_id'});
@@ -193,3 +200,56 @@ Usuarios_Roles.belongsTo(Rol, {foreignKey: 'role_id'});
 
 Permisos.belongsTo(Rol, {foreignKey: 'role_id'});
 
+Plano.hasMany(Version_Documento, { foreignKey: 'planoId' });
+Version_Documento.belongsTo(Plano, { foreignKey: 'planoId', as: 'plano' });
+
+Usuario.hasMany(Version_Documento, { foreignKey: 'creado_por' });
+Version_Documento.belongsTo(Usuario, { foreignKey: 'creado_por', as: 'creadoPor' });
+
+
+Usuario.belongsToMany(Competencia, {
+  through: UsuarioCompetencia,
+  foreignKey: 'usuarioId',
+  otherKey: 'competenciaId',
+  as: 'competencias'
+});
+
+Competencia.belongsToMany(Usuario, {
+  through: UsuarioCompetencia,
+  foreignKey: 'competenciaId',
+  otherKey: 'usuarioId',
+  as: 'usuarios'
+});
+
+
+AsignacionPedido.belongsTo(Usuario, { as: "usuario", foreignKey: "usuarioId" });
+AsignacionPedido.belongsTo(Pedido, { as: "pedido", foreignKey: "pedidoId" });
+
+Usuario.belongsToMany(Pedido, {
+  through: AsignacionPedido,
+  foreignKey: "usuarioId",
+  otherKey: "pedidoId",
+  as: "pedidos"
+});
+
+Pedido.belongsToMany(Usuario, {
+  through: AsignacionPedido,
+  foreignKey: "pedidoId",
+  otherKey: "usuarioId",
+  as: "usuarios"
+});
+
+CheckoutHerramienta.belongsTo(Herramienta, {
+  as: "herramienta", foreignKey:"herramienta_id"
+});
+CheckoutHerramienta.belongsTo(Usuario, {
+  as: "usuario", foreignKey:"usuario_id"
+});
+
+Reserva_Herramienta.belongsTo(Herramienta, {
+  as: "herramienta", foreignKey:"herramienta_id"
+});
+
+Reserva_Herramienta.belongsTo(Usuario, {
+  as: "usuario", foreignKey:"usuario_id"
+});

@@ -1,6 +1,7 @@
 import app  from "./app.js";
 import { sequelize } from "./shared/database/database.js";
 import dotenv from 'dotenv';
+//import admin from "../src/shared/firebase/firebase.js";
 
 if (process.env.NODE_ENV !== 'production') {
   dotenv.config();

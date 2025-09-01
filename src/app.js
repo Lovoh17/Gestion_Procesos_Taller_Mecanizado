@@ -48,6 +48,14 @@ import UsuarioRoutes from './modules/Usuario/Usuario.routes.js';
 import UsuarioRolesRoutes from './modules/Usuarios_Roles/Usuarios_Roles.routes.js';
 import ZonaTrabajoRoutes from './modules/Zona_Trabajo/Zona_Trabajo.routes.js';
 import AuthRoutes from './modules/Auth/Auth.routes.js';
+import VersionDocumentoRoutes from './modules/Version_Documento/Version_Documento.routes.js';
+import AsignacionInteligenteRoutes from './modules/AsignacionPedido/AsignacionInteligente.routes.js';
+import UsuarioCompetenciasRoutes from './modules/Usuario_Competencia/Usuario_Competencia.routes.js';
+import CompetenciaRoutes from './modules/Competencia/Competencia.routes.js';
+import ArchivoRouter from './modules/Archivo/Archivo.routes.js';
+import CheckOutHerramientaRouter from './modules/CheckOut_Herramienta/CheckOutHerramienta.routes.js';
+import ReservaHerramientaRouter from './modules/Reservas_Herramientas/Reserva_Herramienta.routes.js';
+import DashboardRoutes from './modules/Dashboard/Dashboard.routes.js';
 
 const corsOptions = {
     origin: '*',
@@ -107,5 +115,13 @@ app.use(UsuarioRoutes);
 app.use(UsuarioRolesRoutes);
 app.use(ZonaTrabajoRoutes);
 app.use(AuthRoutes);
+app.use(VersionDocumentoRoutes);
+app.use(AsignacionInteligenteRoutes);
+app.use(UsuarioCompetenciasRoutes);
+app.use(CompetenciaRoutes);
+app.use(ArchivoRouter);
+app.use(CheckOutHerramientaRouter);
+app.use(ReservaHerramientaRouter);
+app.use(DashboardRoutes);
 
 export default app;

@@ -1,5 +1,6 @@
 import { usuarioService } from "./Usuario.service.js";
 import bcrypt from "bcrypt";
+import { asignacionInteligenteService } from "../AsignacionPedido/AsignacionInteligente.service.js";
 
 
 export const crearUsuario = async (req, res) => {
@@ -164,3 +165,45 @@ export const obtenerUsuariosPorIdPuesto = async (req, res)=>{
         res.status(500).json({ error: error.message });
     }
 }
+export const obtenerUsuarioDisponible = async (req, res) => {
+    try {
+        const [asignaciones, usuarios] = await Promise.all([
+            asignacionInteligenteService.getAll(),
+            usuarioService.getAll()
+        ]);
+
+        // Crear un Set de IDs asignados para búsqueda más eficiente
+        const idsAsignados = new Set(
+            asignaciones.map(asig => asig.usuarioId) // ajusta según tu estructura
+        );
+
+        const usuariosConAsignaciones = usuarios.filter(usuario => 
+            idsAsignados.has(usuario.id)
+        );
+        
+        const usuariosDisponibles = usuarios.filter(usuario => 
+            !idsAsignados.has(usuario.id)
+        );
+
+        res.status(200).json({
+            success: true,
+            data: {
+                usuariosAsignados: {
+                    count: usuariosConAsignaciones.length,
+                    usuarios: usuariosConAsignaciones
+                },
+                usuariosDisponibles: {
+                    count: usuariosDisponibles.length,
+                    usuarios: usuariosDisponibles
+                }
+            }
+        });
+
+    } catch (error) {
+        console.error('Error en obtenerUsuarioDisponible:', error);
+        res.status(500).json({
+            success: false,
+            error: error.message
+        });
+    }
+};
