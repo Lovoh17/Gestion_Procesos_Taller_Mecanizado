@@ -17,10 +17,10 @@ export const sequelize = new Sequelize(databaseName, databaseUser, databasePassw
     host: databaseHost,
     port: databasePort,
     dialect: databaseDialect,
-    /*dialectOptions: {
+    dialectOptions: {
         ssl: {
             require: true,
         }
-    },*/
+    },
 
 });
