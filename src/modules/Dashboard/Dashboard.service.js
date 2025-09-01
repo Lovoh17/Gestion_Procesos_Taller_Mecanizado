@@ -15,14 +15,14 @@ class DashboardService {
   async getAdminDashboard() {
     try {
       // Usuarios por puesto
-    const usuariosPorPuesto = await Usuario.findAll({
-      attributes: [
-        "puesto_id",
-        [Sequelize.fn("COUNT", Sequelize.col("Usuario.id")), "total"]
-      ],
-      include: [{ model: Puesto, as: "puesto", attributes: ["nombre_puesto"] }],
-      group: ["puesto_id", "puesto.id"]   
-    });
+      const usuariosPorPuesto = await Usuario.findAll({
+        attributes: [
+          "puesto_id",
+          [Sequelize.fn("COUNT", Sequelize.col("Usuario.id")), "total"]
+        ],
+        include: [{ model: Puesto, as: "puesto", attributes: ["nombre_puesto"] }],
+        group: ["puesto_id", "puesto.id"]
+      });
 
       // Pedidos por estado
       const pedidosPorEstado = await Pedido.findAll({
@@ -30,8 +30,8 @@ class DashboardService {
           "estado_id",
           [Sequelize.fn("COUNT", Sequelize.col("Pedido.id")), "total"]
         ],
-        include: [{ model: Estado_Pedido, attributes: ["nombre"] }],
-        group: ["estado_id", "estados_pedido.id"]   // 👈 usa nombre real de tabla
+        include: [{ model: Estado_Pedido, as: "estado", attributes: ["nombre"] }],
+        group: ["estado_id", "estado.id"]
       });
 
       // Herramientas por estado
@@ -40,15 +40,15 @@ class DashboardService {
           "estado_herramienta_id",
           [Sequelize.fn("COUNT", Sequelize.col("Herramienta.id")), "total"]
         ],
-        include: [{ model: Estado_Herramienta, attributes: ["nombre"] }],
-        group: ["estado_herramienta_id", "estados_herramienta.id"]
+        include: [{ model: Estado_Herramienta, as: "estado_herramienta", attributes: ["nombre"] }],
+        group: ["estado_herramienta_id", "estado_herramienta.id"]
       });
 
       // Transacciones financieras
       const transaccionesPorEstado = await Transaccion_Financiera.findAll({
         attributes: [
           "estado_transaccion_id",
-          [Sequelize.fn("COUNT", Sequelize.col("Transaccion_Financiera.id")), "total"],
+          [Sequelize.fn("COUNT", Sequelize.col("id")), "total"],
           [Sequelize.fn("SUM", Sequelize.col("monto_total")), "monto_total"]
         ],
         group: ["estado_transaccion_id"]
@@ -57,7 +57,7 @@ class DashboardService {
       const transaccionesPorTipo = await Transaccion_Financiera.findAll({
         attributes: [
           "tipo_transaccion_id",
-          [Sequelize.fn("COUNT", Sequelize.col("Transaccion_Financiera.id")), "total"],
+          [Sequelize.fn("COUNT", Sequelize.col("id")), "total"],
           [Sequelize.fn("SUM", Sequelize.col("monto_total")), "monto_total"]
         ],
         group: ["tipo_transaccion_id"]

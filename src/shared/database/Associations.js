@@ -171,7 +171,7 @@ Pedido.belongsTo(Usuario, { foreignKey: 'aprobador_id' });
 Pedido.belongsTo(Usuario, { foreignKey: 'supervisor_id' });
 Pedido.belongsTo(Plano, { foreignKey: 'plano_id' });
 Pedido.belongsTo(Tipo_Pedido, { foreignKey: 'tipo_pedido_id' });
-Pedido.belongsTo(Estado_Pedido, { foreignKey: 'estado_id' });
+Pedido.belongsTo(Estado_Pedido, { foreignKey: "estado_id", as: "estado" });
 Pedido.belongsTo(Razones_Pausa_Pedido, { foreignKey: 'razon_pausa_actual_id' });
 
 Herramienta.belongsTo(Tipo_Herramienta,{foreignKey: 'tipo_herramienta_id'});
