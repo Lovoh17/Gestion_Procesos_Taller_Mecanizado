@@ -41,7 +41,7 @@ class DashboardService {
       const herramientasPorEstado = await Herramienta.findAll({
         attributes: [
           "estado_herramienta_id",
-          [Sequelize.fn("COUNT", Sequelize.col("Herramienta.id")), "total"]
+          [Sequelize.fn("COUNT", Sequelize.col("herramientas.id")), "total"]
         ],
         include: [{ model: Estado_Herramienta, as: "estado_herramienta", attributes: ["nombre"] }],
         group: ["estado_herramienta_id", "estado_herramienta.id"]
