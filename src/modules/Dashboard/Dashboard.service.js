@@ -31,7 +31,7 @@ class DashboardService {
           [Sequelize.fn("COUNT", Sequelize.col("Pedido.id")), "total"]
         ],
         include: [{ model: Estado_Pedido, as: "estado", attributes: ["nombre"] }],
-        group: ["estado_id", "estado.id"]
+        group: ["Pedido.estado_id", "estado.id", "estado.nombre"]
       });
 
       // Herramientas por estado
