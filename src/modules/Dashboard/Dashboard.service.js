@@ -8,6 +8,7 @@ import { AsignacionPedido } from "../AsignacionPedido/AsignacionPedido.js";
 import { CheckoutHerramienta } from "../CheckOut_Herramienta/CheckOutHerramienta.js";
 import { Transaccion_Financiera } from "../Transaccion_Financiera/Transaccion_Financiera.js";
 import { Sequelize } from "sequelize";
+import { sequelize } from "../../shared/database/database.js";
 
 class DashboardService {
   async getAdminDashboard() {
@@ -25,8 +26,8 @@ class DashboardService {
           group: ["puesto_id", "Puesto.id", "Puesto.nombre_puesto"]  
         });
 
-        // Pedidos por estado
-        const pedidosPorEstado = await Sequelize.query(`
+        // Pedidos por estado - VERSION ALTERNATIVA
+        const pedidosPorEstado = await sequelize.query(`
           SELECT 
             p.estado_id,
             ep.nombre,
@@ -38,7 +39,7 @@ class DashboardService {
           type: Sequelize.QueryTypes.SELECT
         });
 
-        // Herramientas por estado
+        // Herramientas por estado - CORREGIDO
         const herramientasPorEstado = await Herramienta.findAll({
           attributes: [
             "estado_herramienta_id",
