@@ -163,3 +163,4 @@ export const Pedido = sequelize.define("pedidos", {
     timestamps: false,
     tableName: "pedidos",
 });
+
