@@ -4,7 +4,7 @@ import { Puesto } from "../Puesto/Puesto.js";
 import { Estado_Usuario } from "../Estado_Usuario/Estado_Usuario.js";
 import { Turno } from "../Turno/Turno.js";
 import { Zona_Trabajo } from "../Zona_Trabajo/Zona_Trabajo.js";
-import { toDefaultValue } from "sequelize/lib/utils";
+//import { toDefaultValue } from "sequelize/lib/utils";
 
 export const Usuario = sequelize.define(
   "Usuario",
