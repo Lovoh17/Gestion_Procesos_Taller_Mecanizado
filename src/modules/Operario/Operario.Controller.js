@@ -27,3 +27,27 @@ export const deleteTrabajo = (req, res) => {
   if (!eliminado) return res.status(404).json({ message: 'No encontrado' });
   res.json({ message: 'Eliminado correctamente' });
 };
+
+export const getDashboardOperario = (req, res) => {
+  const idOperario = parseInt(req.params.id);
+  if (isNaN(idOperario)) {
+    return res.status(400).json({ error: "ID inválido" });
+  }
+
+  const trabajos = operario.getAll();
+
+  const dashboardData = {
+    pedidos: trabajos.map(t => ({
+      asignacionId: t.id,
+      titulo: t.titulo,
+      estado: t.estado,
+      prioridad: t.prioridad,
+      cliente: t.cliente
+    })),
+    herramientas: {
+      total: 10 
+    }
+  };
+
+  res.json(dashboardData);
+};
