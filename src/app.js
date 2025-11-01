@@ -57,6 +57,7 @@ import CheckOutHerramientaRouter from './modules/CheckOut_Herramienta/CheckOutHe
 import ReservaHerramientaRouter from './modules/Reservas_Herramientas/Reserva_Herramienta.routes.js';
 import DashboardRoutes from './modules/Dashboard/Dashboard.routes.js';
 import operarioRoutes from './modules/Operario/Operario.routes.js';
+import inventarioRoutes from "./modules/Inventario/Inventario.routes.js";
 
 const corsOptions = {
     origin: '*',
@@ -125,5 +126,6 @@ app.use(CheckOutHerramientaRouter);
 app.use(ReservaHerramientaRouter);
 app.use(DashboardRoutes);
 app.use('/api/trabajos', operarioRoutes);
+app.use("/api/inventario", inventarioRoutes);
 
 export default app;
