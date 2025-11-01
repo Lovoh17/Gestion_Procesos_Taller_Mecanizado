@@ -16,11 +16,10 @@ const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 const USE_EXTERNAL_SERVICES = process.env.USE_EXTERNAL_THUMBNAIL_SERVICES === 'true';
 const THUMBNAIL_SERVICE_URL = process.env.THUMBNAIL_SERVICE_URL;
 
-// OPCIÓN 1: Usar servicios externos para generar thumbnails
+
 const generarThumbnailExterno = async (rutaArchivo, rutaThumbnail, tipoMime) => {
   try {
-    // Ejemplo usando un servicio como CloudConvert o similar
-    // Aquí usarías una API externa para generar thumbnails
+    
     
     if (THUMBNAIL_SERVICE_URL) {
       const FormData = require('form-data');
@@ -53,26 +52,26 @@ const generarThumbnailExterno = async (rutaArchivo, rutaThumbnail, tipoMime) => 
   }
 };
 
-// OPCIÓN 2: Usar librerías JavaScript puras (sin dependencias del sistema)
+
 const generarThumbnailPurejs = async (rutaArchivo, rutaThumbnail, tipoMime, nombreArchivo) => {
   try {
     const ext = path.extname(nombreArchivo).toLowerCase();
     
-    // Para PDFs - usar pdf-lib o pdf-parse (librerías JS puras)
+    
     if (ext === '.pdf') {
       try {
-        // Opción A: pdf-lib (más robusta)
+        
         const { PDFDocument } = await import('pdf-lib');
         const pdfBytes = await fs.readFile(rutaArchivo);
         const pdfDoc = await PDFDocument.load(pdfBytes);
         
         if (pdfDoc.getPageCount() > 0) {
-          // Para PDF usamos canvas para renderizar
+          
           const Canvas = await import('canvas');
           const canvas = Canvas.createCanvas(200, 200);
           const ctx = canvas.getContext('2d');
           
-          // Dibujar representación básica del PDF
+          
           ctx.fillStyle = '#ffffff';
           ctx.fillRect(0, 0, 200, 200);
           ctx.strokeStyle = '#cccccc';
@@ -94,7 +93,7 @@ const generarThumbnailPurejs = async (rutaArchivo, rutaThumbnail, tipoMime, nomb
       }
     }
     
-    // Para imágenes - usar Sharp (funciona en la mayoría de servidores)
+    
     if (tipoMime.startsWith('image/')) {
       await sharp(rutaArchivo)
         .resize(200, 200, { fit: 'inside', withoutEnlargement: true })
@@ -103,7 +102,7 @@ const generarThumbnailPurejs = async (rutaArchivo, rutaThumbnail, tipoMime, nomb
       return rutaThumbnail;
     }
     
-    // Para documentos de Office - usar officeparser o mammoth
+    
     if (ext === '.docx') {
       try {
         const mammoth = await import('mammoth');
@@ -142,7 +141,7 @@ const generarThumbnailPurejs = async (rutaArchivo, rutaThumbnail, tipoMime, nomb
       }
     }
     
-    // Fallback: thumbnail genérico usando Canvas
+    
     return await generarThumbnailGenericoPuro(rutaThumbnail, tipoMime, nombreArchivo);
     
   } catch (error) {
@@ -151,7 +150,7 @@ const generarThumbnailPurejs = async (rutaArchivo, rutaThumbnail, tipoMime, nomb
   }
 };
 
-// Función auxiliar para envolver texto
+
 const wrapText = (ctx, text, maxWidth) => {
   const words = text.split(' ');
   const lines = [];
@@ -171,7 +170,7 @@ const wrapText = (ctx, text, maxWidth) => {
   return lines;
 };
 
-// Generar thumbnail genérico usando Canvas (JS puro)
+
 const generarThumbnailGenericoPuro = async (rutaThumbnail, tipoMime, nombreArchivo) => {
   try {
     const Canvas = await import('canvas');
@@ -180,7 +179,7 @@ const generarThumbnailGenericoPuro = async (rutaThumbnail, tipoMime, nombreArchi
     
     const extension = path.extname(nombreArchivo).substring(1).toUpperCase() || 'FILE';
     
-    // Colores según tipo de archivo
+    
     const colores = {
       'PDF': '#FF6B6B',
       'DOC': '#4285F4',
@@ -195,23 +194,23 @@ const generarThumbnailGenericoPuro = async (rutaThumbnail, tipoMime, nombreArchi
     
     const color = colores[extension] || colores.default;
     
-    // Fondo
+    
     ctx.fillStyle = '#f5f5f5';
     ctx.fillRect(0, 0, 200, 200);
     
-    // Icono del archivo
+    
     ctx.fillStyle = color;
     ctx.fillRect(50, 40, 100, 120);
     ctx.fillStyle = '#ffffff';
     ctx.fillRect(55, 45, 90, 110);
     
-    // Líneas simulando contenido
+    
     ctx.fillStyle = '#cccccc';
     for (let i = 0; i < 8; i++) {
       ctx.fillRect(65, 55 + (i * 12), 70, 2);
     }
     
-    // Texto de extensión
+    
     ctx.fillStyle = color;
     ctx.font = 'bold 18px Arial';
     ctx.textAlign = 'center';
@@ -227,7 +226,7 @@ const generarThumbnailGenericoPuro = async (rutaThumbnail, tipoMime, nombreArchi
   }
 };
 
-// Verificar disponibilidad de herramientas del sistema
+
 const verificarHerramientasDisponibles = async () => {
   const herramientas = [];
   
@@ -254,14 +253,13 @@ const verificarHerramientasDisponibles = async () => {
   return herramientas;
 };
 
-// FUNCIÓN PRINCIPAL: Generar thumbnail con fallbacks inteligentes
+
 const generarThumbnail = async (rutaArchivo, rutaThumbnail, tipoMime, nombreArchivo) => {
   try {
-    // En producción, usar métodos que no dependan del sistema
     if (IS_PRODUCTION || USE_EXTERNAL_SERVICES) {
       console.log("Usando métodos compatibles con producción...");
       
-      // Intentar servicio externo primero
+      
       if (USE_EXTERNAL_SERVICES) {
         try {
           return await generarThumbnailExterno(rutaArchivo, rutaThumbnail, tipoMime);
@@ -270,29 +268,28 @@ const generarThumbnail = async (rutaArchivo, rutaThumbnail, tipoMime, nombreArch
         }
       }
       
-      // Usar librerías JavaScript puras
+      
       return await generarThumbnailPurejs(rutaArchivo, rutaThumbnail, tipoMime, nombreArchivo);
     }
     
-    // En desarrollo, usar herramientas del sistema si están disponibles
+    
     const herramientas = await verificarHerramientasDisponibles();
     
     if (herramientas.length > 0) {
-      // Usar el método original con herramientas del sistema
+      
       return await generarThumbnailSistema(rutaArchivo, rutaThumbnail, tipoMime, nombreArchivo);
     } else {
-      // Fallback a métodos JavaScript puros
+      
       return await generarThumbnailPurejs(rutaArchivo, rutaThumbnail, tipoMime, nombreArchivo);
     }
     
   } catch (error) {
     console.error("Error generando thumbnail:", error);
-    // Último fallback: thumbnail básico
     return await generarThumbnailGenericoPuro(rutaThumbnail, tipoMime, nombreArchivo);
   }
 };
 
-// Método original para desarrollo (con herramientas del sistema)
+
 const generarThumbnailSistema = async (rutaArchivo, rutaThumbnail, tipoMime, nombreArchivo) => {
   const ext = path.extname(nombreArchivo).toLowerCase();
   
@@ -329,7 +326,7 @@ const generarThumbnailSistema = async (rutaArchivo, rutaThumbnail, tipoMime, nom
   return await generarThumbnailGenericoPuro(rutaThumbnail, tipoMime, nombreArchivo);
 };
 
-// Resto de funciones auxiliares igual...
+
 const subirAStorage = async (archivoLocal, nombreRemoto, contentType) => {
   const metadata = {
     metadata: {

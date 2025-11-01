@@ -87,7 +87,7 @@ class HerramientaService {
     }
     async checkout(id, id_usuario) {
         try {
-            // Ejecutar búsquedas en paralelo
+            
             const [herramienta, usuario] = await Promise.all([
                 Herramienta.findByPk(id),
                 Usuario.findByPk(id_usuario)
@@ -96,13 +96,13 @@ class HerramientaService {
             if (!herramienta) throw new Error("Herramienta no encontrada");
             if (!usuario) throw new Error("Usuario no encontrado");
 
-            //seguir*/
-            const horaActual = new Date();//aqui
+            
+            const horaActual = new Date();
 
             const CHO = await checkoutHerramientaService.create({
                 herramienta_id: herramienta.id,
                 usuario_id: usuario.id,
-                hora_de_check: horaActual,//en DataTypes es DATEONLY
+                hora_de_check: horaActual,
                 delete: false
             });
 
@@ -132,19 +132,19 @@ class HerramientaService {
 
     async checkin(idCHO) {
         try {
-            // Buscar el registro de checkout
+            
             const CHO = await checkoutHerramientaService.getById(idCHO);
             if (!CHO) throw new Error("Registro de checkout no encontrado");
     
-            // Buscar herramienta asociada
+            
             const herramienta = await Herramienta.findByPk(CHO.herramienta_id);
             if (!herramienta) throw new Error("Herramienta no encontrada");
     
-            // Cambiar estado del checkout a eliminado
+            
             CHO.delete = true;
             await CHO.save();
     
-            // Cambiar estado de herramienta a "disponible"
+            
             herramienta.estado_herramienta_id = await this.buscador("disponible");
             await herramienta.save();
     
