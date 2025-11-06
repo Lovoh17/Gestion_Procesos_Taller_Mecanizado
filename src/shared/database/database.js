@@ -17,11 +17,6 @@ export const sequelize = new Sequelize(databaseName, databaseUser, databasePassw
     host: databaseHost,
     port: databasePort,
     dialect: databaseDialect,
-    dialectOptions: {
-        ssl: {
-            require: true,
-            rejectUnauthorized: false
-        }
-    },
+
 
 });
