@@ -23,7 +23,7 @@ class PedidoService {
     try {
       return await Pedido.create(data);
     } catch (error) {
-      throw new Error("Error al crear el pedido: " + error.message);
+      throw new Error("Error al crear el pedido: " + error);
     }
   }
 
